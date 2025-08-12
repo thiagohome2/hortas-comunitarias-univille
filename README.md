@@ -88,7 +88,7 @@
 
 ## **4. Ferramenta de Apoio à Avaliação**
 
-Sugiro criar uma **planilha de controle** (Google Sheets) integrada com os dados do GitHub (via GitHub API) para que o professor possa:
+**planilha de controle** (Google Sheets) integrada com os dados do GitHub (via GitHub API) para que o professor possa:
 
 * Puxar automaticamente número de commits, PRs e issues por aluno
 * Visualizar contribuições por equipe e individuais
