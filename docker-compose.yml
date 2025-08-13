@@ -78,9 +78,7 @@ services:
 
   # Node.js para desenvolvimento do frontend Vue.js
   frontend:
-    build:
-      context: ./docker/node
-      dockerfile: Dockerfile
+    image: node:18-alpine
     container_name: hortas_frontend
     ports:
       - "3000:3000"
@@ -89,7 +87,11 @@ services:
       - ./frontend:/app
       - /app/node_modules
     working_dir: /app
-    command: npm run serve
+    command: >
+      sh -c "apk add --no-cache git &&
+             npm install -g @vue/cli @vue/cli-service &&
+             if [ ! -d node_modules ]; then npm install; fi &&
+             npm run serve"
     networks:
       - hortas_network
     restart: unless-stopped
