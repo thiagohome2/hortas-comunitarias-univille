@@ -97,6 +97,51 @@ fix-docker: ## Corrige problemas do Docker
 	@docker-compose down || true
 	@docker system prune -f || true
 	@echo "$(GREEN)✅ Limpeza concluída. Tente 'make start' novamente$(NC)"
+portainer-start: ## Inicia apenas o Portainer
+	@echo "$(GREEN)🐳 Iniciando Portainer...$(NC)"
+	@docker-compose up -d portainer
+	@echo "$(GREEN)✅ Portainer disponível em: http://localhost:9000$(NC)"
+
+portainer-logs: ## Mostra logs do Portainer
+	@docker-compose logs -f portainer
+
+dev-local: ## Desenvolvimento local SEM Docker
+	@echo "$(GREEN)🚀 Iniciando desenvolvimento local (sem Docker)...$(NC)"
+	@echo ""
+	@echo "$(YELLOW)📋 Instruções:$(NC)"
+	@echo "1️⃣ Terminal 1 - Frontend:"
+	@echo "   cd frontend && npm install && npm run serve"
+	@echo ""
+	@echo "2️⃣ Terminal 2 - Backend:"
+	@echo "   cd backend && composer install && php -S localhost:8181 -t public"
+	@echo ""
+	@echo "3️⃣ Terminal 3 - Mobile:"
+	@echo "   cd mobile && npm install && npx expo start"
+	@echo ""
+	@echo "$(GREEN)🌐 URLs após iniciar:$(NC)"
+	@echo "   Frontend: http://localhost:3000"
+	@echo "   Backend:  http://localhost:8181"
+	@echo "   Mobile:   Expo QR Code"
+
+install-local: ## Instala dependências locais (sem Docker)
+	@echo "$(GREEN)📦 Instalando dependências locais...$(NC)"
+	@if ! command -v mysql > /dev/null; then echo "Instalando MySQL..." && brew install mysql; fi
+	@if ! command -v php > /dev/null; then echo "Instalando PHP..." && brew install php; fi
+	@if ! command -v composer > /dev/null; then echo "Instalando Composer..." && brew install composer; fi
+	@if ! command -v node > /dev/null; then echo "Instalando Node.js..." && brew install node; fi
+	@echo "$(GREEN)✅ Dependências instaladas!$(NC)"
+
+frontend-dev: ## Inicia apenas frontend local
+	@echo "$(GREEN)🌐 Iniciando frontend em modo desenvolvimento...$(NC)"
+	@cd frontend && npm install && npm run serve
+
+backend-dev: ## Inicia apenas backend local
+	@echo "$(GREEN)⚡ Iniciando backend PHP local...$(NC)"
+	@cd backend && composer install && php -S localhost:8181 -t public
+
+mobile-dev: ## Inicia apenas mobile local
+	@echo "$(GREEN)📱 Iniciando mobile com Expo...$(NC)"
+	@cd mobile && npm install && npx expo start
 
 install-mobile: ## Instala dependências do mobile
 	@echo "$(GREEN)📦 Instalando dependências do mobile...$(NC)"
@@ -143,6 +188,7 @@ info: ## Mostra informações do ambiente
 	@echo "  Frontend:    http://localhost:3000"
 	@echo "  Backend API: http://localhost:8181/api"
 	@echo "  phpMyAdmin:  http://localhost:8080"
+	@echo "  Portainer:   http://localhost:9000"
 	@echo ""
 	@echo "$(YELLOW)🔧 Banco de Dados:$(NC)"
 	@echo "  Host: localhost:3306"
