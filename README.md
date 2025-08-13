@@ -1,3 +1,81 @@
+# 🌱 Hortas Comunitárias - Univille
+
+Sistema de gestão de hortas comunitárias desenvolvido para a disciplina de Engenharia de Software da Univille.
+
+## 🚀 Stack Tecnológica
+
+### Backend
+- **PHP 8.2** com **Slim Framework 4**
+- **MySQL 8.0** para banco de dados
+- **Nginx** como servidor web
+- **Redis** para cache e sessões
+- **JWT** para autenticação
+
+### Frontend
+- **Vue.js 3** com Composition API
+- **Vue Router 4** para roteamento
+- **Vuex 4** para gerenciamento de estado
+- **Bootstrap 5** para UI
+- **Leaflet** para mapas
+
+### Mobile
+- **Vue Native** / **React Native**
+- **Expo** para desenvolvimento
+- **React Navigation** para navegação
+
+### DevOps
+- **Docker** e **Docker Compose**
+- **Nginx** como proxy reverso
+- **phpMyAdmin** para administração do banco
+
+## 📁 Estrutura do Projeto
+
+```
+hortas-comunitarias-univille/
+├── backend/                 # API PHP com Slim Framework
+├── frontend/               # Aplicação Vue.js
+├── mobile/                 # App React Native
+├── docker/                 # Configurações Docker
+├── docker-compose.yml      # Orquestração dos serviços
+├── Makefile               # Comandos úteis
+└── DEVELOPMENT.md         # Guia detalhado de desenvolvimento
+```
+
+## 🔧 Configuração Rápida
+
+```bash
+# Clone o repositório
+git clone <repo-url>
+cd hortas-comunitarias-univille
+
+# Configuração automática do ambiente
+make setup
+
+# Ou use o script diretamente
+./setup.sh
+```
+
+## 🌐 URLs dos Serviços
+
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:8181/api
+- **phpMyAdmin**: http://localhost:8080
+- **MySQL**: localhost:3306
+
+## 📋 Comandos Úteis
+
+```bash
+make help           # Ver todos os comandos disponíveis
+make start          # Iniciar todos os containers
+make stop           # Parar todos os containers
+make logs           # Ver logs dos serviços
+make install        # Instalar dependências
+make clean          # Limpar ambiente
+```
+
+Para mais detalhes, consulte o [DEVELOPMENT.md](DEVELOPMENT.md).
+
+---
 
 ## **📊 Método de Avaliação – Projeto Hortas Comunitárias Univille**
 

@@ -1,0 +1,117 @@
+version: '3.8'
+
+services:
+  # Nginx - Servidor Web
+  nginx:
+    image: nginx:alpine
+    container_name: hortas_nginx
+    ports:
+      - "8181:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/sites/:/etc/nginx/sites-available/
+      - ./docker/nginx/ssl/:/etc/nginx/ssl/
+      - ./backend:/var/www/backend
+      - ./frontend/dist:/var/www/frontend
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - hortas_network
+    restart: unless-stopped
+
+  # PHP-FPM para Slim Framework
+  php:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    container_name: hortas_php
+    volumes:
+      - ./backend:/var/www/backend
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+    depends_on:
+      - mysql
+    networks:
+      - hortas_network
+    restart: unless-stopped
+    environment:
+      - DB_HOST=mysql
+      - DB_NAME=hortas_db
+      - DB_USER=hortas_user
+      - DB_PASS=hortas_password
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: hortas_mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+      - ./docker/mysql/conf:/etc/mysql/conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: hortas_db
+      MYSQL_USER: hortas_user
+      MYSQL_PASSWORD: hortas_password
+    networks:
+      - hortas_network
+    restart: unless-stopped
+
+  # phpMyAdmin para gerenciamento do banco
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: hortas_phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root_password
+    depends_on:
+      - mysql
+    networks:
+      - hortas_network
+    restart: unless-stopped
+
+  # Node.js para desenvolvimento do frontend Vue.js
+  frontend:
+    build:
+      context: ./docker/node
+      dockerfile: Dockerfile
+    container_name: hortas_frontend
+    ports:
+      - "3000:3000"
+      - "9229:9229" # Debug port
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    working_dir: /app
+    command: npm run serve
+    networks:
+      - hortas_network
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+
+  # Redis para cache e sessões
+  redis:
+    image: redis:alpine
+    container_name: hortas_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - hortas_network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+  redis_data:
+
+networks:
+  hortas_network:
+    driver: bridge

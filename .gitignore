@@ -1,0 +1,61 @@
+# Arquivos e pastas do sistema
+.DS_Store
+.env
+.env.local
+.env.*.local
+Thumbs.db
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependências
+node_modules/
+vendor/
+composer.lock
+package-lock.json
+yarn.lock
+
+# Build e cache
+dist/
+build/
+.cache/
+var/cache/
+.nuxt/
+.vuepress/dist
+.serverless/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Docker
+.docker/
+
+# Banco de dados
+*.sqlite
+*.db
+
+# Uploads e arquivos temporários
+uploads/
+temp/
+tmp/
+
+# Mobile
+.expo/
+.expo-shared/
+
+# Backend específico
+backend/.env
+backend/logs/
+backend/var/
+
+# Frontend específico  
+frontend/.env.local
+frontend/dist/
