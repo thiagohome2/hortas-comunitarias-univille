@@ -3,8 +3,26 @@
 # Cores para output
 GREEN=\033[0;32m
 YELLOW=\033[1;33m
-RED=\033[0;31m
-NC=\033[0m # No Color
+R# Informações úteis
+info: ## Mostra informações do ambiente
+	@echo "$(GREEN)📊 Informações do Ambiente:$(NC)"
+	@echo ""
+	@echo "$(YELLOW)🌐 URLs:$(NC)"
+	@echo "  Frontend:    http://localhost:3000 (execute localmente)"
+	@echo "  Backend API: http://localhost:8181/api"
+	@echo "  phpMyAdmin:  http://localhost:8080"
+	@echo ""
+	@echo "$(YELLOW)🔧 Banco de Dados:$(NC)"
+	@echo "  Host: localhost:8181"
+	@echo "  Database: hortas_db"
+	@echo "  User: hortas_user"
+	@echo "  Password: hortas_password"
+	@echo ""
+	@echo "$(YELLOW)📱 Mobile:$(NC)"
+	@echo "  cd mobile && npm install && npm start"
+	@echo ""
+	@echo "$(YELLOW)💡 Modo Desenvolvimento Recomendado:$(NC)"
+	@echo "  make dev-hybrid  # Backend no Docker + Frontend local"\033[0m # No Color
 
 help: ## Mostra este help
 	@echo "$(GREEN)Hortas Comunitárias - Comandos Disponíveis:$(NC)"
@@ -50,9 +68,35 @@ install-backend: ## Instala dependências do backend
 	@echo "$(GREEN)📦 Instalando dependências do backend...$(NC)"
 	@docker-compose exec php composer install
 
-install-frontend: ## Instala dependências do frontend
-	@echo "$(GREEN)📦 Instalando dependências do frontend...$(NC)"
-	@docker-compose exec frontend npm install
+install-frontend: ## Instala dependências do frontend LOCALMENTE
+	@echo "$(GREEN)📦 Instalando dependências do frontend localmente...$(NC)"
+	@cd frontend && npm install
+	@cd frontend && npm install -g @vue/cli @vue/cli-service || echo "Vue CLI já instalado"
+
+frontend-local: ## Executa frontend localmente (recomendado)
+	@echo "$(GREEN)🚀 Iniciando frontend localmente...$(NC)"
+	@cd frontend && npm run serve
+
+backend-only: ## Inicia apenas backend e serviços (sem frontend)
+	@echo "$(GREEN)🐳 Iniciando apenas backend e banco...$(NC)"
+	@docker-compose up -d mysql php nginx phpmyadmin redis
+
+dev-hybrid: backend-only ## Desenvolvimento híbrido: backend no Docker, frontend local
+	@echo ""
+	@echo "$(GREEN)✅ Backend iniciado no Docker!$(NC)"
+	@echo "$(YELLOW)🌐 Agora execute em outro terminal:$(NC)"
+	@echo "  cd frontend && npm run serve"
+	@echo ""
+	@echo "$(YELLOW)📊 URLs disponíveis:$(NC)"
+	@echo "  Backend API: http://localhost:8181/api"
+	@echo "  phpMyAdmin:  http://localhost:8080"
+	@echo "  Frontend:    http://localhost:3000 (após npm run serve)"
+
+fix-docker: ## Corrige problemas do Docker
+	@echo "$(YELLOW)🔧 Corrigindo problemas do Docker...$(NC)"
+	@docker-compose down || true
+	@docker system prune -f || true
+	@echo "$(GREEN)✅ Limpeza concluída. Tente 'make start' novamente$(NC)"
 
 install-mobile: ## Instala dependências do mobile
 	@echo "$(GREEN)📦 Instalando dependências do mobile...$(NC)"
