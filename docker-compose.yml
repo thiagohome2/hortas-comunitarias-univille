@@ -110,9 +110,24 @@ services:
       - hortas_network
     restart: unless-stopped
 
+  # Portainer - Interface web para gerenciar Docker
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: hortas_portainer
+    ports:
+      - "9000:9000"
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - hortas_network
+    restart: unless-stopped
+
 volumes:
   mysql_data:
   redis_data:
+  portainer_data:
 
 networks:
   hortas_network:

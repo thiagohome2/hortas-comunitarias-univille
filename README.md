@@ -60,6 +60,7 @@ make setup
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:8181/api
 - **phpMyAdmin**: http://localhost:8080
+- **Portainer**: http://localhost:9000
 - **MySQL**: localhost:3306
 
 ## 📋 Comandos Úteis
