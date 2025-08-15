@@ -2,6 +2,9 @@
 
 Sistema de gestão de hortas comunitárias desenvolvido para as disciplinas de Engenharia de Software e Sistemas de Informação da Univille.
 
+## 🌐 GRUPO DEVS UNIVILLE
+https://discord.gg/fjJJtgED
+
 ## 🚀 Stack Tecnológica
 
 ### Backend
