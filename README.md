@@ -1,6 +1,6 @@
 # 🌱 Hortas Comunitárias - Univille
 
-Sistema de gestão de hortas comunitárias desenvolvido para a disciplina de Engenharia de Software da Univille.
+Sistema de gestão de hortas comunitárias desenvolvido para as disciplinas de Engenharia de Software e Sistemas de Informação da Univille.
 
 ## 🚀 Stack Tecnológica
 
