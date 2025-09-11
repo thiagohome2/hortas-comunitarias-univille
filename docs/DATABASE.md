@@ -3,6 +3,7 @@
 **Criado e mantido pelos senhores:** Felipe Mourão, João Alencar, Lucas Reinaldo, Marcelo Fiedler e Marcos Will
 _7º Semestre de Engenharia de Software e Sistemas de Informação da UNIVILLE_
 
+<img src="https://i.imgur.com/fRoDHO1.png" width="600px">
 
 # 📗Introdução
 
