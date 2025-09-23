@@ -3,48 +3,42 @@
 namespace App\Repositories;
 
 use App\Models\HortaModel;
+use Illuminate\Database\Eloquent\Collection;
 
 class HortaRepository
 {
-    protected HortaModel $model;
+    protected HortaModel $hortaModel;
 
-    public function __construct(HortaModel $model)
+    public function __construct(HortaModel $hortaModel)
     {
-        $this->model = $model;
+        $this->hortaModel = $hortaModel;
     }
 
-    public function findAll()
+    public function findAllWhere(array $conditions): Collection
     {
-        return $this->model->all();
+        return $this->hortaModel->where($conditions)->get();
     }
 
-    public function findByUuid(string $uuid)
+    public function findByUuid(string $uuid): ?HortaModel
     {
-        return $this->model->where('uuid', $uuid)->first();
+        return $this->hortaModel->find($uuid);
     }
-
-    public function existsByUuid(string $uuid): bool { return $this->model->find($uuid) ? true : false; }
-
-    public function create(array $data)
+    
+    public function create(array $data): HortaModel
     {
-        return $this->model->create($data);
+        return $this->hortaModel->create($data);
     }
-
-    public function update(string $uuid, array $data)
+    
+    public function update(HortaModel $horta, array $data): HortaModel
     {
-        $horta = $this->findByUuid($uuid);
-        if ($horta) {
-            $horta->update($data);
-        }
+        $horta->update($data);
         return $horta;
     }
 
-    public function delete(string $uuid)
+    public function delete(HortaModel $horta, array $data): bool
     {
-        $horta = $this->findByUuid($uuid);
-        if ($horta) {
-            $horta->delete();
-        }
-        return $horta;
+        $horta->fill($data);
+        return $horta->save();
     }
 }
+

@@ -3,45 +3,41 @@
 namespace App\Repositories;
 
 use App\Models\UsuarioModel;
+use Illuminate\Database\Eloquent\Collection;
 
 class UsuarioRepository
 {
-    protected $model;
+    protected $usuarioModel;
 
-    public function __construct(UsuarioModel $usuario)
+    public function __construct(UsuarioModel $usuarioModel)
     {
-        $this->model = $usuario;
+        $this->usuarioModel = $usuarioModel;
+    }
+
+    public function findAllWhere(array $conditions): Collection
+    {
+        return $this->usuarioModel->where($conditions)->get();
     }
 
     public function findByUuid(string $uuid): ?UsuarioModel
     {
-        return $this->model->find($uuid);
+        return $this->usuarioModel->find($uuid);
     }
-
-    public function findAll()
-    {
-        return $this->model->all();
-    }
-
+    
     public function create(array $data): UsuarioModel
     {
-        return $this->model->create($data);
+        return $this->usuarioModel->create($data);
     }
-
+    
     public function update(UsuarioModel $usuario, array $data): UsuarioModel
     {
         $usuario->update($data);
         return $usuario;
     }
 
-    public function delete(UsuarioModel $usuario): bool {
-        $usuario->excluido = 1;
+    public function delete(UsuarioModel $usuario, array $data): bool
+    {
+        $usuario->fill($data);
         return $usuario->save();
     }
-
-    public function findAllWhere(array $conditions)
-    {
-        return $this->model->where($conditions)->get();
-    }
-
 }

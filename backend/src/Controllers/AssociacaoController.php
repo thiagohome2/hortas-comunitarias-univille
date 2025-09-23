@@ -8,51 +8,57 @@ use App\Services\AssociacaoService;
 
 class AssociacaoController
 {
-    protected AssociacaoService $service;
+    protected AssociacaoService $associacaoService;
 
-    public function __construct(AssociacaoService $service)
+    public function __construct(AssociacaoService $associacaoService)
     {
-        $this->service = $service;
+        $this->associacaoService = $associacaoService;
     }
 
     public function list(Request $request, Response $response)
     {
-        $result = $this->service->list();
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+        $associacoes = $this->associacaoService->findAllWhere();
+        $response->getBody()->write(json_encode($associacoes));
+        return $response->withStatus(200);
     }
 
     public function get(Request $request, Response $response, array $args)
     {
-        $result = $this->service->get($args['uuid']);
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+        $associacao = $this->associacaoService->findByUuid($args['uuid']);
+        if (!$associacao) return $response->withStatus(404);
+
+        $response->getBody()->write(json_encode($associacao));
+        return $response->withStatus(200);
     }
 
     public function create(Request $request, Response $response)
     {
-        $data = $request->getParsedBody();
-        $usuarioUuid = $request->getAttribute('usuario_uuid');
+        $data = (array)$request->getParsedBody();
+        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
+        $associacao = $this->associacaoService->create($data, $uuidUsuarioLogado);
 
-        $result = $this->service->create($data, $usuarioUuid);
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+        $response->getBody()->write(json_encode($associacao));
+        return $response->withStatus(201);
     }
 
     public function update(Request $request, Response $response, array $args)
     {
-        $data = $request->getParsedBody();
-        $usuarioUuid = $request->getAttribute('usuario_uuid');
+        $data = (array)$request->getParsedBody();
+        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
+        $associacao = $this->associacaoService->update($args['uuid'], $data, $uuidUsuarioLogado);
 
-        $result = $this->service->update($args['uuid'], $data, $usuarioUuid);
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+        $response->getBody()->write(json_encode($associacao));
+        return $response->withStatus(200);
     }
 
     public function delete(Request $request, Response $response, array $args)
     {
-        $result = $this->service->delete($args['uuid']);
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
+        $this->associacaoService->delete($args['uuid'], $uuidUsuarioLogado);
+        
+        $response->getBody()->write(json_encode([
+            "message" => "Registro UUID: " . $args['uuid'] . " excluído"
+        ]));
+        return $response->withStatus(200);
     }
 }

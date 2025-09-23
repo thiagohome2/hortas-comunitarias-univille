@@ -8,51 +8,56 @@ use App\Services\EnderecoService;
 
 class EnderecoController
 {
-    protected EnderecoService $service;
+    protected EnderecoService $enderecoService;
 
-    public function __construct(EnderecoService $service)
+    public function __construct(EnderecoService $enderecoService)
     {
-        $this->service = $service;
+        $this->enderecoService = $enderecoService;
     }
 
     public function list(Request $request, Response $response)
     {
-        $result = $this->service->list();
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+        $enderecos = $this->enderecoService->findAllWhere();
+        $response->getBody()->write(json_encode($enderecos));
+        return $response->withStatus(200);
     }
 
     public function get(Request $request, Response $response, array $args)
     {
-        $result = $this->service->get($args['uuid']);
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+        $endereco = $this->enderecoService->findByUuid($args['uuid']);
+        if (!$endereco) return $response->withStatus(404);
+
+        $response->getBody()->write(json_encode($endereco));
+        return $response->withStatus(200);
     }
 
     public function create(Request $request, Response $response)
     {
-        $data = $request->getParsedBody();
-        $usuarioUuid = $request->getAttribute('usuario_uuid');
+        $data = (array)$request->getParsedBody();
+        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
+        $endereco = $this->enderecoService->create($data, $uuidUsuarioLogado);
 
-        $result = $this->service->create($data, $usuarioUuid);
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+        $response->getBody()->write(json_encode($endereco));
+        return $response->withStatus(201);
     }
 
     public function update(Request $request, Response $response, array $args)
     {
-        $data = $request->getParsedBody();
-        $usuarioUuid = $request->getAttribute('usuario_uuid');
+        $data = (array)$request->getParsedBody();
+        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
+        $endereco = $this->enderecoService->update($args['uuid'], $data, $uuidUsuarioLogado);
 
-        $result = $this->service->update($args['uuid'], $data, $usuarioUuid);
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+        $response->getBody()->write(json_encode($endereco));
+        return $response->withStatus(200);
     }
 
-    public function delete(Request $request, Response $response, array $args)
-    {
-        $result = $this->service->delete($args['uuid']);
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+    public function delete(Request $request, Response $response, array $args){   
+        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
+        $this->enderecoService->delete($args['uuid'], $uuidUsuarioLogado);
+        
+        $response->getBody()->write(json_encode([
+            "message" => "Registro UUID: " . $args['uuid'] . " excluído"
+        ]));
+        return $response->withStatus(200);
     }
 }

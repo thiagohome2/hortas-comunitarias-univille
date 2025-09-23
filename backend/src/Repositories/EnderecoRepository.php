@@ -3,46 +3,41 @@
 namespace App\Repositories;
 
 use App\Models\EnderecoModel;
+use Illuminate\Database\Eloquent\Collection;
 
 class EnderecoRepository
 {
-    protected EnderecoModel $model;
+    protected EnderecoModel $enderecoModel;
 
-    public function __construct(EnderecoModel $model)
+    public function __construct(EnderecoModel $enderecoModel)
     {
-        $this->model = $model;
+        $this->enderecoModel = $enderecoModel;
     }
 
-    public function findAll()
+   public function findAllWhere(array $conditions): Collection
     {
-        return $this->model->all();
-    }
-    public function existsByUuid(string $uuid): bool { return $this->model->find($uuid) ? true : false; }
-    public function findByUuid(string $uuid)
-    {
-        return $this->model->where('uuid', $uuid)->first();
+        return $this->enderecoModel->where($conditions)->get();
     }
 
-    public function create(array $data)
+    public function findByUuid(string $uuid): ?EnderecoModel
     {
-        return $this->model->create($data);
+        return $this->enderecoModel->find($uuid);
     }
-
-    public function update(string $uuid, array $data)
+    
+    public function create(array $data): EnderecoModel
     {
-        $endereco = $this->findByUuid($uuid);
-        if ($endereco) {
-            $endereco->update($data);
-        }
+        return $this->enderecoModel->create($data);
+    }
+    
+    public function update(EnderecoModel $endereco, array $data): EnderecoModel
+    {
+        $endereco->update($data);
         return $endereco;
     }
 
-    public function delete(string $uuid)
+    public function delete(EnderecoModel $endereco, array $data): bool
     {
-        $endereco = $this->findByUuid($uuid);
-        if ($endereco) {
-            $endereco->delete();
-        }
-        return $endereco;
+        $endereco->fill($data);
+        return $endereco->save();
     }
 }

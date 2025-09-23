@@ -14,6 +14,7 @@ class CargoModel extends Model
     const UPDATED_AT = 'data_de_ultima_alteracao';
 
     protected $fillable = [
+        'uuid',
         'codigo',
         'slug',
         'nome',

@@ -3,48 +3,41 @@
 namespace App\Repositories;
 
 use App\Models\AssociacaoModel;
+use Illuminate\Database\Eloquent\Collection;
 
 class AssociacaoRepository
 {
-    protected AssociacaoModel $model;
+    protected AssociacaoModel $associacaoModel;
 
-    public function __construct(AssociacaoModel $model)
+    public function __construct(AssociacaoModel $associacaoModel)
     {
-        $this->model = $model;
+        $this->associacaoModel = $associacaoModel;
     }
 
-    public function findAll()
+    public function findAllWhere(array $conditions): Collection
     {
-        return $this->model->all();
+        return $this->associacaoModel->where($conditions)->get();
     }
 
-    public function findByUuid(string $uuid)
+    public function findByUuid(string $uuid): ?AssociacaoModel
     {
-        return $this->model->where('uuid', $uuid)->first();
+        return $this->associacaoModel->find($uuid);
     }
 
-    public function existsByUuid(string $uuid): bool { return $this->model->find($uuid) ? true : false; }
-
-    public function create(array $data)
+    public function create(array $data): AssociacaoModel
     {
-        return $this->model->create($data);
+        return $this->associacaoModel->create($data);
     }
 
-    public function update(string $uuid, array $data)
+    public function update(AssociacaoModel $associacao, array $data): AssociacaoModel
     {
-        $associacao = $this->findByUuid($uuid);
-        if ($associacao) {
-            $associacao->update($data);
-        }
+        $associacao->update($data);
         return $associacao;
     }
 
-    public function delete(string $uuid)
+    public function delete(AssociacaoModel $associacao, array $data): bool
     {
-        $associacao = $this->findByUuid($uuid);
-        if ($associacao) {
-            $associacao->delete();
-        }
-        return $associacao;
+        $associacao->fill($data);
+        return $associacao->save();
     }
 }

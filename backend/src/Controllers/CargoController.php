@@ -7,36 +7,54 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class CargoController
 {
-    public function __construct(private CargoService $service){}
-
-    public function list(Request $request, Response $response){
-        $response->getBody()->write(json_encode($this->service->listar()));
-        return $response->withHeader('Content-Type','application/json');
+    protected CargoService $cargoService;
+    public function __construct(CargoService $cargoService){
+        $this->cargoService = $cargoService;
     }
 
-    public function get(Request $request, Response $response, array $args){
-        $cargo = $this->service->obter($args['uuid']);
+    public function list(Request $request, Response $response)
+    {
+        $cargos = $this->cargoService->findAllWhere();
+        $response->getBody()->write(json_encode($cargos));
+        return $response->withStatus(200);
+    }
+
+    public function get(Request $request, Response $response, array $args)
+    {
+        $cargo = $this->cargoService->findByUuid($args['uuid']);
+        if(!$cargo) return $response->withStatus(404);
+
         $response->getBody()->write(json_encode($cargo));
-        return $response->withHeader('Content-Type','application/json');
+        return $response->withStatus(200);
     }
 
     public function create(Request $request, Response $response){
         $data = (array)$request->getParsedBody();
-        $cargo = $this->service->criar($data, $request);
+        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
+        $cargo = $this->cargoService->create($data,$uuidUsuarioLogado);
+
         $response->getBody()->write(json_encode($cargo));
-        return $response->withHeader('Content-Type','application/json');
+        return $response->withStatus(201);
     }
 
-    public function update(Request $request, Response $response, array $args){
+    public function update(Request $request, Response $response, array $args)
+    {
         $data = (array)$request->getParsedBody();
-        $cargo = $this->service->atualizar($args['uuid'], $data, $request);
+        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
+        $cargo = $this->cargoService->update($args['uuid'], $data, $uuidUsuarioLogado );
+        
         $response->getBody()->write(json_encode($cargo));
-        return $response->withHeader('Content-Type','application/json');
+        return $response->withStatus(200);
     }
 
-    public function delete(Request $request, Response $response, array $args){
-        $sucesso = $this->service->excluir($args['uuid']);
-        $response->getBody()->write(json_encode(['success'=>$sucesso]));
-        return $response->withHeader('Content-Type','application/json');
+    public function delete(Request $request, Response $response, array $args)
+    {
+        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
+        $this->cargoService->delete($args['uuid'], $uuidUsuarioLogado);
+
+        $response->getBody()->write(json_encode([
+            "message" => "Registro UUID: " . $args['uuid'] . " excluído"
+        ]));
+        return $response->withStatus(200);
     }
 }

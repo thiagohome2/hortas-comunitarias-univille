@@ -8,51 +8,57 @@ use App\Services\HortaService;
 
 class HortaController
 {
-    protected HortaService $service;
+    protected HortaService $hortaService;
 
-    public function __construct(HortaService $service)
+    public function __construct(HortaService $hortaService)
     {
-        $this->service = $service;
+        $this->hortaService = $hortaService;
     }
 
+    
     public function list(Request $request, Response $response)
     {
-        $result = $this->service->list();
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+        $hortas = $this->hortaService->findAllWhere();
+        $response->getBody()->write(json_encode($hortas));
+        return $response->withStatus(200);
     }
 
     public function get(Request $request, Response $response, array $args)
     {
-        $result = $this->service->get($args['uuid']);
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+        $horta = $this->hortaService->findByUuid($args['uuid']);
+        if (!$horta) return $response->withStatus(404);
+
+        $response->getBody()->write(json_encode($horta));
+        return $response->withStatus(200);
     }
 
     public function create(Request $request, Response $response)
     {
-        $data = $request->getParsedBody();
-        $usuarioUuid = $request->getAttribute('usuario_uuid');
+        $data = (array)$request->getParsedBody();
+        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
+        $horta = $this->hortaService->create($data, $uuidUsuarioLogado);
 
-        $result = $this->service->create($data, $usuarioUuid);
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+        $response->getBody()->write(json_encode($horta));
+        return $response->withStatus(201);
     }
 
     public function update(Request $request, Response $response, array $args)
     {
-        $data = $request->getParsedBody();
-        $usuarioUuid = $request->getAttribute('usuario_uuid');
+        $data = (array)$request->getParsedBody();
+        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
+        $horta = $this->hortaService->update($args['uuid'], $data, $uuidUsuarioLogado);
 
-        $result = $this->service->update($args['uuid'], $data, $usuarioUuid);
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+        $response->getBody()->write(json_encode($horta));
+        return $response->withStatus(200);
     }
 
-    public function delete(Request $request, Response $response, array $args)
-    {
-        $result = $this->service->delete($args['uuid']);
-        $response->getBody()->write(json_encode($result));
-        return $response->withHeader('Content-Type', 'application/json');
+    public function delete(Request $request, Response $response, array $args){   
+        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
+        $this->hortaService->delete($args['uuid'], $uuidUsuarioLogado);
+        
+        $response->getBody()->write(json_encode([
+            "message" => "Registro UUID: " . $args['uuid'] . " excluído"
+        ]));
+        return $response->withStatus(200);
     }
 }
