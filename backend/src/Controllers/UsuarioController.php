@@ -52,8 +52,9 @@ class UsuarioController
     }
 
     public function delete(Request $request, Response $response, array $args)
-    {
-        $this->service->delete($args['uuid']);
+    {   
+        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
+        $this->service->delete($args['uuid'], $uuidUsuarioLogado);
         return $response->withStatus(204);
     }
 }

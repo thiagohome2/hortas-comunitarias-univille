@@ -17,7 +17,7 @@ class EnderecoRepository
     {
         return $this->model->all();
     }
-
+    public function existsByUuid(string $uuid): bool { return $this->model->find($uuid) ? true : false; }
     public function findByUuid(string $uuid)
     {
         return $this->model->where('uuid', $uuid)->first();

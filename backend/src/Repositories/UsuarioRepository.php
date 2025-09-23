@@ -34,8 +34,14 @@ class UsuarioRepository
         return $usuario;
     }
 
-    public function delete(UsuarioModel $usuario): bool
-    {
-        return $usuario->delete();
+    public function delete(UsuarioModel $usuario): bool {
+        $usuario->excluido = 1;
+        return $usuario->save();
     }
+
+    public function findAllWhere(array $conditions)
+    {
+        return $this->model->where($conditions)->get();
+    }
+
 }

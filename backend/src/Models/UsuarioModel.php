@@ -16,6 +16,9 @@ class UsuarioModel extends Model
     const CREATED_AT = 'data_de_criacao';
     const UPDATED_AT = 'data_de_ultima_alteracao';
 
+    protected $guarded = ['uuid','usuario_criador_uuid','usuario_alterador_uuid','data_de_criacao','data_de_ultima_alteracao'];
+
+
     protected $fillable = [
         'uuid',
         'nome_completo',
