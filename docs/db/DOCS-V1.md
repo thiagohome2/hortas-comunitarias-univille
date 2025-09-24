@@ -530,7 +530,6 @@ Em caso de status = 2, que seja feita uma entrada na tabela de caixa da associa�
 | Usuário | usuario_uuid | CHAR(36) NOT NULL | FK para usuários (quem paga a mensalidade) |
 | Associação | associacao_uuid | CHAR(36) NOT NULL | FK para a associação dona do vínculo |
 | Valor em Centavos | valor_em_centavos | BIGINT NOT NULL | Valor da mensalidade em centavos (copiado de usuarios.taxa_associado_em_centavos) |
-| Mês Referência | mes_referencia | DATE NOT NULL | Primeiro dia do mês de referência (YYYY-MM-01) |
 | Data de Vencimento | data_vencimento | DATE NOT NULL | Data que deveria pagar |
 | Data de Pagamento | data_pagamento | DATE | Preenchido quando efetivamente pago |
 | Status | status | TINYINT NOT NULL DEFAULT 0 | 0 = aguardando pagamento, 1 = pago, 2 = compensado/concluído, 3 = cancelado, 4 = em atraso |
@@ -561,7 +560,7 @@ O usuário que criar a conta será o usuário responsável da conta por padrão,
 | Associação | associacao_uuid | CHAR(36) NOT NULL | FK para a associação dona do vínculo |
 | Valor em Centavos | valor_em_centavos | BIGINT NOT NULL | Valor da mensalidade em centavos |
 | Mês Referência | mes_referencia | DATE NOT NULL | Primeiro dia do mês de referência (YYYY-MM-01) |
-| Plano | plano | TINYINT NOT NULL DEFAULT 0 | Range de planos (0-2 inicialmente) |
+| Plano UUID | plano_uuid | CHAR(36) | UUID do plano |
 | Data de Vencimento | data_vencimento | DATE NOT NULL | Data que deveria pagar |
 | Data de Pagamento | data_pagamento | DATE | Preenchido quando efetivamente pago |
 | Status | status | TINYINT NOT NULL DEFAULT 0 | 0 = aguardando pagamento, 1 = pago, 2 = compensado/concluído, 3 = cancelado, 4 = em atraso |
@@ -578,6 +577,7 @@ O usuário que criar a conta será o usuário responsável da conta por padrão,
 - **associacao_uuid** → associacoes.uuid (N:1)
 - **usuario_criador_uuid** → usuarios.uuid (N:1)
 - **usuario_alterador_uuid** → usuarios.uuid (N:1)
+- **plano_uuid** → planos.uuid (N:1)
 
 ---
 

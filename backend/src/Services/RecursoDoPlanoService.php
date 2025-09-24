@@ -10,10 +10,13 @@ use Ramsey\Uuid\Uuid;
 
 class RecursoDoPlanoService
 {
-    protected $recursoDoPlanoRepository;
+    protected RecursoDoPlanoRepository $recursoDoPlanoRepository;
+    protected PlanoService $planoService;
 
-    public function __construct(RecursoDoPlanoRepository $recursoDoPlanoRepository){
+    public function __construct(RecursoDoPlanoRepository $recursoDoPlanoRepository,
+    PlanoService $planoService){
         $this->recursoDoPlanoRepository = $recursoDoPlanoRepository;
+        $this->planoService = $planoService;
     }
 
     public function findAllWhere(): Collection {
@@ -23,18 +26,21 @@ class RecursoDoPlanoService
     public function findByUuid(string $uuid): ?RecursoDoPlanoModel {
         $recursoDoPlano = $this->recursoDoPlanoRepository->findByUuid($uuid);
         if(!$recursoDoPlano || $recursoDoPlano->excluido){
-            throw new Exception('RecursoDoPlano não encontrado');
+            throw new Exception('Recurso do Plano não encontrado');
         }
         return $recursoDoPlano;
     }
 
     public function create(array $data, string $uuidUsuarioLogado): RecursoDoPlanoModel {
-        v::key('codigo', v::intType()->between(0,5))
-          ->key('slug', v::stringType()->notEmpty())
-          ->key('nome', v::stringType()->notEmpty())
+        v::key('nome_do_recurso', v::stringType()->notEmpty())
+          ->key('quantidade', v::intType())
           ->key('descricao', v::stringType()->notEmpty())
-          ->key('cor', v::stringType()->notEmpty())
+          ->key('plano_uuid', v::uuid())
           ->check($data);
+
+          if (!empty($data['plano_uuid'])){
+              $this->planoService->findByUuid($data['plano_uuid']);
+          }
 
         $guarded = ['uuid', 'usuario_criador_uuid', 'data_de_criacao', 'data_de_ultima_alteracao'];
         foreach ($guarded as $g) unset($data[$g]);
@@ -49,15 +55,18 @@ class RecursoDoPlanoService
     public function update(string $uuid, array $data, string $uuidUsuarioLogado): RecursoDoPlanoModel {
         $recursoDoPlano = $this->recursoDoPlanoRepository->findByUuid($uuid);
         if(!$recursoDoPlano || $recursoDoPlano->excluido){
-            throw new Exception('RecursoDoPlano não encontrado');
+            throw new Exception('Recurso do Plano não encontrado');
         }
 
-        v::key('codigo', v::intType()->between(0,5), false)
-          ->key('slug', v::stringType()->notEmpty(), false)
-          ->key('nome', v::stringType()->notEmpty(), false)
+        v::key('nome_do_recurso', v::stringType()->notEmpty(), false)
+          ->key('quantidade', v::intType(), false)
           ->key('descricao', v::stringType()->notEmpty(), false)
-          ->key('cor', v::stringType()->notEmpty(), false)
+          ->key('plano_uuid', v::uuid(), false)
           ->check($data);
+
+        if (!empty($data['plano_uuid'])){
+            $this->planoService->findByUuid($data['plano_uuid']);
+        }
 
         $guarded = ['uuid', 'usuario_criador_uuid', 'data_de_criacao', 'data_de_ultima_alteracao'];
         foreach ($guarded as $g) unset($data[$g]);
@@ -70,7 +79,7 @@ class RecursoDoPlanoService
     public function delete(string $uuid, string $uuidUsuarioLogado): bool {
         $recursoDoPlano = $this->recursoDoPlanoRepository->findByUuid($uuid);
         if (!$recursoDoPlano || $recursoDoPlano->excluido) {
-            throw new Exception('RecursoDoPlano não encontrado');
+            throw new Exception('Recurso do Plano não encontrado');
         }
 
         $data = [

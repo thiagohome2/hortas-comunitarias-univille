@@ -29,11 +29,10 @@ class PlanoService
     }
 
     public function create(array $data, string $uuidUsuarioLogado): PlanoModel {
-        v::key('codigo', v::intType()->between(0,5))
+        v::key('codigo', v::stringType()->notEmpty())
           ->key('slug', v::stringType()->notEmpty())
           ->key('nome', v::stringType()->notEmpty())
           ->key('descricao', v::stringType()->notEmpty())
-          ->key('cor', v::stringType()->notEmpty())
           ->check($data);
 
         $guarded = ['uuid', 'usuario_criador_uuid', 'data_de_criacao', 'data_de_ultima_alteracao'];
@@ -52,11 +51,10 @@ class PlanoService
             throw new Exception('Plano não encontrado');
         }
 
-        v::key('codigo', v::intType()->between(0,5), false)
+        v::key('codigo', v::stringType()->notEmpty(), false)
           ->key('slug', v::stringType()->notEmpty(), false)
           ->key('nome', v::stringType()->notEmpty(), false)
           ->key('descricao', v::stringType()->notEmpty(), false)
-          ->key('cor', v::stringType()->notEmpty(), false)
           ->check($data);
 
         $guarded = ['uuid', 'usuario_criador_uuid', 'data_de_criacao', 'data_de_ultima_alteracao'];

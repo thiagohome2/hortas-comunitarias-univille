@@ -11,9 +11,15 @@ use Ramsey\Uuid\Uuid;
 class MensalidadeDaAssociacaoService
 {
     protected $mensalidadeDaAssociacaoRepository;
+    protected AssociacaoService $associacaoService;
+    protected UsuarioService $usuarioService;
 
-    public function __construct(MensalidadeDaAssociacaoRepository $mensalidadeDaAssociacaoRepository){
+    public function __construct(MensalidadeDaAssociacaoRepository $mensalidadeDaAssociacaoRepository,
+    AssociacaoService $associacaoService,
+    UsuarioService $usuarioService){
         $this->mensalidadeDaAssociacaoRepository = $mensalidadeDaAssociacaoRepository;
+        $this->associacaoService = $associacaoService;
+        $this->usuarioService = $usuarioService;
     }
 
     public function findAllWhere(): Collection {
@@ -29,12 +35,23 @@ class MensalidadeDaAssociacaoService
     }
 
     public function create(array $data, string $uuidUsuarioLogado): MensalidadeDaAssociacaoModel {
-        v::key('codigo', v::intType()->between(0,5))
-          ->key('slug', v::stringType()->notEmpty())
-          ->key('nome', v::stringType()->notEmpty())
-          ->key('descricao', v::stringType()->notEmpty())
-          ->key('cor', v::stringType()->notEmpty())
+        v::key('valor_em_centavos', v::intType()->positive())
+        ->key('usuario_uuid', v::uuid())
+        ->key('associacao_uuid', v::uuid())
+        ->key('data_vencimento',  v::date('Y-m-d'))
+        ->key('data_pagamento', v::optional(v::date('Y-m-d')))
+        ->key('status', v::intType()->positive())
+        ->key('dias_atraso', v::intType()->positive())
+        ->key('url_anexo', v::optional(v::url()))
           ->check($data);
+
+        if (!empty($data['usuario_uuid'])){
+            $this->usuarioService->findByUuid($data['usuario_uuid']);
+        }
+
+        if (!empty($data['associacao_uuid'])){
+            $this->associacaoService->findByUuid($data['associacao_uuid']);
+        }
 
         $guarded = ['uuid', 'usuario_criador_uuid', 'data_de_criacao', 'data_de_ultima_alteracao'];
         foreach ($guarded as $g) unset($data[$g]);
@@ -52,12 +69,23 @@ class MensalidadeDaAssociacaoService
             throw new Exception('Mensalidade da Associação não encontrado');
         }
 
-        v::key('codigo', v::intType()->between(0,5), false)
-          ->key('slug', v::stringType()->notEmpty(), false)
-          ->key('nome', v::stringType()->notEmpty(), false)
-          ->key('descricao', v::stringType()->notEmpty(), false)
-          ->key('cor', v::stringType()->notEmpty(), false)
+        v::key('valor_em_centavos', v::intType()->positive(), false)
+        ->key('usuario_uuid', v::uuid(), false)
+        ->key('associacao_uuid', v::uuid(), false)
+        ->key('data_vencimento',  v::date('Y-m-d'), false)
+        ->key('data_pagamento', v::date('Y-m-d'), false)
+        ->key('status', v::intType()->positive(), false)
+        ->key('dias_atraso', v::intType()->positive(), false)
+        ->key('url_anexo', v::optional(v::url()), false)
           ->check($data);
+
+        if (!empty($data['usuario_uuid'])){
+            $this->usuarioService->findByUuid($data['usuario_uuid']);
+        }
+
+        if (!empty($data['associacao_uuid'])){
+            $this->associacaoService->findByUuid($data['associacao_uuid']);
+        }
 
         $guarded = ['uuid', 'usuario_criador_uuid', 'data_de_criacao', 'data_de_ultima_alteracao'];
         foreach ($guarded as $g) unset($data[$g]);
