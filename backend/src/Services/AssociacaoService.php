@@ -27,7 +27,7 @@ class AssociacaoService
     {
         $associacao = $this->associacaoRepository->findByUuid($uuid);
         if(!$associacao || $associacao->excluido){
-            throw new Exception('Usuário não encontrado');
+            throw new Exception('Associação não encontrada');
         }
         return $associacao;
     }

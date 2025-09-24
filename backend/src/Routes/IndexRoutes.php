@@ -41,5 +41,27 @@ return function (App $app) {
         $permissaoDoUsuarioRoutes = require __DIR__ . '/PermissaoDoUsuarioRoutes.php';
         $permissaoDoUsuarioRoutes($group);
 
+        $categoriaFinanceiraRoutes = require __DIR__ . '/CategoriaFinanceiraRoutes.php';
+        $categoriaFinanceiraRoutes($group);
+
+        $planoRoutes = require __DIR__ . '/PlanoRoutes.php';
+        $planoRoutes($group);
+
+        $recursoDoPlanoRoutes = require __DIR__ . '/RecursoDoPlanoRoutes.php';
+        $recursoDoPlanoRoutes($group);
+
+        $financeiroDaAssociacaoRoutes = require __DIR__ . '/FinanceiroDaAssociacaoRoutes.php';
+        $financeiroDaAssociacaoRoutes($group);
+
+        $financeiroDaHortaRoutes = require __DIR__ . '/FinanceiroDaHortaRoutes.php';
+        $financeiroDaHortaRoutes($group);
+
+        $mensalidadeDaAssociacaoRoutes = require __DIR__ . '/MensalidadeDaAssociacaoRoutes.php';
+        $mensalidadeDaAssociacaoRoutes($group);
+
+        $mensalidadeDaPlataformaRoutes = require __DIR__ . '/MensalidadeDaPlataformaRoutes.php';
+        $mensalidadeDaPlataformaRoutes($group);
+
+
     });
 };

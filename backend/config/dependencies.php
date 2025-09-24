@@ -43,6 +43,27 @@
 
         $permissaoDoUsuario = require __DIR__ . '/permissao_do_usuario_bindings.php';
         $permissaoDoUsuario($containerBuilder);
+
+        $categoriaFinanceiraBindings = require __DIR__ . '/categoria_financeira_bindings.php';
+        $categoriaFinanceiraBindings($containerBuilder);
+
+        $planoBindings = require __DIR__ . '/plano_bindings.php';
+        $planoBindings($containerBuilder);
+
+        $recursoDoPlanoBindings = require __DIR__ . '/recurso_do_plano_bindings.php';
+        $recursoDoPlanoBindings($containerBuilder);
+
+        $financeiroDaAssociacaoBindings = require __DIR__ . '/financeiro_da_associacao_bindings.php';
+        $financeiroDaAssociacaoBindings($containerBuilder);
+
+        $financeiroDaHortaBindings = require __DIR__ . '/financeiro_da_horta_bindings.php';
+        $financeiroDaHortaBindings($containerBuilder);
+
+        $mensalidadeDaAssociacaoBindings = require __DIR__ . '/mensalidade_da_associacao_bindings.php';
+        $mensalidadeDaAssociacaoBindings($containerBuilder);
+
+        $mensalidadeDaPlataformaBindings = require __DIR__ . '/mensalidade_da_plataforma_bindings.php';
+        $mensalidadeDaPlataformaBindings($containerBuilder);
     }
 
 ?>

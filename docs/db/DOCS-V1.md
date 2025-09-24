@@ -19,8 +19,8 @@
   - [Permissões de Exceção](#4-permissões-de-exceção--bdpermissoes_de_excecao)
 - [📗 Tabelas para Gestão Financeira](#tabelas-para-gestao-financeira)
   - [1. Categorias Financeiras | `bd.categorias_financeiras`](#1-categorias-financeiras--bdcategorias_financeiras)
-  - [2. Financeiro Horta | `bd.financeiro_horta`](#2-financeiro-horta--bdfinanceiro_horta)
-  - [3. Financeiro Associação | `bd.financeiro_associacao`](#3-financeiro-associação--bdfinanceiro_associacao)
+  - [2. Financeiro da Horta | `bd.financeiro_da_horta`](#2-financeiro-da_horta--bdfinanceiro_da_horta)
+  - [3. Financeiro da Associação | `bd.financeiro_da_associacao`](#3-financeiro-da-associação--bdfinanceiro_da_associacao)
   - [4. Mensalidades da Associação | `bd.mensalidades_da_associacao`](#4-mensalidades-da-associação--bdmensalidades_da_associacao)
   - [5. Mensalidades da Plataforma | `bd.mensalidades_da_plataforma`](#5-mensalidades-da-plataforma--bdmensalidades_da_plataforma)
   - [6. Planos | `bd.planos`](#6-planos--bdplanos)
@@ -50,7 +50,7 @@ Todas as tabelas têm campos destinados para auditoria, suporte técnico e hist�
 | --- | --- | --- |
 | **Data de criação** | `data_de_criacao` | TIMESTAMP DEFAULT NOW() |
 | **Usuário de criação** | `usuario_criador_uuid` | CHAR(36) |
-| **Data de alteração** | `data_de_alteracao` | TIMESTAMP DEFAULT NOW() |
+| **Data de Última Alteração** | `data_de_ultima_alteracao` | TIMESTAMP DEFAULT NOW() |
 | **Usuário de alteração** | `usuario_alterador_uuid` | CHAR(36) |
 
 Optamos por utilizar **exclusão lógica** no banco de dados, o que significa que entidades excluídas terão o campo `excluido` definido como `TRUE`, mantendo o registro fisicamente no banco para consultas futuras.
@@ -101,7 +101,7 @@ Tabelas necessárias para manter uma base de staff (administradores da plataform
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 Consideramos que usuários só poderão ter um cargo por vez. Exceções tratadas na tabela respectiva.
 
@@ -133,7 +133,7 @@ Consideramos que usuários só poderão ter um cargo por vez. Exceções tratada
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 ### Relacionamentos de ASSOCIAÇÕES:
 - **endereco_uuid** → enderecos.uuid (N:1)
@@ -156,7 +156,7 @@ Consideramos que usuários só poderão ter um cargo por vez. Exceções tratada
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 ### Relacionamentos de HORTAS:
 - **endereco_uuid** → enderecos.uuid (N:1)
@@ -185,7 +185,7 @@ Consideramos que usuários só poderão ter um cargo por vez. Exceções tratada
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 ### Relacionamentos de ENDEREÇOS:
 - **usuario_criador_uuid** → usuarios.uuid (N:1)
@@ -205,7 +205,7 @@ Consideramos que usuários só poderão ter um cargo por vez. Exceções tratada
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 ### Sobre a multiplicidade
 A tabela de canteiros foi modificada para suportar múltiplos proprietários por canteiro através da tabela de vínculo `canteiros_e_usuarios` descrita abaixo.
@@ -236,7 +236,7 @@ Tabela de vínculo N:N entre canteiros e usuários, permitindo copropriedade de 
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 ### Relacionamentos de CANTEIROS E USUÁRIOS:
 - **canteiro_uuid** → canteiros.uuid (N:1)
@@ -292,7 +292,7 @@ Armazena os cargos possíveis no sistema. Atualmente temos 5 cargos base.
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 ### Relacionamentos de CARGOS:
 - **usuario_criador_uuid** → usuarios.uuid (N:1)
@@ -331,7 +331,7 @@ if ($usuario['cargo']['codigo'] === 1) {
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 ### Relacionamentos de PERMISSÕES:
 - **usuario_criador_uuid** → usuarios.uuid (N:1)
@@ -389,7 +389,7 @@ Tabela que armazena o que cada cargo pode fazer, por padrão, na plataforma.
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 ### Relacionamentos de PERMISSÕES DE CARGO:
 - **cargo_uuid** → cargos.uuid (N:1)
@@ -409,7 +409,7 @@ Tabela que armazena o que cada cargo pode fazer, por padrão, na plataforma.
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 ### Relacionamentos de PERMISSÕES DE EXCEÇÃO:
 - **usuario_uuid** → usuarios.uuid (N:1)
@@ -434,15 +434,17 @@ Tabela para categorizar lançamentos financeiros, facilitando relatórios e cont
 | Tipo | tipo | TINYINT NOT NULL | 1 = Entrada, 2 = Saída, 3 = Ambos |
 | Cor | cor | VARCHAR(7) | Código hexadecimal da cor para interface |
 | Ícone | icone | VARCHAR(50) | Nome do ícone para interface |
-| Associação UUID | associacao_uuid | CHAR(36) | UUID da associação (NULL = categoria global) |
+| Associação UUID | associacao_uuid | CHAR(36) | UUID da associação (NULL = categoria de horta) |
+| Horta UUID | horta_uuid | CHAR(36) | UUID da associação (NULL = categoria de associação |
 | Excluído | excluido | BOOLEAN DEFAULT FALSE | Exclusão lógica |
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 ### Relacionamentos de CATEGORIAS FINANCEIRAS:
 - **associacao_uuid** → associacoes.uuid (N:1) - Opcional
+- **horta_uuid** → associacoes.uuid (N:1) - Opcional
 - **usuario_criador_uuid** → usuarios.uuid (N:1)
 - **usuario_alterador_uuid** → usuarios.uuid (N:1)
 
@@ -458,14 +460,13 @@ Tabela para categorizar lançamentos financeiros, facilitando relatórios e cont
 
 ---
 
-## 2. FINANCEIRO HORTA | `bd.financeiro_horta`
+## 2. FINANCEIRO DA HORTA | `bd.financeiro_da_horta`
 
 Tabela para manter um registro de caixa da Horta. Não comporta gestão de pagamento dos canteiristas, que será gerida pelas próximas tabelas.
 
 | Nome do Campo | Nome da Coluna | Tipo | Observação |
 | --- | --- | --- | --- |
 | UUID | uuid | CHAR(36) | Chave primária |
-| Tipo | tipo | TINYINT NOT NULL | 1 = Entrada, 2 = Saída |
 | Valor em Centavos | valor_em_centavos | BIGINT NOT NULL | Valor da movimentação em centavos (R$ 1,00 = 100) |
 | Descrição do Lançamento | descricao_do_lancamento | TEXT NOT NULL | Descrição detalhada |
 | Categoria UUID | categoria_uuid | CHAR(36) | UUID da categoria financeira |
@@ -476,9 +477,9 @@ Tabela para manter um registro de caixa da Horta. Não comporta gestão de pagam
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
-### Relacionamentos de FINANCEIRO HORTA:
+### Relacionamentos de FINANCEIRO DA HORTA:
 - **horta_uuid** → hortas.uuid (N:1)
 - **categoria_uuid** → categorias_financeiras.uuid (N:1)
 - **usuario_criador_uuid** → usuarios.uuid (N:1)
@@ -486,14 +487,13 @@ Tabela para manter um registro de caixa da Horta. Não comporta gestão de pagam
 
 ---
 
-## 3. FINANCEIRO ASSOCIAÇÃO | `bd.financeiro_associacao`
+## 3. FINANCEIRO DA ASSOCIAÇÃO | `bd.financeiro_da_associacao`
 
 Gera o caixa da associação, e permite que entradas no caixa sejam oriundas das mensalidades mantidas na tabela seguinte.
 
 | Nome do Campo | Nome da Coluna | Tipo | Observação |
 | --- | --- | --- | --- |
 | UUID | uuid | CHAR(36) | Chave primária |
-| Tipo | tipo | TINYINT NOT NULL | 1 = Entrada, 2 = Saída |
 | Valor em Centavos | valor_em_centavos | BIGINT NOT NULL | Valor da movimentação em centavos (R$ 1,00 = 100) |
 | Descrição do Lançamento | descricao_do_lancamento | TEXT NOT NULL | Descrição detalhada |
 | Categoria UUID | categoria_uuid | CHAR(36) | UUID da categoria financeira |
@@ -505,9 +505,9 @@ Gera o caixa da associação, e permite que entradas no caixa sejam oriundas das
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
-### Relacionamentos de FINANCEIRO ASSOCIAÇÃO:
+### Relacionamentos de FINANCEIRO DA ASSOCIAÇÃO:
 - **associacao_uuid** → associacoes.uuid (N:1)
 - **categoria_uuid** → categorias_financeiras.uuid (N:1)
 - **mensalidade_uuid** → mensalidades_da_associacao.uuid (N:1) - Opcional
@@ -540,7 +540,7 @@ Em caso de status = 2, que seja feita uma entrada na tabela de caixa da associa�
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 ### Relacionamentos de MENSALIDADES DA ASSOCIAÇÃO:
 - **usuario_uuid** → usuarios.uuid (N:1)
@@ -571,7 +571,7 @@ O usuário que criar a conta será o usuário responsável da conta por padrão,
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 ### Relacionamentos de MENSALIDADES DA PLATAFORMA:
 - **usuario_uuid** → usuarios.uuid (N:1)
@@ -594,7 +594,7 @@ O usuário que criar a conta será o usuário responsável da conta por padrão,
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 ### Relacionamentos de PLANOS:
 - **usuario_criador_uuid** → usuarios.uuid (N:1)
@@ -615,7 +615,7 @@ O usuário que criar a conta será o usuário responsável da conta por padrão,
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
-| Data de Alteração | data_de_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
 
 ### Relacionamentos de RECURSOS DO PLANO:
 - **plano_uuid** → planos.uuid (N:1)
