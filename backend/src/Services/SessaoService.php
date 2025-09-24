@@ -22,9 +22,11 @@ class SessaoService
         $payload = [
             'usuario_uuid' => $usuario->uuid,
             'cargo_uuid' => $usuario->cargo_uuid,
-            'exp' => time() + 3600, // 1h de expiração
+            'exp' => time() + 7200, // 2h de expiração
         ];
+
 
         return JWT::encode($payload, $_ENV['JWT_SECRET'], 'HS256');
     }
+
 }

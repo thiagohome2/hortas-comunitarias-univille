@@ -324,9 +324,9 @@ if ($usuario['cargo']['codigo'] === 1) {
 | --- | --- | --- | --- |
 | UUID | uuid | CHAR(36) | Chave primária |
 | Slug da Permissão | slug | VARCHAR(100) UNIQUE NOT NULL | Identificador amigável |
-| Nome | nome | VARCHAR(100) NOT NULL | Nome da permissão |
+| tipo | tipo | TINYINT NOT NULL | Tipo da permissão (0 - criar, 1 - atualizar, 2 - ler, 3 - deletar) |
+| Módulo | modulo | TINYINT NOT NULL | Módulo do sistema |
 | Descrição | descricao | TEXT | Descrição da permissão |
-| Módulo | modulo | VARCHAR(50) | Módulo do sistema (usuários, financeiro, hortas, etc.) |
 | Excluído | excluido | BOOLEAN DEFAULT FALSE | Exclusão lógica |
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
@@ -336,6 +336,43 @@ if ($usuario['cargo']['codigo'] === 1) {
 ### Relacionamentos de PERMISSÕES:
 - **usuario_criador_uuid** → usuarios.uuid (N:1)
 - **usuario_alterador_uuid** → usuarios.uuid (N:1)
+
+Sobre as permissões, atualmente temos:
+```php
+enum Permissoes: int
+{
+    case LER = 0;
+    case CRIAR = 1;
+    case EDITAR = 2;
+    case DELETAR = 3;
+}
+```
+Sobre os módulos, atualmente temos:
+
+```php
+enum Modulos: int
+{
+    case USUARIOS = 0;
+    case ASSOCIACOES = 1;
+    case HORTAS = 2;
+    case ENDERECOS = 3;
+    case CANTEIROS = 4;
+    case CANTEIROS_E_USUARIOS = 5;
+    case CARGOS = 6;
+    case PERMISSOES = 7;
+    case PERMISSOES_DE_CARGO = 8;
+    case PERMISSOES_DE_EXCECAO = 9;
+    case CATEGORIAS_FINANCEIRAS = 10;
+    case FINANCEIRO_HORTA = 11;
+    case FINANCEIRO_ASSOCIACAO = 12;
+    case MENSALIDADES_DA_ASSOCIACAO = 13;
+    case MENSALIDADES_DA_PLATAFORMA = 14;
+    case PLANOS = 15;
+    case RECURSOS_DO_PLANO = 16;
+}
+```
+
+Uma permissão se dá por X, Y onde X = módulo e Y = tipo de permissão.
 
 ---
 
@@ -348,7 +385,6 @@ Tabela que armazena o que cada cargo pode fazer, por padrão, na plataforma.
 | UUID | uuid | CHAR(36) | Chave primária |
 | Cargo UUID | cargo_uuid | CHAR(36) NOT NULL | UUID do cargo |
 | Permissão UUID | permissao_uuid | CHAR(36) NOT NULL | UUID da permissão |
-| Liberado | liberado | BOOLEAN DEFAULT FALSE | Status da permissão para o cargo |
 | Excluído | excluido | BOOLEAN DEFAULT FALSE | Exclusão lógica |
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
