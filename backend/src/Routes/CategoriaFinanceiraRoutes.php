@@ -9,9 +9,11 @@ use Slim\Routing\RouteCollectorProxy;
 return function (RouteCollectorProxy $app) {
     $jwtMiddleware = new JwtMiddleware();
 
-    $app->group('/categoria-financeira', function (RouteCollectorProxy $group) {
+    $app->group('/categorias-financeiras', function (RouteCollectorProxy $group) {
         $group->get('', CategoriaFinanceiraController::class . ':list');
         $group->get('/{uuid}', CategoriaFinanceiraController::class . ':get');
+        $group->get('/associacao/{uuid}', CategoriaFinanceiraController::class . ':getByAssociacao');
+        $group->get('/horta/{uuid}', CategoriaFinanceiraController::class . ':getByHorta');
         $group->post('', CategoriaFinanceiraController::class . ':create');
         $group->put('/{uuid}', CategoriaFinanceiraController::class . ':update');
         $group->delete('/{uuid}', CategoriaFinanceiraController::class . ':delete');

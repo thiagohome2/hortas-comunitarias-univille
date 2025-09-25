@@ -10,7 +10,7 @@ use Ramsey\Uuid\Uuid;
 
 class MensalidadeDaAssociacaoService
 {
-    protected $mensalidadeDaAssociacaoRepository;
+    protected MensalidadeDaAssociacaoRepository $mensalidadeDaAssociacaoRepository;
     protected AssociacaoService $associacaoService;
     protected UsuarioService $usuarioService;
 
@@ -32,6 +32,36 @@ class MensalidadeDaAssociacaoService
             throw new Exception('Mensalidade da Associação não encontrado');
         }
         return $mensalidadeDaAssociacao;
+    }
+
+
+    public function findByAssociacaoUuid(string $associacaoUuid): Collection
+    {
+        $associacao = $this->associacaoService->findByUuid($associacaoUuid);
+        if (!$associacao || $associacao->excluido) {
+            throw new Exception('Usuário não encontrado');
+        }
+
+        $mensalidades = $this->mensalidadeDaAssociacaoRepository->findByAssociacaoUuid($associacaoUuid);
+        if ($mensalidades->isEmpty()) {
+            throw new Exception('Mensalidades de associação da associação não encontradas');
+        }
+        return $mensalidades;
+    }
+
+
+        public function findByUsuarioUuid(string $usuarioUuid): Collection
+    {
+        $usuario = $this->usuarioService->findByUuid($usuarioUuid);
+        if (!$usuario || $usuario->excluido) {
+            throw new Exception('Usuário não encontrado');
+        }
+
+        $mensalidades = $this->mensalidadeDaAssociacaoRepository->findByUsuarioUuid($usuarioUuid);
+        if ($mensalidades->isEmpty()) {
+            throw new Exception('Mensalidades de associação do usuário não encontradas');
+        }
+        return $mensalidades;
     }
 
     public function create(array $data, string $uuidUsuarioLogado): MensalidadeDaAssociacaoModel {

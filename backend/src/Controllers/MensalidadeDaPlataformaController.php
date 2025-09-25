@@ -31,6 +31,15 @@ class MensalidadeDaPlataformaController
         return $response->withStatus(200);
     }
 
+    public function getByUsuario(Request $request, Response $response, array $args)
+    {
+        $mensalidadesDaPlataforma = $this->mensalidadeDaPlataformaService->findByUsuarioUuid($args['uuid']);
+        if ($mensalidadesDaPlataforma->isEmpty()) return $response->withStatus(404);
+
+        $response->getBody()->write(json_encode($mensalidadesDaPlataforma));
+        return $response->withStatus(200);
+    }
+
     public function create(Request $request, Response $response)
     {
         $data = (array)$request->getParsedBody();

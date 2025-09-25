@@ -30,6 +30,21 @@ class CategoriaFinanceiraRepository
         return $this->categoriaFinanceiraModel->find($uuid);
     }
 
+    public function findByHortaUuid(string $hortaUuid): Collection
+    {
+        return $this->categoriaFinanceiraModel
+        ->where("horta_uuid", $hortaUuid)
+        ->where('excluido', 0)
+        ->get();
+    }
+    public function findByAssociacaoUuid(string $associacaoUuid): Collection
+    {
+        return $this->categoriaFinanceiraModel
+        ->where("associacao_uuid", $associacaoUuid)
+        ->where('excluido', 0)
+        ->get();
+    }
+
     public function create(array $data): CategoriaFinanceiraModel
     {
         return $this->categoriaFinanceiraModel->create($data);

@@ -31,6 +31,23 @@ class MensalidadeDaAssociacaoController
         return $response->withStatus(200);
     }
 
+    public function getByAssociacao(Request $request, Response $response, array $args)
+    {
+        $mensalidadesDaAssociacao = $this->mensalidadeDaAssociacaoService->findByAssociacaoUuid($args['uuid']);
+        if ($mensalidadesDaAssociacao->isEmpty()) return $response->withStatus(404);
+
+        $response->getBody()->write(json_encode($mensalidadesDaAssociacao));
+        return $response->withStatus(200);
+    }
+    public function getByUsuario(Request $request, Response $response, array $args)
+    {
+        $mensalidadesDoUsuario = $this->mensalidadeDaAssociacaoService->findByUsuarioUuid($args['uuid']);
+        if ($mensalidadesDoUsuario->isEmpty()) return $response->withStatus(404);
+
+        $response->getBody()->write(json_encode($mensalidadesDoUsuario));
+        return $response->withStatus(200);
+    }
+
     public function create(Request $request, Response $response)
     {
         $data = (array)$request->getParsedBody();

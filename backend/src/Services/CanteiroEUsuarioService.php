@@ -41,8 +41,8 @@ class CanteiroEUsuarioService
         v::key('usuario_uuid', v::uuid())
         ->key('canteiro_uuid', v::uuid())
         ->key('tipo_vinculo', V::intVal()->min(1)->max(3))
-        ->key('data_inicio', V::date()->notEmpty())
-        ->key('data_fim', V::optional(V::date()))
+        ->key('data_inicio', v::date())
+        ->key('data_fim', v::date())
         ->key('percentual_responsabilidade', v::floatVal()->between(0, 100, true))
         ->key('observacoes', V::optional(V::stringType()))
         ->assert($data);
@@ -51,6 +51,7 @@ class CanteiroEUsuarioService
         foreach ($guarded as $g) unset($data[$g]);
         
         $data['uuid'] = Uuid::uuid1()->toString();
+        $data['ativo'] = 1;
         $data['usuario_criador_uuid'] = $uuidUsuarioLogado;
         $data['usuario_alterador_uuid'] = $uuidUsuarioLogado;
 
@@ -61,7 +62,7 @@ class CanteiroEUsuarioService
         if (!empty($data['usuario_uuid'])) {
             $this->usuarioService->findByUuid($data['usuario_uuid']);
         }
-
+        
         return $this->canteiroEUsuarioRepository->create($data);
     }
 
@@ -76,11 +77,11 @@ class CanteiroEUsuarioService
         v::key('usuario_uuid', v::uuid(), false)
         ->key('canteiro_uuid', v::uuid(), false)
         ->key('tipo_vinculo', v::intVal()->min(1)->max(3), false)
-        ->key('data_inicio', v::date()->notEmpty(), false)
-        ->key('data_fim', v::optional(V::date()), false)
+        ->key('data_inicio', v::date(), false)
+        ->key('data_fim', v::date(), false)
         ->key('percentual_responsabilidade', v::floatVal()->between(0, 100, true), false)
         ->key('observacoes', v::optional(v::stringType()), false)
-        ->key('ativo', V::boolVal(), false)
+        ->key('ativo', v::boolVal(), false)
         ->assert($data);
 
         $guarded = ['uuid', 'usuario_criador_uuid', 'data_de_criacao', 'data_de_ultima_alteracao'];

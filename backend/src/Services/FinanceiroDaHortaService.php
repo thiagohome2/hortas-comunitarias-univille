@@ -33,6 +33,19 @@ class FinanceiroDaHortaService
         return $financeiroDaHorta;
     }
 
+    public function findByHortaUuid(string $hortaUuid): Collection
+    {
+        $horta = $this->hortaService->findByUuid($hortaUuid);
+        if (!$horta || $horta->excluido) {
+            throw new Exception('Horta não encontrado');
+        }
+        $financeirosDaHorta = $this->financeiroDaHortaRepository->findByHortaUuid($hortaUuid);
+        if ($financeirosDaHorta->isEmpty()) {
+            throw new Exception('Financeiros da horta não encontrados');
+        }
+        return $financeirosDaHorta;
+    }
+
     public function create(array $data, string $uuidUsuarioLogado): FinanceiroDaHortaModel {
         v::key('valor_em_centavos', v::intType()->min(0))
         ->key('descricao_do_lancamento', v::stringType()->notEmpty())

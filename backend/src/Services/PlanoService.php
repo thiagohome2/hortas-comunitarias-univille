@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Models\PlanoModel;
+use App\Repositories\MensalidadeDaPlataformaRepository;
 use App\Repositories\PlanoRepository;
 use Respect\Validation\Validator as v;
 use Exception;
@@ -10,10 +11,16 @@ use Ramsey\Uuid\Uuid;
 
 class PlanoService
 {
-    protected $planoRepository;
+    protected PlanoRepository $planoRepository;
+    protected UsuarioService $usuarioService;
+    protected MensalidadeDaPlataformaRepository $mensalidadeDaPlataformaRepository;
 
-    public function __construct(PlanoRepository $planoRepository){
+    public function __construct(PlanoRepository $planoRepository,
+    UsuarioService $usuarioService,
+    MensalidadeDaPlataformaRepository $mensalidadeDaPlataformaRepository){
         $this->planoRepository = $planoRepository;
+        $this->usuarioService = $usuarioService;
+        $this->mensalidadeDaPlataformaRepository = $mensalidadeDaPlataformaRepository;
     }
 
     public function findAllWhere(): Collection {
@@ -26,6 +33,20 @@ class PlanoService
             throw new Exception('Plano não encontrado');
         }
         return $plano;
+    }
+
+    public function findByUsuarioUuid(string $usuarioUuid): array
+    {
+        $usuario = $this->usuarioService->findByUuid($usuarioUuid);
+        if (!$usuario || $usuario->excluido) {
+            throw new Exception('Usuário não encontrado');
+        }
+
+        $plano = $this->mensalidadeDaPlataformaRepository->findPlanoByUsuarioUuid($usuarioUuid);
+        if (!$plano) {
+            throw new Exception('Plano do usuário não encontrado');
+        }
+        return ["plano_uuid" => $plano];
     }
 
     public function create(array $data, string $uuidUsuarioLogado): PlanoModel {

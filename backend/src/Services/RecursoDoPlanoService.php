@@ -31,6 +31,19 @@ class RecursoDoPlanoService
         return $recursoDoPlano;
     }
 
+    public function findByPlanoUuid(string $planoUuid): ?Collection {
+        $plano = $this->planoService->findByUuid($planoUuid);
+        if(!$plano || $plano->excluido){
+            throw new Exception('Plano não encontrado');
+        }
+
+        $recursosDoPlano = $this->recursoDoPlanoRepository->findByPlanoUuid($planoUuid);
+        if($recursosDoPlano->isEmpty()){
+            throw new Exception('Recursos do Plano não encontrado');
+        }
+        return $recursosDoPlano;
+    }
+
     public function create(array $data, string $uuidUsuarioLogado): RecursoDoPlanoModel {
         v::key('nome_do_recurso', v::stringType()->notEmpty())
           ->key('quantidade', v::intType())

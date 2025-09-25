@@ -31,6 +31,15 @@ class PlanoController
         return $response->withStatus(200);
     }
 
+    public function getByUsuario(Request $request, Response $response, array $args)
+    {
+        $plano = $this->planoService->findByUsuarioUuid($args['uuid']);
+        if (!$plano) return $response->withStatus(404);
+
+        $response->getBody()->write(json_encode($plano));
+        return $response->withStatus(200);
+    }
+
     public function create(Request $request, Response $response)
     {
         $data = (array)$request->getParsedBody();

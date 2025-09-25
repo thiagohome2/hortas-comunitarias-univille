@@ -22,6 +22,14 @@ class RecursoDoPlanoRepository
     {
         return $this->recursoDoPlanoModel->find($uuid);
     }
+    
+    public function findByPlanoUuid(string $planoUuid): ?Collection
+    {
+        return $this->recursoDoPlanoModel
+        ->where("plano_uuid", $planoUuid)
+        ->where("excluido", 0)
+        ->get();
+    }
 
     public function create(array $data): RecursoDoPlanoModel
     {

@@ -31,6 +31,15 @@ class RecursoDoPlanoController
         return $response->withStatus(200);
     }
 
+    public function getByPlano(Request $request, Response $response, array $args)
+    {
+        $recursosDestePlano = $this->recursoDoPlanoService->findByPlanoUuid($args['uuid']);
+        if (!$recursosDestePlano) return $response->withStatus(404);
+
+        $response->getBody()->write(json_encode($recursosDestePlano));
+        return $response->withStatus(200);
+    }
+
     public function create(Request $request, Response $response)
     {
         $data = (array)$request->getParsedBody();

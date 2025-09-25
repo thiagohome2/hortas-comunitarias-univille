@@ -31,6 +31,15 @@ class FinanceiroDaHortaController
         return $response->withStatus(200);
     }
 
+    public function getByHorta(Request $request, Response $response, array $args)
+    {
+        $financeirosDaHorta = $this->financeiroDaHortaService->findByHortaUuid($args['uuid']);
+        if ($financeirosDaHorta->isEmpty()) return $response->withStatus(404);
+
+        $response->getBody()->write(json_encode($financeirosDaHorta));
+        return $response->withStatus(200);
+    }
+
     public function create(Request $request, Response $response)
     {
         $data = (array)$request->getParsedBody();

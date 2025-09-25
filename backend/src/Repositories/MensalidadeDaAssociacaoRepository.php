@@ -23,6 +23,26 @@ class MensalidadeDaAssociacaoRepository
         return $this->mensalidadeDaAssociacaoModel->find($uuid);
     }
 
+    public function findByUsuarioUuid(string $usuarioUuid): Collection
+    {
+        $registros = $this->mensalidadeDaAssociacaoModel
+        ->where("usuario_uuid", $usuarioUuid)
+        ->where("excluido", 0)
+        ->get();
+
+        return $registros;
+    }
+
+    public function findByAssociacaoUuid(string $associacaoUuid): Collection
+    {
+        $registros = $this->mensalidadeDaAssociacaoModel
+        ->where("associacao_uuid", $associacaoUuid)
+        ->where("excluido", 0)
+        ->get();
+
+        return $registros;
+    }
+
     public function create(array $data): MensalidadeDaAssociacaoModel
     {
         return $this->mensalidadeDaAssociacaoModel->create($data);

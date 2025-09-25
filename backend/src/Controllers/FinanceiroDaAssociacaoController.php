@@ -31,6 +31,15 @@ class FinanceiroDaAssociacaoController
         return $response->withStatus(200);
     }
 
+    public function getByAssociacao(Request $request, Response $response, array $args)
+    {
+        $financeirosDaAssociacao = $this->financeiroDaAssociacaoService->findByAssociacaoUuid($args['uuid']);
+        if ($financeirosDaAssociacao->isEmpty()) return $response->withStatus(404);
+
+        $response->getBody()->write(json_encode($financeirosDaAssociacao));
+        return $response->withStatus(200);
+    }
+
     public function create(Request $request, Response $response)
     {
         $data = (array)$request->getParsedBody();

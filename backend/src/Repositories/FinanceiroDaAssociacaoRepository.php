@@ -23,6 +23,14 @@ class FinanceiroDaAssociacaoRepository
         return $this->financeiroDaAssociacaoModel->find($uuid);
     }
 
+    public function findByAssociacaoUuid(string $associacaoUuid): Collection
+    {
+        return $this->financeiroDaAssociacaoModel
+        ->where("associacao_uuid", $associacaoUuid)
+        ->where('excluido', 0)
+        ->get();
+    }
+
     public function create(array $data): FinanceiroDaAssociacaoModel
     {
         return $this->financeiroDaAssociacaoModel->create($data);

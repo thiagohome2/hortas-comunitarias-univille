@@ -28,6 +28,14 @@ class FinanceiroDaHortaRepository
         return $this->financeiroDaHortaModel->create($data);
     }
 
+    public function findByHortaUuid(string $hortaUuid): Collection
+    {
+        return $this->financeiroDaHortaModel
+        ->where("horta_uuid", $hortaUuid)
+        ->where('excluido', 0)
+        ->get();
+    }
+
     public function update(FinanceiroDaHortaModel $financeiroHorta, array $data): ?FinanceiroDaHortaModel
     {
         $financeiroHorta->update($data);

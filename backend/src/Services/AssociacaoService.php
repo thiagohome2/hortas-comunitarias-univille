@@ -38,8 +38,8 @@ class AssociacaoService
         ->key('razao_social', v::stringType()->notEmpty())
         ->key('nome_fantasia', v::stringType()->notEmpty())
         ->key('endereco_uuid', v::uuid())
-        ->key('url_estatuto_social_pdf', v::stringType()->notEmpty())
-        ->key('url_ata_associacao_pdf', v::stringType()->notEmpty())
+        ->key('url_estatuto_social_pdf', v::url())
+        ->key('url_ata_associacao_pdf', v::url())
         ->assert($data);
 
         $guarded = ['uuid', 'usuario_criador_uuid', 'data_de_criacao', 'data_de_ultima_alteracao'];
@@ -64,8 +64,8 @@ class AssociacaoService
         ->key('razao_social', v::stringType()->notEmpty(), false)
         ->key('nome_fantasia', v::stringType()->notEmpty(), false)
         ->key('endereco_uuid', v::uuid())
-        ->key('url_estatuto_social_pdf', v::stringType()->notEmpty(), false)
-        ->key('url_ata_associacao_pdf', v::stringType()->notEmpty(), false)
+        ->key('url_estatuto_social_pdf', v::url(), false)
+        ->key('url_ata_associacao_pdf',v::url(), false)
         ->key('status_aprovacao', v::stringType()->notEmpty(), false)
         ->assert($data);
 

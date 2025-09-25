@@ -10,7 +10,7 @@ use Ramsey\Uuid\Uuid;
 
 class MensalidadeDaPlataformaService
 {
-    protected $mensalidadeDaPlataformaRepository;
+    protected MensalidadeDaPlataformaRepository $mensalidadeDaPlataformaRepository;
     protected PlanoService $planoService;
     protected UsuarioService $usuarioService;
 
@@ -35,6 +35,20 @@ class MensalidadeDaPlataformaService
             throw new Exception('Mensalidade da Plataforma não encontrado');
         }
         return $mensalidadeDaPlataforma;
+    }
+
+    public function findByUsuarioUuid(string $usuarioUuid): Collection
+    {
+        $usuario = $this->usuarioService->findByUuid($usuarioUuid);
+        if (!$usuario || $usuario->excluido) {
+            throw new Exception('Usuário não encontrado');
+        }
+
+        $mensalidades = $this->mensalidadeDaPlataformaRepository->findByUsuarioUuid($usuarioUuid);
+        if ($mensalidades->isEmpty()) {
+            throw new Exception('Mensalidades de plataforma do usuário não encontradas');
+        }
+        return $mensalidades;
     }
 
     public function create(array $data, string $uuidUsuarioLogado): MensalidadeDaPlataformaModel {

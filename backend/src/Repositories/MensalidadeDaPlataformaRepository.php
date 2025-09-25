@@ -23,6 +23,27 @@ class MensalidadeDaPlataformaRepository
         return $this->mensalidadeDaPlataformaModel->find($uuid);
     }
 
+    public function findPlanoByUsuarioUuid(string $usuarioUuid): ?string
+    {
+    $registro = $this->mensalidadeDaPlataformaModel
+        ->where("usuario_uuid", $usuarioUuid)
+        ->where("excluido", 0)
+        ->orderBy("data_vencimento", "desc")
+        ->first();
+
+        return $registro?->plano_uuid;
+    }
+
+    public function findByUsuarioUuid(string $usuarioUuid): Collection
+    {
+        $registros = $this->mensalidadeDaPlataformaModel
+        ->where("usuario_uuid", $usuarioUuid)
+        ->where("excluido", 0)
+        ->get();
+
+        return $registros;
+    }
+
     public function create(array $data): MensalidadeDaPlataformaModel
     {
         return $this->mensalidadeDaPlataformaModel->create($data);

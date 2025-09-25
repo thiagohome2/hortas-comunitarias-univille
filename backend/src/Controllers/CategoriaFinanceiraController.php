@@ -31,6 +31,24 @@ class CategoriaFinanceiraController
         return $response->withStatus(200);
     }
 
+    public function getByAssociacao(Request $request, Response $response, array $args)
+    {
+        $categoriasFinanceirasDaAssociacao = $this->categoriaFinanceiraService->findByAssociacaoUuid($args['uuid']);
+        if ($categoriasFinanceirasDaAssociacao->isEmpty()) return $response->withStatus(404);
+
+        $response->getBody()->write(json_encode($categoriasFinanceirasDaAssociacao));
+        return $response->withStatus(200);
+    }
+
+    public function getByHorta(Request $request, Response $response, array $args)
+    {
+        $categoriasFinanceirasDaHorta = $this->categoriaFinanceiraService->findByHortaUuid($args['uuid']);
+        if ($categoriasFinanceirasDaHorta->isEmpty()) return $response->withStatus(404);
+
+        $response->getBody()->write(json_encode($categoriasFinanceirasDaHorta));
+        return $response->withStatus(200);
+    }
+
     public function create(Request $request, Response $response)
     {
         $data = (array)$request->getParsedBody();
