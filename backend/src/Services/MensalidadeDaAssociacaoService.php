@@ -73,6 +73,7 @@ class MensalidadeDaAssociacaoService
         ->key('status', v::intType()->positive())
         ->key('dias_atraso', v::intType()->positive())
         ->key('url_anexo', v::optional(v::url()))
+        ->key('url_recibo', v::optional(v::url()), false)
           ->check($data);
 
         if (!empty($data['usuario_uuid'])){
@@ -107,6 +108,7 @@ class MensalidadeDaAssociacaoService
         ->key('status', v::intType()->positive(), false)
         ->key('dias_atraso', v::intType()->positive(), false)
         ->key('url_anexo', v::optional(v::url()), false)
+        ->key('url_recibo', v::optional(v::url()), false)
           ->check($data);
 
         if (!empty($data['usuario_uuid'])){

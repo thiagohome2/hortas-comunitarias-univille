@@ -64,6 +64,12 @@
 
         $mensalidadeDaPlataformaBindings = require __DIR__ . '/mensalidade_da_plataforma_bindings.php';
         $mensalidadeDaPlataformaBindings($containerBuilder);
+
+        $chavesBindings = require __DIR__ . '/chave_bindings.php';
+        $chavesBindings($containerBuilder);
+
+        $filaDeUsuarioBindings = require __DIR__ . '/fila_de_usuario_bindings.php';
+        $filaDeUsuarioBindings($containerBuilder);
     }
 
 ?>

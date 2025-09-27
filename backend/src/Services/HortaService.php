@@ -41,6 +41,7 @@ class HortaService
         v::key('nome_da_horta', v::stringType()->notEmpty())
         ->key('percentual_taxa_associado', v::floatVal()->between(0, 100, true))
         ->key('associacao_vinculada_uuid', v::uuid())
+        ->key('tipo_de_liberacao', V::intVal()->min(1)->max(3))
         ->key('endereco_uuid', v::uuid())
         ->assert($data);
         
@@ -72,6 +73,7 @@ class HortaService
         v::key('nome_da_horta', v::stringType()->notEmpty(), false)
         ->key('percentual_taxa_associado', v::floatVal()->between(0, 100, true), false)
         ->key('associacao_vinculada_uuid', v::uuid(), false)
+        ->key('tipo_de_liberacao', V::intVal()->min(1)->max(3), false)
         ->key('endereco_uuid', v::uuid(), false)
         ->assert($data);
 

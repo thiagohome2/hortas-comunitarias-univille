@@ -12,6 +12,8 @@
   - [Endereços](#4-endereços--bdenderecos)
   - [Canteiros](#5-canteiros--bdcanteiros)
   - [Canteiros e Usuários](#6-canteiros-e-usuários--bdcanteiros_e_usuarios)
+  - [Chaves](#7-chaves--bdchaves)
+  - [Fila de Usuários](#8-fila-de-usuários--bdfila_de_usuarios)
 - [📗 Tabelas para Controle de Acesso a Recursos | RBAC Híbrido](#tabelas-para-controle-de-acesso-a-recursos--rbac-híbrido)
   - [Cargos](#1-cargos--bdcargos)
   - [Permissões](#2-permissões--bdpermissoes)
@@ -93,6 +95,9 @@ Tabelas necessárias para manter uma base de staff (administradores da plataform
 | Associação UUID | associacao_uuid | CHAR(36) | UUID da associação |
 | Horta UUID | horta_uuid | CHAR(36) | UUID da horta |
 | Usuário Associado | usuario_associado_uuid | CHAR(36) | Para dependentes - UUID do usuário principal |
+| Apelido | apelido | VARCHAR(100) | Nome informal do usuário |
+| Dias Ausente | dias_ausente | INT | Número de dias consecutivos de ausência |
+| Chave UUID | chave_uuid | CHAR(36) | UUID da chave associada ao usuário |
 | Status de Acesso | status_de_acesso | TINYINT DEFAULT 1 | 0 = Bloqueado, 1 = Ativo, 2 = Suspenso, 3 = Pendente aprovação |
 | Responsável da Conta | responsavel_da_conta | BOOLEAN DEFAULT FALSE | Se é o criador da conta na plataforma e responsável por ela |
 | Data Bloqueio Acesso | data_bloqueio_acesso | TIMESTAMP | Data em que o acesso foi bloqueado |
@@ -113,6 +118,7 @@ Consideramos que usuários só poderão ter um cargo por vez. Exceções tratada
 - **usuario_associado_uuid** → usuarios.uuid (N:1) - Self reference para dependentes
 - **usuario_criador_uuid** → usuarios.uuid (N:1)
 - **usuario_alterador_uuid** → usuarios.uuid (N:1)
+- **chave_uuid** → chaves.uuid (N:1)
 
 ---
 
@@ -154,6 +160,7 @@ Consideramos que usuários só poderão ter um cargo por vez. Exceções tratada
 | Percentual Taxa Associado | percentual_taxa_associado | DECIMAL(5,2) NOT NULL | % que fica para o caixa da horta |
 | Excluído | excluido | BOOLEAN DEFAULT FALSE | Exclusão lógica |
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
+| Tipo de Liberação da Horta | tipo_de_liberacao | TINYINT DEFAULT 1 | 1 = Concessão, 2 = Permissão, 3 = Irregular |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
 | Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
 | Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
@@ -201,6 +208,7 @@ Consideramos que usuários só poderão ter um cargo por vez. Exceções tratada
 | Número Identificador | numero_identificador | VARCHAR(20) NOT NULL | Único dentro da horta |
 | Tamanho m² | tamanho_m2 | DECIMAL(8,2) NOT NULL | Tamanho em metros quadrados |
 | Horta | horta_uuid | CHAR(36) NOT NULL | UUID da horta |
+| Usuário Anterior | usuario_anterior_uuid | CHAR(36) | UUID do último usuário que esteve atrelado |
 | Excluído | excluido | BOOLEAN DEFAULT FALSE | Exclusão lógica |
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
@@ -213,6 +221,7 @@ A tabela de canteiros foi modificada para suportar múltiplos proprietários por
 ### Relacionamentos de CANTEIROS:
 - **horta_uuid** → hortas.uuid (N:1)
 - **usuario_criador_uuid** → usuarios.uuid (N:1)
+- **usuario_anterior_uuid** → usuarios.uuid (N:1)
 - **usuario_alterador_uuid** → usuarios.uuid (N:1)
 
 ---
@@ -243,6 +252,54 @@ Tabela de vínculo N:N entre canteiros e usuários, permitindo copropriedade de 
 - **usuario_uuid** → usuarios.uuid (N:1)
 - **usuario_criador_uuid** → usuarios.uuid (N:1)
 - **usuario_alterador_uuid** → usuarios.uuid (N:1)
+
+## 7. CHAVES | `bd.chaves`
+
+Tabela de vínculo N:N entre chaves e usuários, representa as chaves físicas da horta.
+
+| Nome do Campo | Nome da Coluna | Tipo | Observação |
+| --- | --- | --- | --- |
+| UUID | uuid | CHAR(36) | Chave primária |
+| Código | uuid | a definir | Código na tag da chave |
+| Horta UUID | horta_uuid | CHAR(36) NOT NULL | UUID da horta |
+| Observações | observacoes | TEXT | Observações sobre o item |
+| Disponivel | disponivel | BOOLEAN DEFAULT TRUE | Status se disponivel |
+| Excluído | excluido | BOOLEAN DEFAULT FALSE | Exclusão lógica |
+| Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
+| Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
+| Usuário Alterador | usuario_alterador_uuid | CHAR(36) | UUID do último usuário que alterou |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração |
+
+### Relacionamentos de CANTEIROS E USUÁRIOS:
+- **horta_uuid** → hortas.uuid (N:1)
+- **usuario_uuid** → usuarios.uuid (N:1)
+- **usuario_criador_uuid** → usuarios.uuid (N:1)
+- **usuario_alterador_uuid** → usuarios.uuid (N:1)
+
+## 8 FILA DE USUÁRIOS | `bd.fila_de_usuarios`
+
+Representa fila para entrar na horta.
+
+| Nome do Campo            | Nome da Coluna           | Tipo                    | Observação                                   |
+| ------------------------ | ------------------------ | ----------------------- | -------------------------------------------- |
+| UUID                     | uuid                     | CHAR(36)                | Chave primária                               |
+| Usuário UUID             | usuario_uuid             | CHAR(36) NOT NULL       | Usuário que entrou na fila                   |
+| Horta UUID               | horta_uuid               | CHAR(36) NOT NULL       | Horta para a qual o usuário aguarda canteiro |
+| Data de Entrada          | data_entrada             | TIMESTAMP DEFAULT NOW() | Momento em que o usuário entrou na fila      |
+| Ordem                    | ordem                    | INT AUTO_INCREMENT      | Ordem de chegada na fila (controle interno)  |
+| Excluído                 | excluido                 | BOOLEAN DEFAULT FALSE   | Exclusão lógica                              |
+| Usuário Criador          | usuario_criador_uuid     | CHAR(36)                | UUID do usuário que criou                    |
+| Data de Criação          | data_de_criacao          | TIMESTAMP DEFAULT NOW() | Data/hora da criação                         |
+| Usuário Alterador        | usuario_alterador_uuid   | CHAR(36)                | UUID do último usuário que alterou           |
+| Data de Última Alteração | data_de_ultima_alteracao | TIMESTAMP DEFAULT NOW() | Data/hora da última alteração                |
+
+### Relacionamentos de FILA DE USUÁRIOS:
+
+- **usuario_uuid** → usuarios.uuid (N:1)
+- **horta_uuid** → hortas.uuid (N:1)
+- **usuario_criador_uuid** → usuarios.uuid (N:1)
+- **usuario_alterador_uuid** → usuarios.uuid (N:1)
+
 
 ---
 
@@ -369,6 +426,8 @@ enum Modulos: int
     case MENSALIDADES_DA_PLATAFORMA = 14;
     case PLANOS = 15;
     case RECURSOS_DO_PLANO = 16;
+    case CHAVES = 17;
+    case FILA_DE_USUARIO = 18;
 }
 ```
 
@@ -534,7 +593,8 @@ Em caso de status = 2, que seja feita uma entrada na tabela de caixa da associa�
 | Data de Pagamento | data_pagamento | DATE | Preenchido quando efetivamente pago |
 | Status | status | TINYINT NOT NULL DEFAULT 0 | 0 = aguardando pagamento, 1 = pago, 2 = compensado/concluído, 3 = cancelado, 4 = em atraso |
 | Dias de Atraso | dias_atraso | INT DEFAULT 0 | Calculado automaticamente |
-| URL Anexo | url_anexo | TEXT | Link para comprovante/recibo |
+| URL Anexo | url_anexo | TEXT | Link para boleto, ordem de pagamento, etc |
+| URL Recibo | url_anexo | TEXT | Link para comprovante, recibo, nota fiscal, etc |
 | Excluído | excluido | BOOLEAN DEFAULT FALSE | Exclusão lógica |
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |
@@ -565,7 +625,8 @@ O usuário que criar a conta será o usuário responsável da conta por padrão,
 | Data de Pagamento | data_pagamento | DATE | Preenchido quando efetivamente pago |
 | Status | status | TINYINT NOT NULL DEFAULT 0 | 0 = aguardando pagamento, 1 = pago, 2 = compensado/concluído, 3 = cancelado, 4 = em atraso |
 | Dias de Atraso | dias_atraso | INT DEFAULT 0 | Calculado automaticamente |
-| URL Anexo | url_anexo | TEXT | Link para comprovante/recibo |
+| URL Anexo | url_anexo | TEXT | Link para boleto, ordem de pagamento, etc |
+| URL Recibo | url_anexo | TEXT | Link para comprovante, recibo, nota fiscal, etc |
 | Excluído | excluido | BOOLEAN DEFAULT FALSE | Exclusão lógica |
 | Usuário Criador | usuario_criador_uuid | CHAR(36) | UUID do usuário que criou |
 | Data de Criação | data_de_criacao | TIMESTAMP DEFAULT NOW() | Data/hora da criação |

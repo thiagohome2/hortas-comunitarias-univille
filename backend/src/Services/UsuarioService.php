@@ -8,6 +8,7 @@ use Ramsey\Uuid\Uuid;
 use App\Models\UsuarioModel;
 use App\Services\AssociacaoService;
 use App\Services\CargoService;
+use App\Services\ChaveService;
 use App\Services\EnderecoService;
 use App\Services\HortaService;
 use Exception;
@@ -19,19 +20,22 @@ class UsuarioService {
     protected $associacaoService;
     protected $hortaService;
     protected $enderecoService;
+    protected $chaveService;
 
     public function __construct(
         UsuarioRepository $usuarioRepository, 
         CargoService $cargoService,
         AssociacaoService $associacaoService,
         HortaService $hortaService,
-        EnderecoService $enderecoService) {
+        EnderecoService $enderecoService,
+        ChaveService $chaveService) {
             $this->usuarioRepository = $usuarioRepository;
             $this->cargoService = $cargoService;
             $this->cargoService = $cargoService;
             $this->associacaoService = $associacaoService;
             $this->hortaService = $hortaService;
             $this->enderecoService = $enderecoService;
+            $this->chaveService = $chaveService;
     }
     
     public function findAllWhere(): Collection
@@ -55,10 +59,13 @@ class UsuarioService {
         ->key('email', v::email())
         ->key('senha', v::stringType()->length(6, null))
         ->key('taxa_associado_em_centavos', v::intVal()->positive())
+        ->key('dias_ausente', v::intVal()->positive())
         ->key('data_de_nascimento', v::date())
         ->key('associacao_uuid', v::uuid())
         ->key('horta_uuid', v::uuid())
+        ->key('apelido', v::stringType()->notEmpty())
         ->key('cargo_uuid', v::uuid())
+        ->key('chave_uuid', v::uuid(), false)
         ->key('endereco_uuid', v::uuid())
         ->assert($data);
         
@@ -91,6 +98,10 @@ class UsuarioService {
             $this->enderecoService->findByUuid($data['endereco_uuid']);
         }
 
+        if (!empty($data['chave_uuid'])) {
+            $this->chaveService->findByUuid($data['chave_uuid']);
+        }
+
         return $this->usuarioRepository->create($data);
     }
 
@@ -112,6 +123,9 @@ class UsuarioService {
             ->key('horta_uuid', v::uuid(), false)
             ->key('cargo_uuid', v::uuid(), false)
             ->key('endereco_uuid', v::uuid(), false)
+            ->key('dias_ausente', v::intVal()->positive(), false)
+            ->key('chave_uuid', v::uuid(), false)
+            ->key('apelido', v::stringType()->notEmpty(), false)
             ->assert($data);
 
         $guarded = ['uuid', 'usuario_criador_uuid', 'data_de_criacao', 'data_de_ultima_alteracao'];
@@ -135,6 +149,10 @@ class UsuarioService {
 
         if (!empty($data['endereco_uuid'])) {
             $this->enderecoService->findByUuid($data['endereco_uuid']);
+        }
+
+        if (!empty($data['chave_uuid'])) {
+            $this->chaveService->findByUuid($data['chave_uuid']);
         }
 
         $data['usuario_alterador_uuid'] = $uuidUsuarioLogado;

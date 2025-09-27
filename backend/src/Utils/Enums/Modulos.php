@@ -19,6 +19,8 @@ enum Modulos: int
     case MENSALIDADES_DA_PLATAFORMA = 14;
     case PLANOS = 15;
     case RECURSOS_DO_PLANO = 16;
+    case CHAVES = 17;
+    case FILA_DE_USUARIO = 18;
 }
 
 ?>

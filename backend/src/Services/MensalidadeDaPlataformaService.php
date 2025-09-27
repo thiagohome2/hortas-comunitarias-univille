@@ -59,6 +59,7 @@ class MensalidadeDaPlataformaService
         ->key('data_pagamento', v::date('Y-m-d'))
         ->key('status', v::intType()->positive())
         ->key('dias_atraso', v::intType()->positive())
+        ->key('url_recibo', v::optional(v::url()), false)
         ->key('url_anexo', v::optional(v::url()))
           ->check($data);
 
@@ -95,6 +96,7 @@ class MensalidadeDaPlataformaService
         ->key('status', v::intType()->positive(), false)
         ->key('dias_atraso', v::intType()->positive(), false)
         ->key('url_anexo', v::optional(v::url()), false)
+        ->key('url_recibo', v::optional(v::url()), false)
           ->check($data);
 
         if (!empty($data['plano_uuid'])){

@@ -102,3 +102,19 @@ VALUES
 ('6c7d8e9f-0a1b-4c2d-8e3f-4a5b6c7d8e9f', 'recursos_do_plano_criar', 1, 'Permissão de CRIAR no módulo RECURSOS_DO_PLANO', 16, 0, NULL, NOW(), NULL, NOW()),
 ('7d8e9f0a-1b2c-4d3e-9f4a-5b6c7d8e9f0a', 'recursos_do_plano_editar', 2, 'Permissão de EDITAR no módulo RECURSOS_DO_PLANO', 16, 0, NULL, NOW(), NULL, NOW()),
 ('8e9f0a1b-2c3d-4e5f-0a1b-6c7d8e9f0a1b', 'recursos_do_plano_deletar', 3, 'Permissão de DELETAR no módulo RECURSOS_DO_PLANO', 16, 0, NULL, NOW(), NULL, NOW());
+
+-- CHAVES (17)
+INSERT INTO permissoes (uuid, slug, tipo, descricao, modulo, excluido, usuario_criador_uuid, data_de_criacao, usuario_alterador_uuid, data_de_ultima_alteracao)
+VALUES
+('d1f3a2b4-5c6d-7e8f-9012-3456789abcde', 'chaves_ler', 0, 'Permissão de LER no módulo CHAVES', 17, 0, NULL, NOW(), NULL, NOW()),
+('e2f4b3c5-6d7e-8f90-1234-56789abcdef0', 'chaves_criar', 1, 'Permissão de CRIAR no módulo CHAVES', 17, 0, NULL, NOW(), NULL, NOW()),
+('f3a5c4d6-7e8f-9012-3456-789abcdef012', 'chaves_editar', 2, 'Permissão de EDITAR no módulo CHAVES', 17, 0, NULL, NOW(), NULL, NOW()),
+('a4b6d5e7-8f90-1234-5678-9abcdef01234', 'chaves_deletar', 3, 'Permissão de DELETAR no módulo CHAVES', 17, 0, NULL, NOW(), NULL, NOW());
+
+-- FILA_DE_USUARIOS (18)
+INSERT INTO permissoes (uuid, slug, tipo, descricao, modulo, excluido, usuario_criador_uuid, data_de_criacao, usuario_alterador_uuid, data_de_ultima_alteracao)
+VALUES
+('b5c7e6f8-9012-3456-789a-bcdef0123456', 'fila_de_usuarios_ler', 0, 'Permissão de LER no módulo FILA_DE_USUARIOS', 18, 0, NULL, NOW(), NULL, NOW()),
+('c6d8f7a9-0123-4567-89ab-cdef01234567', 'fila_de_usuarios_criar', 1, 'Permissão de CRIAR no módulo FILA_DE_USUARIOS', 18, 0, NULL, NOW(), NULL, NOW()),
+('d7e9a8b0-1234-5678-9abc-def012345678', 'fila_de_usuarios_editar', 2, 'Permissão de EDITAR no módulo FILA_DE_USUARIOS', 18, 0, NULL, NOW(), NULL, NOW()),
+('e8f0b9c1-2345-6789-abcd-ef0123456789', 'fila_de_usuarios_deletar', 3, 'Permissão de DELETAR no módulo FILA_DE_USUARIOS', 18, 0, NULL, NOW(), NULL, NOW());

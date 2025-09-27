@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class HortaModel extends Model
+class FilaDeUsuarioModel extends Model
 {
-    protected $table = 'hortas';
+    protected $table = 'fila_de_usuarios';
     protected $primaryKey = 'uuid';
     public $incrementing = false;
 
@@ -16,24 +16,24 @@ class HortaModel extends Model
 
     protected $fillable = [
         'uuid',
-        'nome_da_horta',
-        'endereco_uuid',
-        'associacao_vinculada_uuid',
-        'percentual_taxa_associado',
+        'usuario_uuid',
+        'horta_uuid',
+        'data_entrada',
+        'ordem',
         'excluido',
         'usuario_criador_uuid',
         'usuario_alterador_uuid',
     ];
 
     // Relacionamentos
-    public function endereco()
+    public function usuario()
     {
-        return $this->belongsTo(EnderecoModel::class, 'endereco_uuid', 'uuid');
+        return $this->belongsTo(UsuarioModel::class, 'usuario_uuid', 'uuid');
     }
 
-    public function associacao()
+    public function horta()
     {
-        return $this->belongsTo(AssociacaoModel::class, 'associacao_vinculada_uuid', 'uuid');
+        return $this->belongsTo(HortaModel::class, 'horta_uuid', 'uuid');
     }
 
     public function usuarioCriador()

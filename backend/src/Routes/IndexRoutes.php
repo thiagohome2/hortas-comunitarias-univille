@@ -62,6 +62,10 @@ return function (App $app) {
         $mensalidadeDaPlataformaRoutes = require __DIR__ . '/MensalidadeDaPlataformaRoutes.php';
         $mensalidadeDaPlataformaRoutes($group);
 
+        $chavesRoutes = require __DIR__ . '/ChaveRoutes.php';
+        $chavesRoutes($group);
 
+        $filaDeUsuarioRoutes = require __DIR__ . '/FilaDeUsuarioRoutes.php';
+        $filaDeUsuarioRoutes($group); 
     });
 };

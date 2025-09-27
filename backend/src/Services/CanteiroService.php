@@ -13,11 +13,13 @@ class CanteiroService
 {
     protected CanteiroRepository $canteiroRepository;
     protected HortaService $hortaService; 
+    protected UsuarioService $usuarioService; 
 
-    public function __construct(CanteiroRepository $canteiroRepository, HortaService $hortaService)
+    public function __construct(CanteiroRepository $canteiroRepository, HortaService $hortaService, UsuarioService $usuarioService)
     {
         $this->canteiroRepository = $canteiroRepository; 
         $this->hortaService = $hortaService;
+        $this->usuarioService = $usuarioService;
     }
 
     public function findAllWhere(): Collection
@@ -39,6 +41,7 @@ class CanteiroService
         v::key('numero_identificador', v::stringType()->notEmpty())
         ->key('tamanho_m2', v::stringType()->notEmpty())
         ->key('horta_uuid', v::uuid())
+        ->key('usuario_anterior_uuid', v::uuid(), false)
         ->assert($data);
         
         $guarded = ['uuid', 'usuario_criador_uuid', 'data_de_criacao', 'data_de_ultima_alteracao'];
@@ -51,6 +54,11 @@ class CanteiroService
         if (!empty($data['horta_uuid'])) {
             $this->hortaService->findByUuid($data['horta_uuid']);
         }
+
+        if (!empty($data['usuario_anterior_uuid'])) {
+            $this->usuarioService->findByUuid($data['usuario_anterior_uuid']);
+        }
+
 
         return $this->canteiroRepository->create($data);
     }
@@ -65,10 +73,14 @@ class CanteiroService
         v::key('numero_identificador', v::stringType()->notEmpty(), false)
         ->key('tamanho_m2', v::stringType()->notEmpty(), false)
         ->key('horta_uuid', v::uuid(), false)
+        ->key('usuario_anterior_uuid', v::uuid(), false)
         ->assert($data);
 
         if (!empty($data['horta_uuid'])) {
             $this->hortaService->findByUuid($data['horta_uuid']);
+        }
+        if (!empty($data['usuario_anterior_uuid'])) {
+            $this->usuarioService->findByUuid($data['usuario_anterior_uuid']);
         }
 
         $data['usuario_alterador_uuid'] = $uuidUsuarioLogado;

@@ -26,6 +26,7 @@ class MensalidadeDaPlataformaModel extends Model
         'status',
         'dias_atraso',
         'url_anexo',
+        'url_recibo',
         'excluido',
         'usuario_criador_uuid',
         'usuario_alterador_uuid',
