@@ -26,9 +26,9 @@ class RoutePermissionMiddleware
         $path = $request->getUri()->getPath();
         $method = $request->getMethod();
 
-        echo "========================== INFORMAÇÕES DA ROTA ATUAL:\n";
-        echo "URI: " . $path . "\n";
-        echo "Method: " . $method . "\n";
+        // echo "========================== INFORMAÇÕES DA ROTA ATUAL:\n";
+        // echo "URI: " . $path . "\n";
+        // echo "Method: " . $method . "\n";
 
         // Pular validação para rota de login
         if ($path === '/api/v1/sessoes' && $method === 'POST') {
@@ -37,7 +37,7 @@ class RoutePermissionMiddleware
 
         // Construir identificador da rota removendo o prefixo /api/v1
         $routeIdentifier = $this->buildRouteIdentifier($path, $method);
-        echo "Route Identifier: " . $routeIdentifier . "\n";
+        // echo "Route Identifier: " . $routeIdentifier . "\n";
 
         $usuarioUuid = $request->getAttribute('usuario_uuid');
 
@@ -49,14 +49,14 @@ class RoutePermissionMiddleware
 
         $permissoesNecessarias = $this->permissionsMap->getRequiredPermissions($routeIdentifier);
 
-        echo "========================== PERMISSOES NECESSARIAS:\n";
-        if (is_array($permissoesNecessarias)) {
-            foreach ($permissoesNecessarias as $perm) {
-                echo "- " . $perm . "\n";
-            }
-        } else {
-            echo $permissoesNecessarias . "\n";
-        }
+        // echo "========================== PERMISSOES NECESSARIAS:\n";
+        // if (is_array($permissoesNecessarias)) {
+        //     foreach ($permissoesNecessarias as $perm) {
+        //         echo "- " . $perm . "\n";
+        //     }
+        // } else {
+        //     echo $permissoesNecessarias . "\n";
+        // }
                 
         if ($permissoesNecessarias === null) {
             // rota sem permissão explícita -> deixar passar
@@ -65,11 +65,11 @@ class RoutePermissionMiddleware
         
         $permissoesDoUsuario = $this->permissaoService->findByUuid($usuarioUuid);
         
-        echo "========================== PERMISSOES DO USUARIO:\n";
-        foreach ($permissoesDoUsuario as $perm) {
-            // Se $perm for um objeto Eloquent, pode usar a propriedade slug ou uuid
-            echo "- " . ($perm->slug ?? $perm->uuid ?? json_encode($perm)) . "\n";
-        }
+        // echo "========================== PERMISSOES DO USUARIO:\n";
+        // foreach ($permissoesDoUsuario as $perm) {
+        //     // Se $perm for um objeto Eloquent, pode usar a propriedade slug ou uuid
+        //     echo "- " . ($perm->slug ?? $perm->uuid ?? json_encode($perm)) . "\n";
+        // }
 
         foreach ($permissoesNecessarias as $slug) {
             if (!$permissoesDoUsuario->contains('slug', $slug)) {

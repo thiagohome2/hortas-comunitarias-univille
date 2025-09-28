@@ -1,18 +1,24 @@
-# 🌱 Hortas Comunitárias - Univille
+# 🌱 Hortas Comunitárias + Univille
 
-Sistema de gestão de hortas comunitárias desenvolvido para as disciplinas de Engenharia de Software e Sistemas de Informação da Univille.
+Sistema de gestão de associações e hortas comunitárias desenvolvido na disciplina de Vivências de Extensão V pelos graduandos dos cursos de Engenharia de Software e Sistemas de Informação da Univille.
 
-## 🌐 GRUPO DEVS UNIVILLE
+## 🌐 DEVS UNIVILLE | Grupo no Discord
 https://discord.gg/fjJJtgED
+
+## 🛣️ Roadmap do Projeto
+
+Atualmente, estamos registrando progresso na [Issue #9 - Roadmap até MVP 🔗](https://github.com/thiagohome2/hortas-comunitarias-univille/issues/9).
+
+Contribuições são bem-vindas!
 
 ## 🚀 Stack Tecnológica
 
 ### Backend
 - **PHP 8.2** com **Slim Framework 4**
 - **MySQL 8.0** para banco de dados
+- **JWT** para autenticação
 - **Nginx** como servidor web
 - **Redis** para cache e sessões
-- **JWT** para autenticação
 
 ### Frontend
 - **Vue.js 3** com Composition API
@@ -44,7 +50,7 @@ hortas-comunitarias-univille/
 └── DEVELOPMENT.md         # Guia detalhado de desenvolvimento
 ```
 
-## 🔧 Configuração Rápida
+## 🔧 Configuração Rápida: Setup local
 
 ```bash
 # Clone o repositório
@@ -57,6 +63,21 @@ make setup
 # Ou use o script diretamente
 ./setup.sh
 ```
+
+## 🔧 Configuração Rápida: Banco de Dados do Backend
+
+Na pasta SQL tem dois arquivos:
+
+- `00_SQL_criar_banco.sql`: Esse arquivo tem o SQL para criar a estrutura do banco.
+- `00_SQL_popular_banco.sql`: Esse arquivo tem o SQL para popular o banco com Cargos, Permissões, Permissões do Cargo e um Usuário super-admin.
+    - **Email:** admin_hortas_comunitarias@univille.br
+    - **Senha:** senha12345
+
+Rode estes arquivos no MySQL, aqui utlizamos o PhpMyAdmin mas deve funcionar no seu client de preferência.
+
+## 🔧 Configuração Rápida: Utilizando a API REST do Backend
+
+A documentação da API REST, das regras de negócio do projeto, bem como templates e outros recursos úteis estão [disponíveis aqui 🔗](www.todo.com).
 
 ## 🌐 URLs dos Serviços
 
