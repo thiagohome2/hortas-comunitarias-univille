@@ -11,7 +11,8 @@ use Slim\Factory\AppFactory;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use App\Middlewares\FormatadorDeErrosMiddleware;
 use App\Middlewares\ForcarJsonMiddleware;
-
+use App\Middlewares\JwtMiddleware;
+use App\Middlewares\RoutePermissionMiddleware;
 
 // --------------- Carregando .env
 $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
@@ -22,13 +23,16 @@ foreach ($_SERVER as $key => $value) {
     }
 }
 
-// --------------- Criando containder e injetando dependências
+// --------------- Criando containder e adicionado registro de como criar dependências
 $containerBuilder = new ContainerBuilder();
 if (false) { // Setar true em prod
     $containerBuilder->enableCompilation(__DIR__ . '/../var/cache');
 }
 $dependencies = require __DIR__ . '/../config/dependencies.php';
 $dependencies($containerBuilder);
+
+$authDependencies = require __DIR__ . '/../config/auth.php';
+$authDependencies($containerBuilder);
 
 $container = $containerBuilder->build();
 $container->get(Capsule::class);
@@ -41,11 +45,15 @@ $app = AppFactory::create();
 $routes = require __DIR__ . '/../src/Routes/IndexRoutes.php';
 $routes($app);
 
-// Carregando middlewares
-$app->add(FormatadorDeErrosMiddleware::class);
-$app->add(ForcarJsonMiddleware::class);
-
+// Comentar TODOS os outros middlewares
+$app->add(RoutePermissionMiddleware::class);
 $app->addBodyParsingMiddleware();
+$app->add(FormatadorDeErrosMiddleware::class);
+$app->add(ForcarJsonMiddleware::class); 
+$app->add(JwtMiddleware::class); 
+
+// Adicionar um error handler básico temporário
+$app->addErrorMiddleware(true, true, true);
 
 // --------------- Rodando app
 $app->run();

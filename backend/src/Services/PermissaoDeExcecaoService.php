@@ -38,14 +38,11 @@ class PermissaoDeExcecaoService
 
     public function findByUserUuid(string $uuid): Collection
     {
-        $permicoesDeExcecaoDoUsuario = $this->permissaoDeExcecaoRepository->findByUserUuid($uuid);
-        if ($permicoesDeExcecaoDoUsuario->isEmpty()) {
-            throw new Exception('Não foram encontradas permissões de exceção para o usuário UUID: ' . $uuid);
-        }
-        return $permicoesDeExcecaoDoUsuario;
+        $permissoesDeExcecaoDoUsuario = $this->permissaoDeExcecaoRepository->findByUserUuid($uuid);
+        return $permissoesDeExcecaoDoUsuario; // retorna vazia se não houver
     }
 
- public function create(array $data, string $uuidUsuarioLogado): PermissaoDeExcecaoModel
+    public function create(array $data, string $uuidUsuarioLogado): PermissaoDeExcecaoModel
     {
         v::key('usuario_uuid', v::uuid())
         ->key('permissao_uuid', v::uuid())
