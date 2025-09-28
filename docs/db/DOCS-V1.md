@@ -29,8 +29,6 @@
   - [7. Recursos do Plano | `bd.recursos_do_plano`](#7-recursos-do-plano--bdrecursos_do_plano)
 - [📋 Índices Recomendados](#indices-recomendados)
 
-
-# 
 <h1 id="introducao">📗 Introdução</h1>
 
 ⚠️ **Importante:** Usamos o Claude Sonnet 4 para revisão e formatação dessa documentação. Qualquer erro aparente é decorrente desse robo maldito que tanto nos auxilia.
