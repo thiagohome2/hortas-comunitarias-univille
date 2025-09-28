@@ -12,6 +12,13 @@ class JwtMiddleware
 {
     public function __invoke(Request $request, RequestHandler $handler): Response
     {
+
+        $uri = $request->getUri()->getPath();
+        if ($uri === '/api/v1/sessoes' && $request->getMethod() === 'POST') {
+            return $handler->handle($request);
+        }
+
+
         $response = new Response();
 
         $authHeader = $request->getHeaderLine('Authorization');
