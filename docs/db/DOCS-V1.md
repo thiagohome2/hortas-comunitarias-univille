@@ -358,7 +358,7 @@ Armazena os cargos possíveis no sistema. Atualmente temos 5 cargos base.
 Utilizando um número como código podemos deixar a camada de aplicação 100% pronta sem depender do tratamento de UUIDs. Por exemplo:
 
 ```php
-if ($usuario['cargo']['codigo'] === 1) {
+if ($usuario['cargo']['slug'] === "admin_platafora") {
     echo "Usuário é Administração da Associação Geral";
 }
 ```

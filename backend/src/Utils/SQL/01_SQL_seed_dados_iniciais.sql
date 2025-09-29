@@ -169,8 +169,115 @@ FROM cargos c
 CROSS JOIN permissoes p
 WHERE c.slug = 'admin_plataforma';
 
--- //// Adiciona usuário super admin em "usuarios"
--- email e senha na doc
+-- Adiciona permissões para o cargo "Administração da Associação"
+INSERT INTO permissoes_de_cargo (uuid, cargo_uuid, permissao_uuid, excluido, usuario_criador_uuid, data_de_criacao)
+SELECT
+    UUID(),
+    c.uuid,
+    p.uuid,
+    0,
+    NULL,
+    NOW()
+FROM cargos c
+CROSS JOIN permissoes p
+WHERE c.slug = 'admin_associacao_geral'
+AND p.slug IN (
+    'usuarios_ler', 'usuarios_criar', 'usuarios_editar', 'usuarios_deletar',
+    'hortas_ler', 'hortas_criar', 'hortas_editar', 'hortas_deletar',
+    'enderecos_ler', 'enderecos_criar', 'enderecos_editar', 'enderecos_deletar',
+    'canteiros_ler', 'canteiros_criar', 'canteiros_editar', 'canteiros_deletar',
+    'canteiros_usuarios_ler', 'canteiros_usuarios_criar', 'canteiros_usuarios_editar', 'canteiros_usuarios_deletar',
+    'cargos_ler',
+    'permissoes_cargo_ler',
+    'permissoes_excecao_ler', 'permissoes_excecao_criar', 'permissoes_excecao_editar', 'permissoes_excecao_deletar',
+    'permissoes_usuario_ler',
+    'categorias_financeiras_ler', 'categorias_financeiras_criar', 'categorias_financeiras_editar', 'categorias_financeiras_deletar',
+    'financeiro_horta_ler', 'financeiro_horta_criar', 'financeiro_horta_editar', 'financeiro_horta_deletar',
+    'financeiro_associacao_ler', 'financeiro_associacao_criar', 'financeiro_associacao_editar', 'financeiro_associacao_deletar',
+    'mensalidades_associacao_ler',
+    'mensalidades_plataforma_ler',
+    'planos_ler',
+    'chaves_ler', 'chaves_criar', 'chaves_editar', 'chaves_deletar',
+    'fila_usuarios_ler', 'fila_usuarios_criar', 'fila_usuarios_editar', 'fila_usuarios_deletar'
+);
+
+
+-- Adiciona permissões para o cargo "Administração da Horta"
+INSERT INTO permissoes_de_cargo (uuid, cargo_uuid, permissao_uuid, excluido, usuario_criador_uuid, data_de_criacao)
+SELECT
+    UUID(),
+    c.uuid,
+    p.uuid,
+    0,
+    NULL,
+    NOW()
+FROM cargos c
+CROSS JOIN permissoes p
+WHERE c.slug = 'admin_horta_geral'
+AND p.slug IN (
+    'usuarios_ler', 'usuarios_criar', 'usuarios_editar', 'usuarios_deletar',
+    'hortas_ler',
+    'canteiros_ler', 'canteiros_criar', 'canteiros_editar', 'canteiros_deletar',
+    'canteiros_usuarios_ler', 'canteiros_usuarios_criar', 'canteiros_usuarios_editar', 'canteiros_usuarios_deletar',
+    'cargos_ler',
+    'permissoes_usuario_ler',
+    'categorias_financeiras_ler', 'categorias_financeiras_criar', 'categorias_financeiras_editar', 'categorias_financeiras_deletar',
+    'financeiro_horta_ler', 'financeiro_horta_criar', 'financeiro_horta_editar', 'financeiro_horta_deletar',
+    'financeiro_associacao_ler', 'financeiro_associacao_criar', 'financeiro_associacao_editar', 'financeiro_associacao_deletar',
+    'chaves_ler', 'chaves_criar', 'chaves_editar', 'chaves_deletar',
+    'fila_usuarios_ler', 'fila_usuarios_criar', 'fila_usuarios_editar', 'fila_usuarios_deletar'
+);
+
+
+
+-- //// Depois adiciona permissões para o cargo "Canteirista"
+INSERT INTO permissoes_de_cargo (uuid, cargo_uuid, permissao_uuid, excluido, usuario_criador_uuid, data_de_criacao)
+SELECT
+    UUID(),
+    c.uuid,
+    p.uuid,
+    0,
+    NULL,
+    NOW()
+FROM cargos c
+CROSS JOIN permissoes p
+WHERE c.slug = 'canteirista'
+AND p.slug IN (
+    'canteiros_ler',
+    'canteiros_usuarios_ler',
+    'permissoes_usuario_ler',
+    'financeiro_horta_ler',
+    'financeiro_associacao_ler',
+    'chaves_ler',
+    'fila_usuarios_ler'
+);
+
+-- //// Depois adiciona permissões para o cargo "Dependente"
+INSERT INTO permissoes_de_cargo (uuid, cargo_uuid, permissao_uuid, excluido, usuario_criador_uuid, data_de_criacao)
+SELECT
+    UUID(),
+    c.uuid,
+    p.uuid,
+    0,
+    NULL,
+    NOW()
+FROM cargos c
+CROSS JOIN permissoes p
+WHERE c.slug = 'dependente'
+AND p.slug IN (
+    'canteiros_ler',
+    'canteiros_usuarios_ler',
+    'permissoes_usuario_ler',
+    'financeiro_horta_ler',
+    'financeiro_associacao_ler',
+    'chaves_ler',
+    'fila_usuarios_ler'
+);
+
+-- ================= USUARIO ADMIN =================
+-- Primeiro pegue o UUID do cargo admin_plataforma
+SET @adminCargoUUID = (SELECT uuid FROM cargos WHERE slug = 'admin_plataforma');
+
 INSERT INTO usuarios (
     uuid,
     nome_completo,
@@ -180,50 +287,21 @@ INSERT INTO usuarios (
     data_de_nascimento,
     cargo_uuid,
     taxa_associado_em_centavos,
-    endereco_uuid,
-    associacao_uuid,
-    horta_uuid,
-    usuario_associado_uuid,
-    status_de_acesso,
-    responsavel_da_conta,
-    data_bloqueio_acesso,
-    motivo_bloqueio_acesso,
     excluido,
-    usuario_criador_uuid,
-    data_de_criacao,
-    usuario_alterador_uuid,
-    data_de_ultima_alteracao,
-    apelido,
-    dias_ausente,
-    chave_uuid
+    data_de_criacao
 )
-SELECT
+VALUES (
     UUID(),
-    'Admin Hortas Comunitárias',
+    'Administração da Plataforma',
     '123.456.789-09',
-    '$2y$10$TUHWKOcJj85/pMDxEg7eTu3zGDlE2sfOdVn4dfSN5JzMIqssNISYG',
-    NULL,
-    c.uuid,
+    'hortas_comunitarias@univille.com',
+    '$2y$10$TUHWKOcJj85/pMDxEg7eTu3zGDlE2sfOdVn4dfSN5JzMIqssNISYG', -- hash de senha
+    '1980-01-01',
+    @adminCargoUUID,
     0,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
     0,
-    NULL,
-    NOW(),
-    NULL,
-    NOW(),
-    NULL,
-    NULL,
-    0,
-    NULL
-FROM cargos c
-WHERE c.slug = 'admin_plataforma';
+    NOW()
+);
 
 -- Reabilita checagem de foreign keys
 SET FOREIGN_KEY_CHECKS = 1;
