@@ -25,11 +25,11 @@ class MensalidadeDaPlataformaService
         $this->usuarioService = $usuarioService;
     }
 
-    public function findAllWhere(): Collection {
+    public function findAllWhere(array $payloadUsuarioLogado): Collection {
         return $this->mensalidadeDaPlataformaRepository->findAllWhere(['excluido' => 0]);
     }
 
-    public function findByUuid(string $uuid): ?MensalidadeDaPlataformaModel {
+    public function findByUuid(string $uuid, array $payloadUsuarioLogado): ?MensalidadeDaPlataformaModel {
         $mensalidadeDaPlataforma = $this->mensalidadeDaPlataformaRepository->findByUuid($uuid);
         if(!$mensalidadeDaPlataforma || $mensalidadeDaPlataforma->excluido){
             throw new Exception('Mensalidade da Plataforma não encontrado');
@@ -37,9 +37,9 @@ class MensalidadeDaPlataformaService
         return $mensalidadeDaPlataforma;
     }
 
-    public function findByUsuarioUuid(string $usuarioUuid): Collection
+    public function findByUsuarioUuid(string $usuarioUuid, array $payloadUsuarioLogado): Collection
     {
-        $usuario = $this->usuarioService->findByUuid($usuarioUuid);
+        $usuario = $this->usuarioService->findByUuid($usuarioUuid, $payloadUsuarioLogado);
         if (!$usuario || $usuario->excluido) {
             throw new Exception('Usuário não encontrado');
         }
@@ -51,8 +51,8 @@ class MensalidadeDaPlataformaService
         return $mensalidades;
     }
 
-    public function create(array $data, string $uuidUsuarioLogado): MensalidadeDaPlataformaModel {
-        if($uuidUsuarioLogado == "NEW_ACCOUNT"){
+    public function create(array $data, array $payloadUsuarioLogado): MensalidadeDaPlataformaModel {
+        if($payloadUsuarioLogado['usuario_uuid'] == "NEW_ACCOUNT"){
         v::key('valor_em_centavos', v::intType()->positive())
         ->key('usuario_uuid', v::uuid())
         ->key('plano_uuid', v::uuid()) 
@@ -66,7 +66,7 @@ class MensalidadeDaPlataformaService
         }
 
         if (!empty($data['usuario_uuid'])){
-            $this->usuarioService->findByUuid($data['usuario_uuid']);
+            $this->usuarioService->findByUuid($data['usuario_uuid'], $payloadUsuarioLogado);
         }
 
 
@@ -93,7 +93,7 @@ class MensalidadeDaPlataformaService
             }
 
             if (!empty($data['usuario_uuid'])){
-                $this->usuarioService->findByUuid($data['usuario_uuid']);
+                $this->usuarioService->findByUuid($data['usuario_uuid'], $payloadUsuarioLogado);
             }
 
 
@@ -101,14 +101,14 @@ class MensalidadeDaPlataformaService
             foreach ($guarded as $g) unset($data[$g]);
 
             $data['uuid'] = Uuid::uuid1()->toString();
-            $data['usuario_criador_uuid'] = $uuidUsuarioLogado;
-            $data['usuario_alterador_uuid'] = $uuidUsuarioLogado;
+            $data['usuario_criador_uuid'] = $payloadUsuarioLogado['usuario_uuid'];
+            $data['usuario_alterador_uuid'] = $payloadUsuarioLogado['usuario_uuid'];
 
             return $this->mensalidadeDaPlataformaRepository->create($data);
         }
     }
 
-    public function update(string $uuid, array $data, string $uuidUsuarioLogado): MensalidadeDaPlataformaModel {
+    public function update(string $uuid, array $data, array $payloadUsuarioLogado): MensalidadeDaPlataformaModel {
         $mensalidadeDaPlataforma = $this->mensalidadeDaPlataformaRepository->findByUuid($uuid);
         if(!$mensalidadeDaPlataforma || $mensalidadeDaPlataforma->excluido){
             throw new Exception('Mensalidade da Plataforma não encontrado');
@@ -130,17 +130,17 @@ class MensalidadeDaPlataformaService
         }
 
         if (!empty($data['usuario_uuid'])){
-            $this->usuarioService->findByUuid($data['usuario_uuid']);
+            $this->usuarioService->findByUuid($data['usuario_uuid'], $payloadUsuarioLogado);
         }
         $guarded = ['uuid', 'usuario_criador_uuid', 'data_de_criacao', 'data_de_ultima_alteracao'];
         foreach ($guarded as $g) unset($data[$g]);
 
-        $data['usuario_alterador_uuid'] = $uuidUsuarioLogado;
+        $data['usuario_alterador_uuid'] = $payloadUsuarioLogado['usuario_uuid'];
 
         return $this->mensalidadeDaPlataformaRepository->update($mensalidadeDaPlataforma, $data);
     }
 
-    public function delete(string $uuid, string $uuidUsuarioLogado): bool {
+    public function delete(string $uuid, array $payloadUsuarioLogado): bool {
         $mensalidadeDaPlataforma = $this->mensalidadeDaPlataformaRepository->findByUuid($uuid);
         if (!$mensalidadeDaPlataforma || $mensalidadeDaPlataforma->excluido) {
             throw new Exception('Mensalidade da Plataforma não encontrado');
@@ -148,7 +148,7 @@ class MensalidadeDaPlataformaService
 
         $data = [
             'excluido' => 1,
-            'usuario_alterador_uuid' => $uuidUsuarioLogado,
+            'usuario_alterador_uuid' => $payloadUsuarioLogado['usuario_uuid'],
         ];
 
         return $this->mensalidadeDaPlataformaRepository->delete($mensalidadeDaPlataforma, $data);

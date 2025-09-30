@@ -92,7 +92,7 @@
   - [📗 Permissões de exceção (POST)](#permissoes-de-excecao-post)
   - [📗 Permissões de exceção (PUT)](#permissoes-de-excecao-put)
   - [📗 Permissões de exceção (DELETE)](#permissoes-de-excecao-delete)
-  - [📗 Permissões-do-usuario (GET)](#permissoes-do-usuario-get)
+  - [📗 Permissões do Usuário (GET por Usuário UUID)](#permissoes-do-usuario-get)
   - [📗 Permissões (GET) ](#permissoes-get-list)
   - [📗 Permissões (GET por UUID)](#permissoes-get-uuid)
   - [📗 Permissões (POST)](#permissoes-post)
@@ -938,10 +938,18 @@ Acesso:** à todos os registros não excluídos.
 #### Administração da Plataforma
   **Acesso:** à todos os registros não excluídos.
 
-<h3 id="permissoes-do-usuario-get">📗 Permissões-do-usuario (GET)</h3>
+<h3 id="permissoes-do-usuario-get">📗 Permissões do Usuário (GET por Usuário UUID)</h3>
 
 #### Administração da Plataforma
   **Acesso:** à todos os registros não excluídos.
+#### Administração da Associação
+  **Acesso:** à todos os registros para seu próprio UUID
+#### Administração da Horta
+  **Acesso:** à todos os registros para seu próprio UUID
+#### Canteirista
+  **Acesso:** à todos os registros para seu próprio UUID
+#### Dependente
+  **Acesso:** à todos os registros para seu próprio UUID
 
 <h3 id="permissoes-get-list">📗 Permissões (GET) </h3>
 
@@ -1083,43 +1091,87 @@ Acesso:** à todos os registros não excluídos.
 
 --> Demais dados devem ser preenchidos depois
 
-<h1 id="pendencias">⚠️ Pendências: Aplicar regras de negócio nos endpoints</h1>
+<h1 id="dados-teste">🎲 Dados teste</h1>
 
-Aqui está o checklist organizado, começando pelas rotas exclusivas da Administração da Plataforma:
+## 🌱 Associações
+
+* **Hortas SP**
+
+  * Razão Social: Associação Hortas Urbanas 1
+  * CNPJ: 11.111.111/0001-11
+  * Endereço: São Paulo - SP
+
+* **Hortas RJ**
+
+  * Razão Social: Associação Hortas Urbanas 2
+  * CNPJ: 22.222.222/0001-22
+  * Endereço: Rio de Janeiro - RJ
+
+---
+
+## 🥕 Hortas
+
+* **Horta Comunitária SP**
+
+  * Associação vinculada: Hortas SP
+  * Percentual taxa associado: 10%
+
+* **Horta Comunitária RJ**
+
+  * Associação vinculada: Hortas RJ
+  * Percentual taxa associado: 12.5%
+
+---
+
+## 👥 Usuários
+
+| Usuário                | Cargo                  | Email                                                         | Senha      |
+| ---------------------- | ---------------------- | ------------------------------------------------------------- | ---------- |
+| Carlos Admin SP        | admin_associacao_geral | [admin_assoc_1@example.com](mailto:admin_assoc_1@example.com) | senha12345 |
+| Mariana Admin RJ       | admin_associacao_geral | [admin_assoc_2@example.com](mailto:admin_assoc_2@example.com) | senha12345 |
+| João Horta SP          | admin_horta_geral      | [admin_horta_1@example.com](mailto:admin_horta_1@example.com) | senha12345 |
+| Ana Horta RJ           | admin_horta_geral      | [admin_horta_2@example.com](mailto:admin_horta_2@example.com) | senha12345 |
+| Pedro Canteiro SP      | canteirista            | [canteirista_1@example.com](mailto:canteirista_1@example.com) | senha12345 |
+| Julia Canteiro RJ      | canteirista            | [canteirista_2@example.com](mailto:canteirista_2@example.com) | senha12345 |
+| Lucas Dependente SP    | dependente             | [dependente_1@example.com](mailto:dependente_1@example.com)   | senha12345 |
+| Fernanda Dependente RJ | dependente             | [dependente_2@example.com](mailto:dependente_2@example.com)   | senha12345 |
+
+
+<h1 id="pendencias">⚠️ Pendências: Aplicação de regras de negócio nos endpoints</h1> 
 
 ## 🔴 Rotas EXCLUSIVAS - Administração da Plataforma
 
 ### Associações
-- [ ] Associações (GET)
-- [ ] Associações (GET por UUID)
-- [ ] Associações (POST)
-- [ ] Associações (PUT)
-- [ ] Associações (DELETE)
+- [x] Associações (GET)
+- [x] Associações (GET por UUID)
+- [x] Associações (POST)
+- [x] Associações (PUT)
+- [x] Associações (DELETE)
 
 ### Permissões
-- [ ] Permissões (GET)
-- [ ] Permissões (GET por UUID)
-- [ ] Permissões (POST)
-- [ ] Permissões (PUT)
-- [ ] Permissões (DELETE)
+- [x] Permissões (GET)
+- [x] Permissões (GET por UUID)
+- [x] Permissões (POST)
+- [x] Permissões (PUT)
+- [x] Permissões (DELETE)
 
 ### Permissões de Cargo
-- [ ] Permissões de Cargo (GET)
-- [ ] Permissões de Cargo (GET por UUID)
-- [ ] Permissões de Cargo (GET) - Por Cargo
-- [ ] Permissões de Cargo (POST)
-- [ ] Permissões de Cargo (PUT)
-- [ ] Permissões de Cargo (DELETE)
+- [x] Permissões de Cargo (GET)
+- [x] Permissões de Cargo (GET por UUID)
+- [x] Permissões de Cargo (GET) - Por Cargo
+- [x] Permissões de Cargo (POST)
+- [x] Permissões de Cargo (PUT)
+- [x] Permissões de Cargo (DELETE)
 
 ### Permissões de Exceção
-- [ ] Permissões de Exceção (GET)
-- [ ] Permissões de Exceção (GET por UUID)
-- [ ] Permissões de Exceção (POST)
-- [ ] Permissões de Exceção (PUT)
-- [ ] Permissões de Exceção (DELETE)
+- [x] Permissões de Exceção (GET)
+- [x] Permissões de Exceção (GET por UUID)
+- [x] Permissões de Exceção (POST)
+- [x] Permissões de Exceção (PUT)
+- [x] Permissões de Exceção (DELETE)
 
 ### Permissões do Usuário
-- [ ] Permissões do Usuário (GET)
+- [x] Permissões do Usuário (GET)
 
 ### Cargos (Modificação)
 - [ ] Cargos (POST)
@@ -1266,6 +1318,7 @@ Aqui está o checklist organizado, começando pelas rotas exclusivas da Administ
 ---
 
 **Total: 105 rotas**
+**Progresso: 27.62% das rotas**
 
 **Legenda:**
 - 🔴 Exclusivas Admin Plataforma: 42 rotas

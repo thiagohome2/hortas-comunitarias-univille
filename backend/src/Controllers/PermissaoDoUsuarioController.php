@@ -22,6 +22,7 @@ class PermissaoDoUsuarioController
             'cargo_uuid' => $request->getAttribute('cargo_uuid'),
             'associacao_uuid' => $request->getAttribute('associacao_uuid'),
             'horta_uuid' => $request->getAttribute('horta_uuid'),
+            'interno' => false
         ];
 
         $permissoes = $this->permissaoDoUsuarioService->findByUuid($args['uuid'], $payloadUsuarioLogado);

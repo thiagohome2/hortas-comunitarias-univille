@@ -47,21 +47,30 @@ class SessaoService
     {
         $uuidSistema = "NEW_ACCOUNT";
 
+
+
         return $this->capsule->connection()->transaction(function () use ($data, $uuidSistema) {
+            $payloadMinimo = [
+                'usuario_uuid' => null,
+                'cargo_uuid' => null,
+                'associacao_uuid' => null,
+                'horta_uuid' => null
+            ];
+
+
             $associacaoData = $data['associacao'] ?? [];
             $usuarioData = $data['usuario'] ?? [];
 
-            $associacao = $this->associacaoService->create($associacaoData, $uuidSistema);
+            $payloadMinimo["usuario_uuid"] = $uuidSistema;
 
             $cargo = $this->cargoModel->firstOrCreate(['slug' => 'admin_associacao_geral']);
-
             $usuarioData['cargo_uuid'] = $cargo->uuid;
+
+            $associacao = $this->associacaoService->create($associacaoData, $payloadMinimo);
             $usuarioData['associacao_uuid'] = $associacao->uuid;
 
-            $payloadMinimo = [
-                'cargo_uuid' => $cargo->uuid,
-                'associacao_uuid' => $associacao->uuid
-            ]; // falta 2 itens
+            $payloadMinimo['cargo_uuid'] =$cargo->uuid;
+            $payloadMinimo['associacao_uuid'] = $associacao->uuid;
 
             $usuario = $this->usuarioService->create($usuarioData, $uuidSistema, $payloadMinimo);
 
@@ -82,7 +91,7 @@ class SessaoService
                 'usuario_alterador_uuid' => $usuario->uuid,
             ];
 
-            $mensalidade = $this->mensalidadeService->create($mensalidadeData, $uuidSistema);
+            $mensalidade = $this->mensalidadeService->create($mensalidadeData, $payloadMinimo);
 
             $payload = [
                 'usuario_uuid' => $usuario->uuid,

@@ -18,14 +18,29 @@ class PermissaoDeCargoController
     
     public function list(Request $request, Response $response)
     {
-        $permicoesDeCargo = $this->permissaoDeCargoService->findAllWhere();
+        
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+            'interno' => false
+        ];
+        $permicoesDeCargo = $this->permissaoDeCargoService->findAllWhere($payloadUsuarioLogado);
         $response->getBody()->write(json_encode($permicoesDeCargo));
         return $response->withStatus(200);
     }
 
     public function get(Request $request, Response $response, array $args)
     {
-        $permissaoDeCargo = $this->permissaoDeCargoService->findByUuid($args['uuid']);
+                        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+            'interno' => false
+        ];
+        $permissaoDeCargo = $this->permissaoDeCargoService->findByUuid($args['uuid'], $payloadUsuarioLogado);
         if (!$permissaoDeCargo) return $response->withStatus(404);
 
         $response->getBody()->write(json_encode($permissaoDeCargo));
@@ -33,7 +48,14 @@ class PermissaoDeCargoController
     }
     public function getByCargo(Request $request, Response $response, array $args)
     {
-        $permissoesDeCargo = $this->permissaoDeCargoService->findByCargoUuid($args['uuid']);
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+            'interno' => false
+        ];
+        $permissoesDeCargo = $this->permissaoDeCargoService->findByCargoUuid($args['uuid'], $payloadUsuarioLogado);
         if ($permissoesDeCargo->isEmpty()) return $response->withStatus(404);
 
         $response->getBody()->write(json_encode($permissoesDeCargo));
@@ -42,9 +64,15 @@ class PermissaoDeCargoController
 
     public function create(Request $request, Response $response)
     {
-        $data = (array)$request->getParsedBody();
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $permissaoDeCargo = $this->permissaoDeCargoService->create($data, $uuidUsuarioLogado);
+                        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+            'interno' => false
+        ];
+        $data = (array)$request->getParsedBody(); 
+        $permissaoDeCargo = $this->permissaoDeCargoService->create($data, $payloadUsuarioLogado);
 
         $response->getBody()->write(json_encode($permissaoDeCargo));
         return $response->withStatus(201);
@@ -52,17 +80,30 @@ class PermissaoDeCargoController
 
     public function update(Request $request, Response $response, array $args)
     {
-        $data = (array)$request->getParsedBody();
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $permissaoDeCargo = $this->permissaoDeCargoService->update($args['uuid'], $data, $uuidUsuarioLogado);
+                        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+            'interno' => false
+        ];
+        $data = (array)$request->getParsedBody(); 
+        $permissaoDeCargo = $this->permissaoDeCargoService->update($args['uuid'], $data, $payloadUsuarioLogado);
 
         $response->getBody()->write(json_encode($permissaoDeCargo));
         return $response->withStatus(200);
     }
 
     public function delete(Request $request, Response $response, array $args){   
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $this->permissaoDeCargoService->delete($args['uuid'], $uuidUsuarioLogado);
+        
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+            'interno' => false
+        ]; 
+        $this->permissaoDeCargoService->delete($args['uuid'], $payloadUsuarioLogado);
         
         $response->getBody()->write(json_encode([
             "message" => "Registro UUID: " . $args['uuid'] . " excluído"

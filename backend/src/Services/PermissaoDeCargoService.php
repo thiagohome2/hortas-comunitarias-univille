@@ -23,21 +23,34 @@ class PermissaoDeCargoService
         $this->cargoService = $cargoService;
     }
 
-    public function findAllWhere(): Collection
-    {
+    public function findAllWhere(array $payloadUsuarioLogado): Collection
+    {   
+        if (isset($payloadUsuarioLogado['interno']) && $payloadUsuarioLogado['interno'] === false
+            && !$this->isCargoAdminPlataforma($payloadUsuarioLogado)) {
+            throw new Exception("Permissão de cargo 0 necessária | findAllWhere");
+        } 
         return $this->permissaoDeCargoRepository->findAllWhere(['excluido' => 0]);
     }
     
-    public function findByUuid(string $uuid): ?PermissaoDeCargoModel
+    public function findByUuid(string $uuid, array $payloadUsuarioLogado): ?PermissaoDeCargoModel
     {
+        if (isset($payloadUsuarioLogado['interno']) && $payloadUsuarioLogado['interno'] === false
+            && !$this->isCargoAdminPlataforma($payloadUsuarioLogado)) {
+            throw new Exception("Permissão de cargo 0 necessária | findByUuid");
+        }  
         $permissaoDeCargo= $this->permissaoDeCargoRepository->findByUuid($uuid);
         if (!$permissaoDeCargo|| $permissaoDeCargo->excluido) {
             throw new Exception('Permissão de cargo não encontrada');
         }
         return $permissaoDeCargo;
     }
-    public function findByCargoUuid(string $cargoUuid): Collection
+    public function findByCargoUuid(string $cargoUuid, array $payloadUsuarioLogado): Collection
     {
+        if (isset($payloadUsuarioLogado['interno']) && $payloadUsuarioLogado['interno'] === false
+            && !$this->isCargoAdminPlataforma($payloadUsuarioLogado)) {
+            throw new Exception("Permissão de cargo 0 necessária | findByCargoUuid");
+        } 
+
         $permissoesDeCargo = $this->permissaoDeCargoRepository->findByCargoUuid($cargoUuid);
         if ($permissoesDeCargo->isEmpty()) {
             throw new Exception('Permissões de cargo não encontrada');
@@ -45,8 +58,14 @@ class PermissaoDeCargoService
         return $permissoesDeCargo;
     }
 
- public function create(array $data, string $uuidUsuarioLogado): PermissaoDeCargoModel
+ public function create(array $data,array $payloadUsuarioLogado): PermissaoDeCargoModel
     {
+
+        if (isset($payloadUsuarioLogado['interno']) && $payloadUsuarioLogado['interno'] === false
+            && !$this->isCargoAdminPlataforma($payloadUsuarioLogado)) {
+            throw new Exception("Permissão de cargo 0 necessária | create");
+        } 
+
         v::key('permissao_uuid', v::uuid())
         ->key('cargo_uuid', v::uuid())
         ->assert($data);
@@ -55,23 +74,27 @@ class PermissaoDeCargoService
         foreach ($guarded as $g) unset($data[$g]);
         
         $data['uuid'] = Uuid::uuid1()->toString();
-        $data['usuario_criador_uuid'] = $uuidUsuarioLogado;
-        $data['usuario_alterador_uuid'] = $uuidUsuarioLogado;
+        $data['usuario_criador_uuid'] = $payloadUsuarioLogado['usuario_uuid'];
+        $data['usuario_alterador_uuid'] = $payloadUsuarioLogado['usuario_uuid'];
 
         if (!empty($data['cargo_uuid'])){
             $this->cargoService->findByUuid($data['cargo_uuid']);
         }
 
         if (!empty($data['permissao_uuid'])) {
-            $this->permissaoService->findByUuid($data['permissao_uuid']);
+            $this->permissaoService->findByUuid($data['permissao_uuid'], $payloadUsuarioLogado);
         }
 
         return $this->permissaoDeCargoRepository->create($data);
     }
 
 
-    public function update(string $uuid, array $data, string $uuidUsuarioLogado): PermissaoDeCargoModel
+    public function update(string $uuid, array $data, array $payloadUsuarioLogado): PermissaoDeCargoModel
     {
+        if (isset($payloadUsuarioLogado['interno']) && $payloadUsuarioLogado['interno'] === false
+            && !$this->isCargoAdminPlataforma($payloadUsuarioLogado)) {
+            throw new Exception("Permissão de cargo 0 necessária | update");
+        }  
         $permissaoDeCargo= $this->permissaoDeCargoRepository->findByUuid($uuid);
         if (!$permissaoDeCargo|| $permissaoDeCargo->excluido) {
             throw new Exception('Permissão de cargo não encontrada');
@@ -86,16 +109,21 @@ class PermissaoDeCargoService
         }
 
         if (!empty($data['permissao_uuid'])) {
-            $this->permissaoService->findByUuid($data['permissao_uuid']);
+            $this->permissaoService->findByUuid($data['permissao_uuid'], $payloadUsuarioLogado);
         }
 
-        $data['usuario_alterador_uuid'] = $uuidUsuarioLogado;
+        $data['usuario_alterador_uuid'] = $payloadUsuarioLogado['usuario_uuid'];
 
         return $this->permissaoDeCargoRepository->update($permissaoDeCargo, $data);
     }
 
     
-    public function delete(string $uuid, string $uuidUsuarioLogado): bool {
+    public function delete(string $uuid, array $payloadUsuarioLogado): bool {
+        if (isset($payloadUsuarioLogado['interno']) && $payloadUsuarioLogado['interno'] === false
+            && !$this->isCargoAdminPlataforma($payloadUsuarioLogado)) {
+            throw new Exception("Permissão de cargo 0 necessária | delete");
+        } 
+
         $permissaoDeCargo = $this->permissaoDeCargoRepository->findByUuid($uuid);
         if (!$permissaoDeCargo|| $permissaoDeCargo->excluido) {
             throw new Exception('Permissão de cargo não encontrada');
@@ -103,9 +131,14 @@ class PermissaoDeCargoService
 
         $data = [
             'excluido' => 1,
-            'usuario_alterador_uuid' => $uuidUsuarioLogado,
+            'usuario_alterador_uuid' => $payloadUsuarioLogado['usuario_uuid'],
         ];
 
         return $this->permissaoDeCargoRepository->delete($permissaoDeCargo, $data) ? true : false;
+    }
+
+    private function isCargoAdminPlataforma(array $payloadUsuarioLogado): bool
+    {
+        return $this->cargoService->findByUuid($payloadUsuarioLogado['cargo_uuid'])->slug === "admin_plataforma";
     }
 }

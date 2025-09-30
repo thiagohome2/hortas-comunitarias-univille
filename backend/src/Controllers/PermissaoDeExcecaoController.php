@@ -17,15 +17,27 @@ class PermissaoDeExcecaoController
 
     
     public function list(Request $request, Response $response)
-    {
-        $permicoesDeExcecao = $this->permissaoDeExcecaoService->findAllWhere();
+    {        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+            'interno' => false
+        ];
+        $permicoesDeExcecao = $this->permissaoDeExcecaoService->findAllWhere($payloadUsuarioLogado);
         $response->getBody()->write(json_encode($permicoesDeExcecao));
         return $response->withStatus(200);
     }
 
     public function get(Request $request, Response $response, array $args)
-    {
-        $permissaoDeExcecao = $this->permissaoDeExcecaoService->findByUuid($args['uuid']);
+    {        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+            'interno' => false
+        ];
+        $permissaoDeExcecao = $this->permissaoDeExcecaoService->findByUuid($args['uuid'], $payloadUsuarioLogado);
         if (!$permissaoDeExcecao) return $response->withStatus(404);
 
         $response->getBody()->write(json_encode($permissaoDeExcecao));
@@ -33,28 +45,44 @@ class PermissaoDeExcecaoController
     }
 
     public function create(Request $request, Response $response)
-    {
-        $data = (array)$request->getParsedBody();
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $permissaoDeExcecao = $this->permissaoDeExcecaoService->create($data, $uuidUsuarioLogado);
+    {        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+            'interno' => false
+        ];
+        $data = (array)$request->getParsedBody(); 
+        $permissaoDeExcecao = $this->permissaoDeExcecaoService->create($data, $payloadUsuarioLogado);
 
         $response->getBody()->write(json_encode($permissaoDeExcecao));
         return $response->withStatus(201);
     }
 
     public function update(Request $request, Response $response, array $args)
-    {
-        $data = (array)$request->getParsedBody();
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $permissaoDeExcecao = $this->permissaoDeExcecaoService->update($args['uuid'], $data, $uuidUsuarioLogado);
+    {        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+            'interno' => false
+        ];
+        $data = (array)$request->getParsedBody(); 
+        $permissaoDeExcecao = $this->permissaoDeExcecaoService->update($args['uuid'], $data, $payloadUsuarioLogado);
 
         $response->getBody()->write(json_encode($permissaoDeExcecao));
         return $response->withStatus(200);
     }
 
-    public function delete(Request $request, Response $response, array $args){   
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $this->permissaoDeExcecaoService->delete($args['uuid'], $uuidUsuarioLogado);
+    public function delete(Request $request, Response $response, array $args){ 
+                $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+            'interno' => false
+        ];   
+        $this->permissaoDeExcecaoService->delete($args['uuid'], $payloadUsuarioLogado);
         
         $response->getBody()->write(json_encode([
             "message" => "Registro UUID: " . $args['uuid'] . " excluído"

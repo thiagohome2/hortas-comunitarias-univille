@@ -16,15 +16,25 @@ class MensalidadeDaPlataformaController
     }
 
     public function list(Request $request, Response $response)
-    {
-        $mensalidadesDaPlataforma = $this->mensalidadeDaPlataformaService->findAllWhere();
+    {                $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $mensalidadesDaPlataforma = $this->mensalidadeDaPlataformaService->findAllWhere($payloadUsuarioLogado);
         $response->getBody()->write(json_encode($mensalidadesDaPlataforma));
         return $response->withStatus(200);
     }
 
     public function get(Request $request, Response $response, array $args)
-    {
-        $mensalidadeDaPlataforma = $this->mensalidadeDaPlataformaService->findByUuid($args['uuid']);
+    {                $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $mensalidadeDaPlataforma = $this->mensalidadeDaPlataformaService->findByUuid($args['uuid'], $payloadUsuarioLogado);
         if (!$mensalidadeDaPlataforma) return $response->withStatus(404);
 
         $response->getBody()->write(json_encode($mensalidadeDaPlataforma));
@@ -32,8 +42,13 @@ class MensalidadeDaPlataformaController
     }
 
     public function getByUsuario(Request $request, Response $response, array $args)
-    {
-        $mensalidadesDaPlataforma = $this->mensalidadeDaPlataformaService->findByUsuarioUuid($args['uuid']);
+    {                $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $mensalidadesDaPlataforma = $this->mensalidadeDaPlataformaService->findByUsuarioUuid($args['uuid'], $payloadUsuarioLogado);
         if ($mensalidadesDaPlataforma->isEmpty()) return $response->withStatus(404);
 
         $response->getBody()->write(json_encode($mensalidadesDaPlataforma));
@@ -41,28 +56,41 @@ class MensalidadeDaPlataformaController
     }
 
     public function create(Request $request, Response $response)
-    {
+    {                $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
         $data = (array)$request->getParsedBody();
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $mensalidadeDaPlataforma = $this->mensalidadeDaPlataformaService->create($data, $uuidUsuarioLogado);
+        $mensalidadeDaPlataforma = $this->mensalidadeDaPlataformaService->create($data, $payloadUsuarioLogado);
 
         $response->getBody()->write(json_encode($mensalidadeDaPlataforma));
         return $response->withStatus(201);
     }
 
     public function update(Request $request, Response $response, array $args)
-    {
+    {                $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
         $data = (array)$request->getParsedBody();
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $mensalidadeDaPlataforma = $this->mensalidadeDaPlataformaService->update($args['uuid'], $data, $uuidUsuarioLogado);
+        $mensalidadeDaPlataforma = $this->mensalidadeDaPlataformaService->update($args['uuid'], $data, $payloadUsuarioLogado);
 
         $response->getBody()->write(json_encode($mensalidadeDaPlataforma));
         return $response->withStatus(200);
     }
 
-    public function delete(Request $request, Response $response, array $args){   
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $this->mensalidadeDaPlataformaService->delete($args['uuid'], $uuidUsuarioLogado);
+    public function delete(Request $request, Response $response, array $args){  
+                        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $this->mensalidadeDaPlataformaService->delete($args['uuid'], $payloadUsuarioLogado);
         
         $response->getBody()->write(json_encode([
             "message" => "Registro UUID: " . $args['uuid'] . " excluído"

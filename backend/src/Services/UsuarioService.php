@@ -102,7 +102,6 @@ class UsuarioService {
     public function create(array $data, string $uuidUsuarioLogado, array $payloadUsuarioLogado): UsuarioModel
     { 
         if($uuidUsuarioLogado == "NEW_ACCOUNT"){
-            echo "=============> yey";
             v::key('nome_completo', v::stringType()->notEmpty())
             ->key('cpf', v::cpf())
             ->key('email', v::email())
@@ -141,7 +140,7 @@ class UsuarioService {
             }
 
             if (!empty($data['associacao_uuid'])){
-                $this->associacaoService->findByUuid($data['associacao_uuid']);
+                $this->associacaoService->findByUuid($data['associacao_uuid'], $payloadUsuarioLogado);
             }
 
             if (!empty($data['horta_uuid'])) {
@@ -207,7 +206,7 @@ class UsuarioService {
                 }
 
                 if (!empty($data['associacao_uuid'])){
-                    $this->associacaoService->findByUuid($data['associacao_uuid']);
+                    $this->associacaoService->findByUuid($data['associacao_uuid'], $payloadUsuarioLogado);
                 }
 
                 if (!empty($data['horta_uuid'])) {
@@ -406,7 +405,7 @@ class UsuarioService {
             }
 
             if (!empty($data['associacao_uuid'])){
-                $this->associacaoService->findByUuid($data['associacao_uuid']);
+                $this->associacaoService->findByUuid($data['associacao_uuid'], $payloadUsuarioLogado);
             }
 
             if (!empty($data['horta_uuid'])) {
@@ -512,7 +511,7 @@ class UsuarioService {
             $this->cargoService->findByUuid($data['cargo_uuid']);
         }
         if (!empty($data['associacao_uuid'])) {
-            $this->associacaoService->findByUuid($data['associacao_uuid']);
+            $this->associacaoService->findByUuid($data['associacao_uuid'], $payloadUsuarioLogado);
         }
         if (!empty($data['horta_uuid'])) {
             $this->hortaService->findByUuid($data['horta_uuid']);

@@ -17,14 +17,28 @@ class AssociacaoController
 
     public function list(Request $request, Response $response)
     {
-        $associacoes = $this->associacaoService->findAllWhere();
+                $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        
+        $associacoes = $this->associacaoService->findAllWhere($payloadUsuarioLogado);
         $response->getBody()->write(json_encode($associacoes));
         return $response->withStatus(200);
     }
 
     public function get(Request $request, Response $response, array $args)
     {
-        $associacao = $this->associacaoService->findByUuid($args['uuid']);
+                $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+
+        $associacao = $this->associacaoService->findByUuid($args['uuid'], $payloadUsuarioLogado);
         if (!$associacao) return $response->withStatus(404);
 
         $response->getBody()->write(json_encode($associacao));
@@ -33,9 +47,16 @@ class AssociacaoController
 
     public function create(Request $request, Response $response)
     {
+                $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+
         $data = (array)$request->getParsedBody();
         $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $associacao = $this->associacaoService->create($data, $uuidUsuarioLogado);
+        $associacao = $this->associacaoService->create($data, $payloadUsuarioLogado);
 
         $response->getBody()->write(json_encode($associacao));
         return $response->withStatus(201);
@@ -43,9 +64,16 @@ class AssociacaoController
 
     public function update(Request $request, Response $response, array $args)
     {
+                $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+
         $data = (array)$request->getParsedBody();
         $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $associacao = $this->associacaoService->update($args['uuid'], $data, $uuidUsuarioLogado);
+        $associacao = $this->associacaoService->update($args['uuid'], $data, $payloadUsuarioLogado);
 
         $response->getBody()->write(json_encode($associacao));
         return $response->withStatus(200);
@@ -53,8 +81,15 @@ class AssociacaoController
 
     public function delete(Request $request, Response $response, array $args)
     {
+                $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+
         $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $this->associacaoService->delete($args['uuid'], $uuidUsuarioLogado);
+        $this->associacaoService->delete($args['uuid'], $payloadUsuarioLogado);
         
         $response->getBody()->write(json_encode([
             "message" => "Registro UUID: " . $args['uuid'] . " excluído"
