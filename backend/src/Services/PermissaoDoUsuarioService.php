@@ -24,10 +24,10 @@ class PermissaoDoUsuarioService
         $this->usuarioService = $usuarioService;
     }
     
-    public function findByUuid(string $uuid): Collection
+    public function findByUuid(string $uuid, array $payloadUsuarioLogado): Collection
     {
         // Obter o cargo_uuid do usuário
-        $cargo_uuid = $this->usuarioService->findByUuid($uuid)->cargo_uuid;
+        $cargo_uuid = $payloadUsuarioLogado['cargo_uuid'];
         // Obter as permissões do cargo
         $permissoes_de_cargo = $this->permissaoDeCargoService->findByCargoUuid($cargo_uuid);
         // Obter as permissões de exceção do usuário

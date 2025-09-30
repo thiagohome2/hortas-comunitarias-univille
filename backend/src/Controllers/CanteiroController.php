@@ -18,6 +18,13 @@ class CanteiroController
     
     public function list(Request $request, Response $response)
     {
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+
         $canteiros = $this->canteiroService->findAllWhere();
         $response->getBody()->write(json_encode($canteiros));
         return $response->withStatus(200);

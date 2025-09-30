@@ -15,10 +15,17 @@ class SessaoController
 
     public function signIn(Request $request, Response $response)
     {
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+
         $data = (array)$request->getParsedBody();
 
         try {
-            $token = $this->sessaoService->signIn($data['email'] ?? '', $data['senha'] ?? '');
+            $token = $this->sessaoService->signIn($data['email'] ?? '', $data['senha'] ?? '', $payloadUsuarioLogado);
             $response->getBody()->write(json_encode(['token' => $token]));
         } catch (\Exception $e) {
             $response->getBody()->write(json_encode(['error' => $e->getMessage()]));

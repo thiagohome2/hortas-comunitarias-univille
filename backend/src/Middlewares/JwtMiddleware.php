@@ -39,7 +39,7 @@ class JwtMiddleware
 
         if (!$authHeader || !preg_match('/Bearer\s+(.*)$/i', $authHeader, $matches)) {
             $response->getBody()->write(json_encode(['error' => 'Token ausente']));
-            return $response->withStatus(401)->withHeader('Content-Type', 'application/json');
+            return $response->withStatus(401);
         }
 
         $token = $matches[1];
@@ -50,14 +50,16 @@ class JwtMiddleware
             // Adiciona informações do usuário logado à request
             $request = $request
                 ->withAttribute('usuario_uuid', $decoded->usuario_uuid ?? null)
-                ->withAttribute('cargo_uuid', $decoded->cargo_uuid ?? null);
+                ->withAttribute('cargo_uuid', $decoded->cargo_uuid ?? null)
+                ->withAttribute('associacao_uuid', $decoded->associacao_uuid ?? null)
+                ->withAttribute('horta_uuid', $decoded->horta_uuid ?? null);
 
         } catch (\Exception $e) {
             $response->getBody()->write(json_encode([
                 'error' => 'Token inválido',
                 'message' => $e->getMessage()
             ]));
-            return $response->withStatus(401)->withHeader('Content-Type', 'application/json');
+            return $response->withStatus(401);
         }
 
         return $handler->handle($request);

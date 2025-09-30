@@ -22,9 +22,9 @@ class SessaoService
         private Capsule $capsule
     ) {}
 
-    public function signIn(string $email, string $senha): string
+    public function signIn(string $email, string $senha, array $payloadUsuarioLogado): string
     {
-        $usuario = $this->usuarioService->findAllWhere()->firstWhere('email', $email);
+        $usuario = $this->usuarioService->findByEmail($email);
         if (!$usuario) {
             throw new Exception("Usuário inválido");
         }
@@ -36,6 +36,8 @@ class SessaoService
         $payload = [
             'usuario_uuid' => $usuario->uuid,
             'cargo_uuid' => $usuario->cargo_uuid,
+            'associacao_uuid' => $usuario->associacao_uuid,
+            'horta_uuid' => $usuario->horta_uuid,
             'exp' => time() + 7200,
         ];
 
@@ -55,7 +57,13 @@ class SessaoService
 
             $usuarioData['cargo_uuid'] = $cargo->uuid;
             $usuarioData['associacao_uuid'] = $associacao->uuid;
-            $usuario = $this->usuarioService->create($usuarioData, $uuidSistema);
+
+            $payloadMinimo = [
+                'cargo_uuid' => $cargo->uuid,
+                'associacao_uuid' => $associacao->uuid
+            ]; // falta 2 itens
+
+            $usuario = $this->usuarioService->create($usuarioData, $uuidSistema, $payloadMinimo);
 
             $plano = $this->planoService->findBySlug('plano_bronze');
 
@@ -79,6 +87,8 @@ class SessaoService
             $payload = [
                 'usuario_uuid' => $usuario->uuid,
                 'cargo_uuid' => $usuario->cargo_uuid,
+                'associacao_uuid' => $usuario->associacao_uuid,
+                'horta_uuid' => $usuario->horta_uuid,
                 'exp' => time() + 7200,
             ];
 

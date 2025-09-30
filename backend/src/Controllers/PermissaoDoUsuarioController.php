@@ -17,7 +17,14 @@ class PermissaoDoUsuarioController
 
     public function get(Request $request, Response $response, array $args)
     {
-        $permissoes = $this->permissaoDoUsuarioService->findByUuid($args['uuid']);
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+
+        $permissoes = $this->permissaoDoUsuarioService->findByUuid($args['uuid'], $payloadUsuarioLogado);
         if (!$permissoes) return $response->withStatus(404);
 
         $response->getBody()->write(json_encode($permissoes));

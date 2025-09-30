@@ -14,9 +14,9 @@ class UsuarioRepository
         $this->usuarioModel = $usuarioModel;
     }
 
-    public function findAllWhere(): Collection
+    public function findAllWhere(array $conditions): Collection
     {
-        return $this->usuarioModel->where('excluido', 0)->get();
+        return $this->usuarioModel->where($conditions)->get();
     }
 
     public function findByUuid(string $uuid): ?UsuarioModel

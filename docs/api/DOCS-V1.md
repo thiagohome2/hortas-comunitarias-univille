@@ -5,112 +5,113 @@
 - [⏩ Início Rápido](#inicio-rapido)
 - [🔒 Permissões por Cargo](#permissoes)
 - [🧭 Rotas ](#rotas)
-  - [📗 Associacoes (GET) - Lista](#associacoes-get-list)
-  - [📗 Associacoes (GET) - Por UUID](#associacoes-get-uuid)
+  - [📗 Login (POST)](#login-post)
+  - [📗 Cadastro (POST)](#cadastro-post)
+  - [📗 Associacoes (GET) ](#associacoes-get-list)
+  - [📗 Associacoes (GET por UUID)](#associacoes-get-uuid)
   - [📗 Associacoes (POST)](#associacoes-post)
   - [📗 Associacoes (PUT)](#associacoes-put)
   - [📗 Associacoes (DELETE)](#associacoes-delete)
-  - [📗 Canteiros-e-usuarios (GET) - Lista](#canteiros-e-usuarios-get-list)
-  - [📗 Canteiros-e-usuarios (GET) - Por UUID](#canteiros-e-usuarios-get-uuid)
+  - [📗 Canteiros-e-usuarios (GET) ](#canteiros-e-usuarios-get-list)
+  - [📗 Canteiros-e-usuarios (GET por UUID)](#canteiros-e-usuarios-get-uuid)
   - [📗 Canteiros-e-usuarios (POST)](#canteiros-e-usuarios-post)
   - [📗 Canteiros-e-usuarios (PUT)](#canteiros-e-usuarios-put)
   - [📗 Canteiros-e-usuarios (DELETE)](#canteiros-e-usuarios-delete)
-  - [📗 Canteiros (GET) - Lista](#canteiros-get-list)
-  - [📗 Canteiros (GET) - Por UUID](#canteiros-get-uuid)
+  - [📗 Canteiros (GET) ](#canteiros-get-list)
+  - [📗 Canteiros (GET por UUID)](#canteiros-get-uuid)
   - [📗 Canteiros (POST)](#canteiros-post)
   - [📗 Canteiros (PUT)](#canteiros-put)
   - [📗 Canteiros (DELETE)](#canteiros-delete)
-  - [📗 Cargos (GET) - Lista](#cargos-get-list)
-  - [📗 Cargos (GET) - Por UUID](#cargos-get-uuid)
+  - [📗 Cargos (GET) ](#cargos-get-list)
+  - [📗 Cargos (GET por UUID)](#cargos-get-uuid)
   - [📗 Cargos (POST)](#cargos-post)
   - [📗 Cargos (PUT)](#cargos-put)
   - [📗 Cargos (DELETE)](#cargos-delete)
-  - [📗 Categorias-financeiras (GET) - Lista](#categorias-financeiras-get-list)
-  - [📗 Categorias-financeiras (GET) - Por UUID](#categorias-financeiras-get-uuid)
+  - [📗 Categorias-financeiras (GET) ](#categorias-financeiras-get-list)
+  - [📗 Categorias-financeiras (GET por UUID)](#categorias-financeiras-get-uuid)
   - [📗 Categorias-financeiras (GET) - Por Associacao](#categorias-financeiras-get-associacao)
   - [📗 Categorias-financeiras (GET) - Por Horta](#categorias-financeiras-get-horta)
   - [📗 Categorias-financeiras (POST)](#categorias-financeiras-post)
   - [📗 Categorias-financeiras (PUT)](#categorias-financeiras-put)
   - [📗 Categorias-financeiras (DELETE)](#categorias-financeiras-delete)
-  - [📗 Chaves (GET) - Lista](#chaves-get-list)
-  - [📗 Chaves (GET) - Por UUID](#chaves-get-uuid)
+  - [📗 Chaves (GET) ](#chaves-get-list)
+  - [📗 Chaves (GET por UUID)](#chaves-get-uuid)
   - [📗 Chaves (POST)](#chaves-post)
   - [📗 Chaves (PUT)](#chaves-put)
   - [📗 Chaves (DELETE)](#chaves-delete)
-  - [📗 Enderecos (GET) - Lista](#enderecos-get-list)
-  - [📗 Enderecos (GET) - Por UUID](#enderecos-get-uuid)
+  - [📗 Enderecos (GET) ](#enderecos-get-list)
+  - [📗 Enderecos (GET por UUID)](#enderecos-get-uuid)
   - [📗 Enderecos (POST)](#enderecos-post)
   - [📗 Enderecos (PUT)](#enderecos-put)
   - [📗 Enderecos (DELETE)](#enderecos-delete)
-  - [📗 Fila-de-usuarios (GET) - Lista](#fila-de-usuarios-get-list)
-  - [📗 Fila-de-usuarios (GET) - Por UUID](#fila-de-usuarios-get-uuid)
+  - [📗 Fila-de-usuarios (GET) ](#fila-de-usuarios-get-list)
+  - [📗 Fila-de-usuarios (GET por UUID)](#fila-de-usuarios-get-uuid)
   - [📗 Fila-de-usuarios (GET) - Por Horta](#fila-de-usuarios-get-horta)
   - [📗 Fila-de-usuarios (GET) - Por Usuario](#fila-de-usuarios-get-usuario)
   - [📗 Fila-de-usuarios (POST)](#fila-de-usuarios-post)
   - [📗 Fila-de-usuarios (PUT)](#fila-de-usuarios-put)
   - [📗 Fila-de-usuarios (DELETE)](#fila-de-usuarios-delete)
-  - [📗 Financeiro-da-associacao (GET) - Lista](#financeiro-da-associacao-get-list)
-  - [📗 Financeiro-da-associacao (GET) - Por UUID](#financeiro-da-associacao-get-uuid)
-  - [📗 Financeiro-da-associacao (GET) - Por Associacao](#financeiro-da-associacao-get-associacao)
-  - [📗 Financeiro-da-associacao (POST)](#financeiro-da-associacao-post)
-  - [📗 Financeiro-da-associacao (PUT)](#financeiro-da-associacao-put)
-  - [📗 Financeiro-da-associacao (DELETE)](#financeiro-da-associacao-delete)
-  - [📗 Financeiro-da-horta (GET) - Lista](#financeiro-da-horta-get-list)
-  - [📗 Financeiro-da-horta (GET) - Por UUID](#financeiro-da-horta-get-uuid)
-  - [📗 Financeiro-da-horta (GET) - Por Horta](#financeiro-da-horta-get-horta)
-  - [📗 Financeiro-da-horta (POST)](#financeiro-da-horta-post)
-  - [📗 Financeiro-da-horta (PUT)](#financeiro-da-horta-put)
-  - [📗 Financeiro-da-horta (DELETE)](#financeiro-da-horta-delete)
-  - [📗 Hortas (GET) - Lista](#hortas-get-list)
-  - [📗 Hortas (GET) - Por UUID](#hortas-get-uuid)
+  - [📗 Financeiro da Associação (lançamentos) (GET) ](#financeiro-da-associacao-get-list)
+  - [📗 Financeiro da Associação (lançamentos) (GET por UUID)](#financeiro-da-associacao-get-uuid)
+  - [📗 Financeiro da Associação (lançamentos) (GET) - Por Associacao](#financeiro-da-associacao-get-associacao)
+  - [📗 Financeiro da Associação (lançamentos) (POST)](#financeiro-da-associacao-post)
+  - [📗 Financeiro da Associação (lançamentos) (PUT)](#financeiro-da-associacao-put)
+  - [📗 Financeiro da Associação (lançamentos) (DELETE)](#financeiro-da-associacao-delete)
+  - [📗 Financeiro da horta (lançamentos) (GET) ](#financeiro-da-horta-get-list)
+  - [📗 Financeiro da horta (lançamentos) (GET por UUID)](#financeiro-da-horta-get-uuid)
+  - [📗 Financeiro da horta (lançamentos) (GET) - Por Horta](#financeiro-da-horta-get-horta)
+  - [📗 Financeiro da horta (lançamentos) (POST)](#financeiro-da-horta-post)
+  - [📗 Financeiro da horta (lançamentos) (PUT)](#financeiro-da-horta-put)
+  - [📗 Financeiro da horta (lançamentos) (DELETE)](#financeiro-da-horta-delete)
+  - [📗 Hortas (GET) ](#hortas-get-list)
+  - [📗 Hortas (GET por UUID)](#hortas-get-uuid)
   - [📗 Hortas (POST)](#hortas-post)
   - [📗 Hortas (PUT)](#hortas-put)
   - [📗 Hortas (DELETE)](#hortas-delete)
-  - [📗 Mensalidades-da-associacao (GET) - Lista](#mensalidades-da-associacao-get-list)
-  - [📗 Mensalidades-da-associacao (GET) - Por UUID](#mensalidades-da-associacao-get-uuid)
-  - [📗 Mensalidades-da-associacao (GET) - Por Associacao](#mensalidades-da-associacao-get-associacao)
-  - [📗 Mensalidades-da-associacao (GET) - Por Usuario](#mensalidades-da-associacao-get-usuario)
-  - [📗 Mensalidades-da-associacao (POST)](#mensalidades-da-associacao-post)
-  - [📗 Mensalidades-da-associacao (PUT)](#mensalidades-da-associacao-put)
-  - [📗 Mensalidades-da-associacao (DELETE)](#mensalidades-da-associacao-delete)
-  - [📗 Mensalidades-da-plataforma (GET) - Lista](#mensalidades-da-plataforma-get-list)
-  - [📗 Mensalidades-da-plataforma (GET) - Por UUID](#mensalidades-da-plataforma-get-uuid)
-  - [📗 Mensalidades-da-plataforma (GET) - Por Usuario](#mensalidades-da-plataforma-get-usuario)
-  - [📗 Mensalidades-da-plataforma (POST)](#mensalidades-da-plataforma-post)
-  - [📗 Mensalidades-da-plataforma (PUT)](#mensalidades-da-plataforma-put)
-  - [📗 Mensalidades-da-plataforma (DELETE)](#mensalidades-da-plataforma-delete)
-  - [📗 Permissoes-de-cargo (GET) - Lista](#permissoes-de-cargo-get-list)
-  - [📗 Permissoes-de-cargo (GET) - Por UUID](#permissoes-de-cargo-get-uuid)
-  - [📗 Permissoes-de-cargo (GET) - Por Cargo](#permissoes-de-cargo-get-cargo)
-  - [📗 Permissoes-de-cargo (POST)](#permissoes-de-cargo-post)
-  - [📗 Permissoes-de-cargo (PUT)](#permissoes-de-cargo-put)
-  - [📗 Permissoes-de-cargo (DELETE)](#permissoes-de-cargo-delete)
-  - [📗 Permissoes-de-excecao (GET) - Lista](#permissoes-de-excecao-get-list)
-  - [📗 Permissoes-de-excecao (GET) - Por UUID](#permissoes-de-excecao-get-uuid)
-  - [📗 Permissoes-de-excecao (POST)](#permissoes-de-excecao-post)
-  - [📗 Permissoes-de-excecao (PUT)](#permissoes-de-excecao-put)
-  - [📗 Permissoes-de-excecao (DELETE)](#permissoes-de-excecao-delete)
-  - [📗 Permissoes-do-usuario (GET)](#permissoes-do-usuario-get)
-  - [📗 Permissoes (GET) - Lista](#permissoes-get-list)
-  - [📗 Permissoes (GET) - Por UUID](#permissoes-get-uuid)
-  - [📗 Permissoes (POST)](#permissoes-post)
-  - [📗 Permissoes (PUT)](#permissoes-put)
-  - [📗 Permissoes (DELETE)](#permissoes-delete)
-  - [📗 Planos (GET) - Lista](#planos-get-list)
-  - [📗 Planos (GET) - Por UUID](#planos-get-uuid)
+  - [📗 Mensalidades da plataforma (lançamentos) (GET) ](#mensalidades-da-associacao-get-list)
+  - [📗 Mensalidades da plataforma (lançamentos) (GET por UUID)](#mensalidades-da-associacao-get-uuid)
+  - [📗 Mensalidades da plataforma (lançamentos) (GET) - Por Associacao](#mensalidades-da-associacao-get-associacao)
+  - [📗 Mensalidades da plataforma (lançamentos) (GET) - Por Usuario](#mensalidades-da-associacao-get-usuario)
+  - [📗 Mensalidades da plataforma (lançamentos) (POST)](#mensalidades-da-associacao-post)
+  - [📗 Mensalidades da plataforma (lançamentos) (PUT)](#mensalidades-da-associacao-put)
+  - [📗 Mensalidades da plataforma (lançamentos) (DELETE)](#mensalidades-da-associacao-delete)
+  - [📗 Mensalidades da associação (lançamentos) (GET) ](#mensalidades-da-plataforma-get-list)
+  - [📗 Mensalidades da associação (lançamentos) (GET por UUID)](#mensalidades-da-plataforma-get-uuid)
+  - [📗 Mensalidades da associação (lançamentos) (GET) - Por Usuario](#mensalidades-da-plataforma-get-usuario)
+  - [📗 Mensalidades da associação (lançamentos) (POST)](#mensalidades-da-plataforma-post)
+  - [📗 Mensalidades da associação (lançamentos) (PUT)](#mensalidades-da-plataforma-put)
+  - [📗 Mensalidades da associação (lançamentos) (DELETE)](#mensalidades-da-plataforma-delete)
+  - [📗 Permissões de cargo (GET) ](#permissoes-de-cargo-get-list)
+  - [📗 Permissões de cargo (GET por UUID)](#permissoes-de-cargo-get-uuid)
+  - [📗 Permissões de cargo (GET) - Por Cargo](#permissoes-de-cargo-get-cargo)
+  - [📗 Permissões de cargo (POST)](#permissoes-de-cargo-post)
+  - [📗 Permissões de cargo (PUT)](#permissoes-de-cargo-put)
+  - [📗 Permissões de cargo (DELETE)](#permissoes-de-cargo-delete)
+  - [📗 Permissões de exceção (GET) ](#permissoes-de-excecao-get-list)
+  - [📗 Permissões de exceção (GET por UUID)](#permissoes-de-excecao-get-uuid)
+  - [📗 Permissões de exceção (POST)](#permissoes-de-excecao-post)
+  - [📗 Permissões de exceção (PUT)](#permissoes-de-excecao-put)
+  - [📗 Permissões de exceção (DELETE)](#permissoes-de-excecao-delete)
+  - [📗 Permissões-do-usuario (GET)](#permissoes-do-usuario-get)
+  - [📗 Permissões (GET) ](#permissoes-get-list)
+  - [📗 Permissões (GET por UUID)](#permissoes-get-uuid)
+  - [📗 Permissões (POST)](#permissoes-post)
+  - [📗 Permissões (PUT)](#permissoes-put)
+  - [📗 Permissões (DELETE)](#permissoes-delete)
+  - [📗 Planos (GET) ](#planos-get-list)
+  - [📗 Planos (GET por UUID)](#planos-get-uuid)
   - [📗 Planos (GET) - Por Usuario](#planos-get-usuario)
   - [📗 Planos (POST)](#planos-post)
   - [📗 Planos (PUT)](#planos-put)
   - [📗 Planos (DELETE)](#planos-delete)
-  - [📗 Recursos-do-plano (GET) - Lista](#recursos-do-plano-get-list)
-  - [📗 Recursos-do-plano (GET) - Por UUID](#recursos-do-plano-get-uuid)
-  - [📗 Recursos-do-plano (GET) - Por Plano](#recursos-do-plano-get-plano)
-  - [📗 Recursos-do-plano (POST)](#recursos-do-plano-post)
-  - [📗 Recursos-do-plano (PUT)](#recursos-do-plano-put)
-  - [📗 Recursos-do-plano (DELETE)](#recursos-do-plano-delete)
-  - [📗 Sessoes (POST)](#sessoes-post)
-  - [📗 Usuarios (GET) - Lista](#usuarios-get-list)
-  - [📗 Usuarios (GET) - Por UUID](#usuarios-get-uuid)
+  - [📗 Recursos do plano (GET) ](#recursos-do-plano-get-list)
+  - [📗 Recursos do plano (GET por UUID)](#recursos-do-plano-get-uuid)
+  - [📗 Recursos do plano (GET) - Por Plano](#recursos-do-plano-get-plano)
+  - [📗 Recursos do plano (POST)](#recursos-do-plano-post)
+  - [📗 Recursos do plano (PUT)](#recursos-do-plano-put)
+  - [📗 Recursos do plano (DELETE)](#recursos-do-plano-delete)
+  - [📗 Usuarios (GET) ](#usuarios-get-list)
+  - [📗 Usuarios (GET por UUID)](#usuarios-get-uuid)
   - [📗 Usuarios (POST)](#usuarios-post)
   - [📗 Usuarios (PUT)](#usuarios-put)
   - [📗 Usuarios (DELETE)](#usuarios-delete)
@@ -157,10 +158,10 @@ Em geral, o cabeçalho da requisição deve conter o token JWT no formato Bearer
 | `hortas_criar` | ✅ | ✅ |  |  |  |
 | `hortas_editar` | ✅ | ✅ |  |  |  |
 | `hortas_deletar` | ✅ | ✅ |  |  |  |
-| `enderecos_ler` | ✅ | ✅ |  |  |  |
-| `enderecos_criar` | ✅ | ✅ |  |  |  |
-| `enderecos_editar` | ✅ | ✅ |  |  |  |
-| `enderecos_deletar` | ✅ | ✅ |  |  |  |
+| `enderecos_ler` | ✅ | ✅ | ✅ |  |  |
+| `enderecos_criar` | ✅ | ✅ | ✅ |  |  |
+| `enderecos_editar` | ✅ | ✅ | ✅ |  |  |
+| `enderecos_deletar` | ✅ | ✅ | ✅ |  |  |
 | `canteiros_ler` | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `canteiros_criar` | ✅ | ✅ | ✅ |  |  |
 | `canteiros_editar` | ✅ |✅  | ✅ |  |  |
@@ -214,7 +215,7 @@ Em geral, o cabeçalho da requisição deve conter o token JWT no formato Bearer
 | `recursos_plano_criar` | ✅ |  |  |  |  |
 | `recursos_plano_editar` | ✅ |  |  |  |  |
 | `recursos_plano_deletar` | ✅ |  |  |  |  |
-| `chaves_ler` | ✅ | ✅ | ✅ | ✅ |✅ |
+| `chaves_ler` | ✅ | ✅ | ✅ |  | |
 | `chaves_criar` | ✅ | ✅ | ✅ |  |  |
 | `chaves_editar` | ✅ | ✅ | ✅ |  |  |
 | `chaves_deletar` | ✅ | ✅ | ✅ |  |  |
@@ -228,1084 +229,849 @@ Em geral, o cabeçalho da requisição deve conter o token JWT no formato Bearer
 
 À seguir, disponibilizamos a lista de rotas da aplicação e a regra de negócio para cada usuário. Aproveite!
 
-<h3 id="associacoes-get-list">📗 Associacoes (GET) - Lista</h3>
+<h3 id="login-post">📗 Login (POST)</h3>
+
+Rota pública.
+
+<h3 id="cadastro-post">📗 Cadastro (POST)</h3>
+
+Rota pública.
+
+<h3 id="associacoes-get-list">📗 Associacoes (GET) </h3>
 
 #### Administração da Plataforma
+**Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-
-<h3 id="associacoes-get-uuid">📗 Associacoes (GET) - Por UUID</h3>
+<h3 id="associacoes-get-uuid">📗 Associacoes (GET por UUID)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+**Acesso:** à todos os registros não excluídos.
 
 <h3 id="associacoes-post">📗 Associacoes (POST)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+**Acesso:** à todos os registros não excluídos.
 
 <h3 id="associacoes-put">📗 Associacoes (PUT)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+**Acesso:** à todos os registros não excluídos.
 
 <h3 id="associacoes-delete">📗 Associacoes (DELETE)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
-
+**Acesso:** à todos os registros não excluídos.
+ 
 <h3 id="canteiros-e-usuarios-get-list">📗 Canteiros & Usuários (GET)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
-
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
-
-Vê todos os registros não excluídos para Horta UUID atrelado a sua Associação UUID.
-
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="canteiros-e-usuarios-get-uuid">📗 Canteiros & Usuários (GET por UUID)</h3>
+<h3 id="canteiros-e-usuarios-get-uuid">📗 Canteiros & Usuários (GET  por UUID)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="canteiros-e-usuarios-post">📗 Canteiros-e-usuarios (POST)</h3>
+<h3 id="canteiros-e-usuarios-post">📗 Canteiros & Usuários (POST)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="canteiros-e-usuarios-put">📗 Canteiros-e-usuarios (PUT)</h3>
+<h3 id="canteiros-e-usuarios-put">📗 Canteiros & Usuários (PUT)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="canteiros-e-usuarios-delete">📗 Canteiros-e-usuarios (DELETE)</h3>
+<h3 id="canteiros-e-usuarios-delete">📗 Canteiros & Usuários (DELETE)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="canteiros-get-list">📗 Canteiros (GET) - Lista</h3>
+<h3 id="canteiros-get-list">📗 Canteiros (GET) </h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="canteiros-get-uuid">📗 Canteiros (GET) - Por UUID</h3>
-
+<h3 id="canteiros-get-uuid">📗 Canteiros (GET por UUID)</h3>
+ 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
 <h3 id="canteiros-post">📗 Canteiros (POST)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
 <h3 id="canteiros-put">📗 Canteiros (PUT)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
 <h3 id="canteiros-delete">📗 Canteiros (DELETE)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="cargos-get-list">📗 Cargos (GET) - Lista</h3>
+<h3 id="cargos-get-list">📗 Cargos (GET) </h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+**Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos.
 
-<h3 id="cargos-get-uuid">📗 Cargos (GET) - Por UUID</h3>
+<h3 id="cargos-get-uuid">📗 Cargos (GET por UUID)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+**Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos.
 
 <h3 id="cargos-post">📗 Cargos (POST)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+**Acesso:** à todos os registros não excluídos.
 
 <h3 id="cargos-put">📗 Cargos (PUT)</h3>
 
-#### Administração da Plataforma
-
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+#### Administração da Plataforma**
+Acesso:** à todos os registros não excluídos.
 
 <h3 id="cargos-delete">📗 Cargos (DELETE)</h3>
 
-#### Administração da Plataforma
+#### Administração da Plataforma**
+Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="categorias-financeiras-get-list">📗 Categorias-financeiras (GET) - Lista</h3>
+<h3 id="categorias-financeiras-get-list">📗 Categorias financeiras (GET) </h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID, e da sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="categorias-financeiras-get-uuid">📗 Categorias-financeiras (GET) - Por UUID</h3>
+<h3 id="categorias-financeiras-get-uuid">📗 Categorias-financeiras (GET por UUID)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID, e da sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
 <h3 id="categorias-financeiras-get-associacao">📗 Categorias-financeiras (GET) - Por Associacao</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos da sua Associação UUID.
+
 
 <h3 id="categorias-financeiras-get-horta">📗 Categorias-financeiras (GET) - Por Horta</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="categorias-financeiras-post">📗 Categorias-financeiras (POST)</h3>
+<h3 id="categorias-financeiras-post">📗 Categorias financeiras (POST)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="categorias-financeiras-put">📗 Categorias-financeiras (PUT)</h3>
+<h3 id="categorias-financeiras-put">📗 Categorias financeiras (PUT)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="categorias-financeiras-delete">📗 Categorias-financeiras (DELETE)</h3>
+<h3 id="categorias-financeiras-delete">📗 Categorias financeiras (DELETE)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="chaves-get-list">📗 Chaves (GET) - Lista</h3>
+<h3 id="chaves-get-list">📗 Chaves (GET) </h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="chaves-get-uuid">📗 Chaves (GET) - Por UUID</h3>
+<h3 id="chaves-get-uuid">📗 Chaves (GET por UUID)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
 <h3 id="chaves-post">📗 Chaves (POST)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
 <h3 id="chaves-put">📗 Chaves (PUT)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
 <h3 id="chaves-delete">📗 Chaves (DELETE)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="enderecos-get-list">📗 Enderecos (GET) - Lista</h3>
+<h3 id="enderecos-get-list">📗 Enderecos (GET) </h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="enderecos-get-uuid">📗 Enderecos (GET) - Por UUID</h3>
+<h3 id="enderecos-get-uuid">📗 Enderecos (GET por UUID)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
 <h3 id="enderecos-post">📗 Enderecos (POST)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
 <h3 id="enderecos-put">📗 Enderecos (PUT)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
 <h3 id="enderecos-delete">📗 Enderecos (DELETE)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="fila-de-usuarios-get-list">📗 Fila-de-usuarios (GET) - Lista</h3>
+<h3 id="fila-de-usuarios-get-list">📗 Fila de Usuários (GET)</h3>
 
 #### Administração da Plataforma
 
-Vê todos os registros não excluídos.
+#### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="fila-de-usuarios-get-uuid">📗 Fila-de-usuarios (GET) - Por UUID</h3>
+<h3 id="fila-de-usuarios-get-uuid">📗 Fila de Usuários (GET por UUID)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="fila-de-usuarios-get-horta">📗 Fila-de-usuarios (GET) - Por Horta</h3>
+<h3 id="fila-de-usuarios-get-horta">📗 Fila de Usuários (GET por Horta UUID)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="fila-de-usuarios-get-usuario">📗 Fila-de-usuarios (GET) - Por Usuario</h3>
+<h3 id="fila-de-usuarios-get-usuario">📗 Fila de Usuários (GET) - Por Usuario</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="fila-de-usuarios-post">📗 Fila-de-usuarios (POST)</h3>
+<h3 id="fila-de-usuarios-post">📗 Fila de Usuários (POST)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="fila-de-usuarios-put">📗 Fila-de-usuarios (PUT)</h3>
+<h3 id="fila-de-usuarios-put">📗 Fila de Usuários (PUT)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
 <h3 id="fila-de-usuarios-delete">📗 Fila-de-usuarios (DELETE)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="financeiro-da-associacao-get-list">📗 Financeiro-da-associacao (GET) - Lista</h3>
+<h3 id="financeiro-da-associacao-get-list">📗 Financeiro da Associação (lançamentos) (GET) </h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos de sua Associação UUID
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos de sua Associação UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos de sua Associação UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos de sua Associação UUID
 
-<h3 id="financeiro-da-associacao-get-uuid">📗 Financeiro-da-associacao (GET) - Por UUID</h3>
+<h3 id="financeiro-da-associacao-get-uuid">📗 Financeiro da Associação (lançamentos) (GET por UUID)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos de sua Associação UUID
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos de sua Associação UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos de sua Associação UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos de sua Associação UUID
 
-<h3 id="financeiro-da-associacao-get-associacao">📗 Financeiro-da-associacao (GET) - Por Associacao</h3>
+<h3 id="financeiro-da-associacao-get-associacao">📗 Financeiro da Associação (lançamentos) (GET) - Por Associacao</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="financeiro-da-associacao-post">📗 Financeiro-da-associacao (POST)</h3>
+<h3 id="financeiro-da-associacao-post">📗 Financeiro da Associação (lançamentos) (POST)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="financeiro-da-associacao-put">📗 Financeiro-da-associacao (PUT)</h3>
+<h3 id="financeiro-da-associacao-put">📗 Financeiro da Associação (lançamentos) (PUT)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="financeiro-da-associacao-delete">📗 Financeiro-da-associacao (DELETE)</h3>
+<h3 id="financeiro-da-associacao-delete">📗 Financeiro da Associação (lançamentos) (DELETE)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="financeiro-da-horta-get-list">📗 Financeiro-da-horta (GET) - Lista</h3>
+<h3 id="financeiro-da-horta-get-list">📗 Financeiro da horta (lançamentos) (GET) </h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID de sua Associação UUID
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="financeiro-da-horta-get-uuid">📗 Financeiro-da-horta (GET) - Por UUID</h3>
+<h3 id="financeiro-da-horta-get-uuid">📗 Financeiro da horta (lançamentos) (GET por UUID)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID de sua Associação UUID
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="financeiro-da-horta-get-horta">📗 Financeiro-da-horta (GET) - Por Horta</h3>
+<h3 id="financeiro-da-horta-get-horta">📗 Financeiro da horta (lançamentos) (GET) - Por Horta</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID de sua Associação UUID
 #### Administração da Horta
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Canteirista
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 #### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="financeiro-da-horta-post">📗 Financeiro-da-horta (POST)</h3>
+<h3 id="financeiro-da-horta-post">📗 Financeiro da horta (lançamentos) (POST)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="financeiro-da-horta-put">📗 Financeiro-da-horta (PUT)</h3>
+<h3 id="financeiro-da-horta-put">📗 Financeiro da horta (lançamentos) (PUT)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="financeiro-da-horta-delete">📗 Financeiro-da-horta (DELETE)</h3>
+<h3 id="financeiro-da-horta-delete">📗 Financeiro da horta (lançamentos) (DELETE)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="hortas-get-list">📗 Hortas (GET) - Lista</h3>
+<h3 id="hortas-get-list">📗 Hortas (GET) </h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="hortas-get-uuid">📗 Hortas (GET) - Por UUID</h3>
+<h3 id="hortas-get-uuid">📗 Hortas (GET por UUID)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
 <h3 id="hortas-post">📗 Hortas (POST)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
 <h3 id="hortas-put">📗 Hortas (PUT)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
 <h3 id="hortas-delete">📗 Hortas (DELETE)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para Hortas UUID atreladas a sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="mensalidades-da-associacao-get-list">📗 Mensalidades-da-associacao (GET) - Lista</h3>
+<h3 id="mensalidades-da-associacao-get-list">📗 Mensalidades da plataforma (lançamentos) (GET) </h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para a sua Associação UUID.
 
-<h3 id="mensalidades-da-associacao-get-uuid">📗 Mensalidades-da-associacao (GET) - Por UUID</h3>
+
+<h3 id="mensalidades-da-associacao-get-uuid">📗 Mensalidades da plataforma (lançamentos) (GET por UUID)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="mensalidades-da-associacao-get-associacao">📗 Mensalidades-da-associacao (GET) - Por Associacao</h3>
+<h3 id="mensalidades-da-associacao-get-associacao">📗 Mensalidades da plataforma (lançamentos) (GET por Associação)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="mensalidades-da-associacao-get-usuario">📗 Mensalidades-da-associacao (GET) - Por Usuario</h3>
+<h3 id="mensalidades-da-associacao-get-usuario">📗 Mensalidades da plataforma (lançamentos) (GET por Usuário)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="mensalidades-da-associacao-post">📗 Mensalidades-da-associacao (POST)</h3>
+<h3 id="mensalidades-da-associacao-post">📗 Mensalidades da plataforma (lançamentos) (POST)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="mensalidades-da-associacao-put">📗 Mensalidades-da-associacao (PUT)</h3>
+<h3 id="mensalidades-da-associacao-put">📗 Mensalidades da plataforma (lançamentos) (PUT)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="mensalidades-da-associacao-delete">📗 Mensalidades-da-associacao (DELETE)</h3>
+<h3 id="mensalidades-da-associacao-delete">📗 Mensalidades da plataforma (lançamentos) (DELETE)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="mensalidades-da-plataforma-get-list">📗 Mensalidades-da-plataforma (GET) - Lista</h3>
+<h3 id="mensalidades-da-plataforma-get-list">📗 Mensalidades da associação (lançamentos) (GET) </h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para Usuários UUID atrelados a sua Associação UUID.
 
-<h3 id="mensalidades-da-plataforma-get-uuid">📗 Mensalidades-da-plataforma (GET) - Por UUID</h3>
+<h3 id="mensalidades-da-plataforma-get-uuid">📗 Mensalidades da associação (lançamentos) (GET por UUID)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para Usuários UUID atrelados a sua Associação UUID.
 
-<h3 id="mensalidades-da-plataforma-get-usuario">📗 Mensalidades-da-plataforma (GET) - Por Usuario</h3>
+<h3 id="mensalidades-da-plataforma-get-usuario">📗 Mensalidades da associação (lançamentos) (GET) - Por Usuario</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para Usuários UUID atrelados a sua Associação UUID.
 
-<h3 id="mensalidades-da-plataforma-post">📗 Mensalidades-da-plataforma (POST)</h3>
+<h3 id="mensalidades-da-plataforma-post">📗 Mensalidades da associação (lançamentos) (POST)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para Usuários UUID atrelados a sua Associação UUID.
 
-<h3 id="mensalidades-da-plataforma-put">📗 Mensalidades-da-plataforma (PUT)</h3>
+<h3 id="mensalidades-da-plataforma-put">📗 Mensalidades da associação (lançamentos) (PUT)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para Usuários UUID atrelados a sua Associação UUID.
 
-<h3 id="mensalidades-da-plataforma-delete">📗 Mensalidades-da-plataforma (DELETE)</h3>
+<h3 id="mensalidades-da-plataforma-delete">📗 Mensalidades da associação (lançamentos) (DELETE)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos para Usuários UUID atrelados a sua Associação UUID.
 
-<h3 id="permissoes-de-cargo-get-list">📗 Permissoes-de-cargo (GET) - Lista</h3>
+<h3 id="permissoes-de-cargo-get-list">📗 Permissões de cargo (GET) </h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-de-cargo-get-uuid">📗 Permissoes-de-cargo (GET) - Por UUID</h3>
+<h3 id="permissoes-de-cargo-get-uuid">📗 Permissões de cargo (GET por UUID)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-de-cargo-get-cargo">📗 Permissoes-de-cargo (GET) - Por Cargo</h3>
+<h3 id="permissoes-de-cargo-get-cargo">📗 Permissões de cargo (GET) - Por Cargo</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-de-cargo-post">📗 Permissoes-de-cargo (POST)</h3>
+<h3 id="permissoes-de-cargo-post">📗 Permissões de cargo (POST)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-de-cargo-put">📗 Permissoes-de-cargo (PUT)</h3>
+<h3 id="permissoes-de-cargo-put">📗 Permissões de cargo (PUT)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-de-cargo-delete">📗 Permissoes-de-cargo (DELETE)</h3>
+<h3 id="permissoes-de-cargo-delete">📗 Permissões de cargo (DELETE)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-de-excecao-get-list">📗 Permissoes-de-excecao (GET) - Lista</h3>
+<h3 id="permissoes-de-excecao-get-list">📗 Permissões de exceção (GET) </h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-de-excecao-get-uuid">📗 Permissoes-de-excecao (GET) - Por UUID</h3>
+<h3 id="permissoes-de-excecao-get-uuid">📗 Permissões de exceção (GET por UUID)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-de-excecao-post">📗 Permissoes-de-excecao (POST)</h3>
+<h3 id="permissoes-de-excecao-post">📗 Permissões de exceção (POST)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-de-excecao-put">📗 Permissoes-de-excecao (PUT)</h3>
+<h3 id="permissoes-de-excecao-put">📗 Permissões de exceção (PUT)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-de-excecao-delete">📗 Permissoes-de-excecao (DELETE)</h3>
+<h3 id="permissoes-de-excecao-delete">📗 Permissões de exceção (DELETE)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-do-usuario-get">📗 Permissoes-do-usuario (GET)</h3>
+<h3 id="permissoes-do-usuario-get">📗 Permissões-do-usuario (GET)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-get-list">📗 Permissoes (GET) - Lista</h3>
+<h3 id="permissoes-get-list">📗 Permissões (GET) </h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-get-uuid">📗 Permissoes (GET) - Por UUID</h3>
+<h3 id="permissoes-get-uuid">📗 Permissões (GET por UUID)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-post">📗 Permissoes (POST)</h3>
+<h3 id="permissoes-post">📗 Permissões (POST)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-put">📗 Permissoes (PUT)</h3>
+<h3 id="permissoes-put">📗 Permissões (PUT)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="permissoes-delete">📗 Permissoes (DELETE)</h3>
+<h3 id="permissoes-delete">📗 Permissões (DELETE)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="planos-get-list">📗 Planos (GET) - Lista</h3>
+<h3 id="planos-get-list">📗 Planos (GET) </h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="planos-get-uuid">📗 Planos (GET) - Por UUID</h3>
+<h3 id="planos-get-uuid">📗 Planos (GET por UUID)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos.
 
 <h3 id="planos-get-usuario">📗 Planos (GET) - Por Usuario</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos.
 
 <h3 id="planos-post">📗 Planos (POST)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos.
 
 <h3 id="planos-put">📗 Planos (PUT)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos.
 
 <h3 id="planos-delete">📗 Planos (DELETE)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="recursos-do-plano-get-list">📗 Recursos-do-plano (GET) - Lista</h3>
+<h3 id="recursos-do-plano-get-list">📗 Recursos do plano (GET) </h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="recursos-do-plano-get-uuid">📗 Recursos-do-plano (GET) - Por UUID</h3>
+<h3 id="recursos-do-plano-get-uuid">📗 Recursos do plano (GET por UUID)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="recursos-do-plano-get-plano">📗 Recursos-do-plano (GET) - Por Plano</h3>
+<h3 id="recursos-do-plano-get-plano">📗 Recursos do plano (GET) - Por Plano</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="recursos-do-plano-post">📗 Recursos-do-plano (POST)</h3>
+<h3 id="recursos-do-plano-post">📗 Recursos do plano (POST)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="recursos-do-plano-put">📗 Recursos-do-plano (PUT)</h3>
+<h3 id="recursos-do-plano-put">📗 Recursos do plano (PUT)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="recursos-do-plano-delete">📗 Recursos-do-plano (DELETE)</h3>
+<h3 id="recursos-do-plano-delete">📗 Recursos do plano (DELETE)</h3>
 
 #### Administração da Plataforma
+  **Acesso:** à todos os registros não excluídos.
 
-Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="sessoes-post">📗 Sessoes (POST)</h3>
+<h3 id="usuarios-get-list">📗 Usuarios (GET) </h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos atrelados a sua Horta UUID 
 
-<h3 id="usuarios-get-list">📗 Usuarios (GET) - Lista</h3>
+<h3 id="usuarios-get-uuid">📗 Usuarios (GET por UUID)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
-
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
-
-<h3 id="usuarios-get-uuid">📗 Usuarios (GET) - Por UUID</h3>
-
-#### Administração da Plataforma
-
-Vê todos os registros não excluídos.
-
-#### Administração da Associação
-
-#### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos atrelados a sua Horta UUID 
 
 <h3 id="usuarios-post">📗 Usuarios (POST)</h3> ✅
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos atrelados a sua Horta UUID 
 
 <h3 id="usuarios-put">📗 Usuarios (PUT)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
+  **Acesso:** à todos os registros não excluídos atrelados a sua Horta UUID 
 
 <h3 id="usuarios-delete">📗 Usuarios (DELETE)</h3>
 
 #### Administração da Plataforma
-
-Vê todos os registros não excluídos.
+  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
+  **Acesso:** à todos os registros não excluídos para sua Associação UUID.
 #### Administração da Horta
-#### Canteirista
-#### Dependente
-
+  **Acesso:** à todos os registros não excluídos atrelados a sua Horta UUID 
 
 
 <h1 id="fluxos">🪴 Fluxos</h1>
@@ -1317,4 +1083,193 @@ Vê todos os registros não excluídos.
 
 --> Demais dados devem ser preenchidos depois
 
-<h1 id="pendencias">⚠️ Pendências</h1>
+<h1 id="pendencias">⚠️ Pendências: Aplicar regras de negócio nos endpoints</h1>
+
+Aqui está o checklist organizado, começando pelas rotas exclusivas da Administração da Plataforma:
+
+## 🔴 Rotas EXCLUSIVAS - Administração da Plataforma
+
+### Associações
+- [ ] Associações (GET)
+- [ ] Associações (GET por UUID)
+- [ ] Associações (POST)
+- [ ] Associações (PUT)
+- [ ] Associações (DELETE)
+
+### Permissões
+- [ ] Permissões (GET)
+- [ ] Permissões (GET por UUID)
+- [ ] Permissões (POST)
+- [ ] Permissões (PUT)
+- [ ] Permissões (DELETE)
+
+### Permissões de Cargo
+- [ ] Permissões de Cargo (GET)
+- [ ] Permissões de Cargo (GET por UUID)
+- [ ] Permissões de Cargo (GET) - Por Cargo
+- [ ] Permissões de Cargo (POST)
+- [ ] Permissões de Cargo (PUT)
+- [ ] Permissões de Cargo (DELETE)
+
+### Permissões de Exceção
+- [ ] Permissões de Exceção (GET)
+- [ ] Permissões de Exceção (GET por UUID)
+- [ ] Permissões de Exceção (POST)
+- [ ] Permissões de Exceção (PUT)
+- [ ] Permissões de Exceção (DELETE)
+
+### Permissões do Usuário
+- [ ] Permissões do Usuário (GET)
+
+### Cargos (Modificação)
+- [ ] Cargos (POST)
+- [ ] Cargos (PUT)
+- [ ] Cargos (DELETE)
+
+### Planos
+- [ ] Planos (GET)
+- [ ] Planos (GET por UUID)
+- [ ] Planos (GET) - Por Usuário
+- [ ] Planos (POST)
+- [ ] Planos (PUT)
+- [ ] Planos (DELETE)
+
+### Recursos do Plano
+- [ ] Recursos do Plano (GET)
+- [ ] Recursos do Plano (GET por UUID)
+- [ ] Recursos do Plano (GET) - Por Plano
+- [ ] Recursos do Plano (POST)
+- [ ] Recursos do Plano (PUT)
+- [ ] Recursos do Plano (DELETE)
+
+### Mensalidades da Plataforma (Modificação)
+- [ ] Mensalidades da Plataforma (GET por Associação)
+- [ ] Mensalidades da Plataforma (GET por Usuário)
+- [ ] Mensalidades da Plataforma (POST)
+- [ ] Mensalidades da Plataforma (PUT)
+- [ ] Mensalidades da Plataforma (DELETE)
+
+### Mensalidades da Associação (Modificação)
+- [ ] Mensalidades da Associação (POST)
+- [ ] Mensalidades da Associação (PUT)
+- [ ] Mensalidades da Associação (DELETE)
+
+### Financeiro da Associação (Modificação)
+- [ ] Financeiro da Associação (GET) - Por Associação
+- [ ] Financeiro da Associação (POST)
+- [ ] Financeiro da Associação (PUT)
+- [ ] Financeiro da Associação (DELETE)
+
+## 🟡 Rotas COMPARTILHADAS - Plataforma + Associação
+
+### Cargos (Leitura)
+- [ ] Cargos (GET)
+- [ ] Cargos (GET por UUID)
+
+### Mensalidades da Plataforma (Leitura)
+- [ ] Mensalidades da Plataforma (GET)
+- [ ] Mensalidades da Plataforma (GET por UUID)
+
+### Mensalidades da Associação (Leitura)
+- [ ] Mensalidades da Associação (GET)
+- [ ] Mensalidades da Associação (GET por UUID)
+- [ ] Mensalidades da Associação (GET) - Por Usuário
+
+## 🟢 Rotas COMPARTILHADAS - Plataforma + Associação + Horta
+
+### Usuários
+- [x] Usuários (GET)
+- [x] Usuários (GET por UUID)
+- [x] Usuários (POST)
+- [x] Usuários (PUT)
+- [x] Usuários (DELETE)
+
+### Hortas
+- [ ] Hortas (GET)
+- [ ] Hortas (GET por UUID)
+- [ ] Hortas (POST)
+- [ ] Hortas (PUT)
+- [ ] Hortas (DELETE)
+
+### Endereços
+- [ ] Endereços (GET)
+- [ ] Endereços (GET por UUID)
+- [ ] Endereços (POST)
+- [ ] Endereços (PUT)
+- [ ] Endereços (DELETE)
+
+### Categorias Financeiras
+- [ ] Categorias Financeiras (GET)
+- [ ] Categorias Financeiras (GET por UUID)
+- [ ] Categorias Financeiras (GET) - Por Associação
+- [ ] Categorias Financeiras (GET) - Por Horta
+- [ ] Categorias Financeiras (POST)
+- [ ] Categorias Financeiras (PUT)
+- [ ] Categorias Financeiras (DELETE)
+
+### Chaves
+- [ ] Chaves (GET)
+- [ ] Chaves (GET por UUID)
+- [ ] Chaves (POST)
+- [ ] Chaves (PUT)
+- [ ] Chaves (DELETE)
+
+### Canteiros & Usuários (Modificação)
+- [ ] Canteiros & Usuários (POST)
+- [ ] Canteiros & Usuários (PUT)
+- [ ] Canteiros & Usuários (DELETE)
+
+### Canteiros (Modificação)
+- [ ] Canteiros (POST)
+- [ ] Canteiros (PUT)
+- [ ] Canteiros (DELETE)
+
+### Fila de Usuários (Modificação)
+- [ ] Fila de Usuários (POST)
+- [ ] Fila de Usuários (PUT)
+- [ ] Fila de Usuários (DELETE)
+
+### Financeiro da Horta (Modificação)
+- [ ] Financeiro da Horta (POST)
+- [ ] Financeiro da Horta (PUT)
+- [ ] Financeiro da Horta (DELETE)
+
+## 🔵 Rotas COMPARTILHADAS - Todos (Plataforma + Associação + Horta + Canteirista + Dependente)
+
+### Canteiros & Usuários (Leitura)
+- [ ] Canteiros & Usuários (GET)
+- [ ] Canteiros & Usuários (GET por UUID)
+
+### Canteiros (Leitura)
+- [ ] Canteiros (GET)
+- [ ] Canteiros (GET por UUID)
+
+### Fila de Usuários (Leitura)
+- [ ] Fila de Usuários (GET)
+- [ ] Fila de Usuários (GET por UUID)
+- [ ] Fila de Usuários (GET por Horta UUID)
+- [ ] Fila de Usuários (GET) - Por Usuário
+
+### Financeiro da Associação (Leitura)
+- [ ] Financeiro da Associação (GET)
+- [ ] Financeiro da Associação (GET por UUID)
+
+### Financeiro da Horta (Leitura)
+- [ ] Financeiro da Horta (GET)
+- [ ] Financeiro da Horta (GET por UUID)
+- [ ] Financeiro da Horta (GET) - Por Horta
+
+## ⚪ Rotas PÚBLICAS
+- [x] Login (POST)
+- [x] Cadastro (POST)
+
+---
+
+**Total: 105 rotas**
+
+**Legenda:**
+- 🔴 Exclusivas Admin Plataforma: 42 rotas
+- 🟡 Plataforma + Associação: 8 rotas
+- 🟢 Plataforma + Associação + Horta: 38 rotas
+- 🔵 Todos os níveis: 15 rotas
+- ⚪ Públicas: 2 rotas
