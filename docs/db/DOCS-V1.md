@@ -647,6 +647,7 @@ O usuário que criar a conta será o usuário responsável da conta por padrão,
 | UUID | uuid | CHAR(36) | Chave primária |
 | Código | codigo | INT UNIQUE NOT NULL | 0-2 inicialmente |
 | Slug | slug | VARCHAR(100) UNIQUE NOT NULL | Identificador amigável |
+| Valor em Centavos | valor_em_centavos | BIGINT NOT NULL | Valor da movimentação em centavos (R$ 1,00 = 100) |
 | Nome | nome | VARCHAR(100) NOT NULL | Nome do plano |
 | Descrição | descricao | TEXT | Descrição do plano |
 | Excluído | excluido | BOOLEAN DEFAULT FALSE | Exclusão lógica |

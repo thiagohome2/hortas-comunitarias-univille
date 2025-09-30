@@ -6,21 +6,33 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class SessaoController
-{
-    public function __construct(private SessaoService $service){}
+{   
+    private SessaoService $sessaoService;
 
-    public function login(Request $request, Response $response)
+    public function __construct(SessaoService $sessaoService){
+        $this->sessaoService = $sessaoService;
+    }
+
+    public function signIn(Request $request, Response $response)
     {
         $data = (array)$request->getParsedBody();
 
         try {
-            $token = $this->service->login($data['email'] ?? '', $data['senha'] ?? '');
+            $token = $this->sessaoService->signIn($data['email'] ?? '', $data['senha'] ?? '');
             $response->getBody()->write(json_encode(['token' => $token]));
         } catch (\Exception $e) {
             $response->getBody()->write(json_encode(['error' => $e->getMessage()]));
             return $response->withStatus(401);
         }
 
-        return $response->withHeader('Content-Type', 'application/json');
+        return $response;
+    }
+    public function signUp(Request $request, Response $response)
+    {
+        $data = (array)$request->getParsedBody(); 
+        $cadastroCriado = $this->sessaoService->signUp($data);
+        $response->getBody()->write(json_encode($cadastroCriado));
+        
+        return $response->withStatus(200);
     }
 }

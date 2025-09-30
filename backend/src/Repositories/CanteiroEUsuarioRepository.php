@@ -13,9 +13,9 @@ class CanteiroEUsuarioRepository
         $this->canteiroEUsuarioModel = $canteiroEUsuarioModel;
     }
 
-    public function findAllWhere(array $conditions): Collection
+    public function findAllWhere(): Collection
     {
-        return $this->canteiroEUsuarioModel->where($conditions)->get();
+        return $this->canteiroEUsuarioModel->where("excluido", 0)->get();
     }
 
     public function findByUuid(string $uuid): ?CanteiroEUsuarioModel

@@ -23,6 +23,10 @@ class AssociacaoRepository
     {
         return $this->associacaoModel->find($uuid);
     }
+    public function findByCnpj(string $cnpj): ?AssociacaoModel
+    {
+        return $this->associacaoModel->where('cnpj', $cnpj)->first();
+    }
 
     public function create(array $data): AssociacaoModel
     {

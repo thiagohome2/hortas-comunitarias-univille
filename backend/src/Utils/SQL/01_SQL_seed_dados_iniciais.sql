@@ -303,5 +303,15 @@ VALUES (
     NOW()
 );
 
+
+-- //// INSERT Planos base
+
+INSERT INTO planos (uuid, codigo, slug, valor_em_centavos nome, descricao, excluido, usuario_criador_uuid, usuario_alterador_uuid)
+VALUES 
+  (UUID(), 1, 'plano_ouro', 30000, 'Plano Ouro', NULL, 0, NULL, NULL),
+  (UUID(), 2, 'plano_prata', 20000, 'Plano Prata', NULL, 0, NULL, NULL),
+  (UUID(), 3, 'plano_bronze', 10000, 'Plano Bronze', NULL, 0, NULL, NULL);
+
+
 -- Reabilita checagem de foreign keys
 SET FOREIGN_KEY_CHECKS = 1;

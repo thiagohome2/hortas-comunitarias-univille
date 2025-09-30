@@ -56,6 +56,7 @@ CREATE TABLE planos (
     uuid CHAR(36) NOT NULL,
     codigo INT NOT NULL,
     slug VARCHAR(100) NOT NULL,
+    valor_em_centavos BIGINT NOT NULL,
     nome VARCHAR(100) NOT NULL,
     descricao TEXT,
     excluido TINYINT DEFAULT 0,

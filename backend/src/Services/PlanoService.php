@@ -34,6 +34,13 @@ class PlanoService
         }
         return $plano;
     }
+    public function findBySlug(string $slug): ?PlanoModel {
+        $plano = $this->planoRepository->findBySlug($slug);
+        if(!$plano || $plano->excluido){
+            throw new Exception('Plano não encontrado pela slug: ' . $slug);
+        }
+        return $plano;
+    }
 
     public function findByUsuarioUuid(string $usuarioUuid): array
     {
@@ -51,6 +58,7 @@ class PlanoService
 
     public function create(array $data, string $uuidUsuarioLogado): PlanoModel {
         v::key('codigo', v::stringType()->notEmpty())
+           ->key('valor_em_centavos', v::intType()->positive())
           ->key('slug', v::stringType()->notEmpty())
           ->key('nome', v::stringType()->notEmpty())
           ->key('descricao', v::stringType()->notEmpty())
@@ -73,6 +81,7 @@ class PlanoService
         }
 
         v::key('codigo', v::stringType()->notEmpty(), false)
+          ->key('valor_em_centavos', v::intType()->positive(), false)
           ->key('slug', v::stringType()->notEmpty(), false)
           ->key('nome', v::stringType()->notEmpty(), false)
           ->key('descricao', v::stringType()->notEmpty(), false)

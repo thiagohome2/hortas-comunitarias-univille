@@ -14,14 +14,23 @@ class UsuarioRepository
         $this->usuarioModel = $usuarioModel;
     }
 
-    public function findAllWhere(array $conditions): Collection
+    public function findAllWhere(): Collection
     {
-        return $this->usuarioModel->where($conditions)->get();
+        return $this->usuarioModel->where('excluido', 0)->get();
     }
 
     public function findByUuid(string $uuid): ?UsuarioModel
     {
         return $this->usuarioModel->find($uuid);
+    }
+
+    public function findByCpf(string $cpf): ?UsuarioModel
+    {
+        return $this->usuarioModel->where('cpf', $cpf)->first();
+    }
+    public function findByEmail(string $email): ?UsuarioModel
+    {
+        return $this->usuarioModel->where('email', $email)->first();
     }
     
     public function create(array $data): UsuarioModel

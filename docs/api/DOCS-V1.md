@@ -233,62 +233,47 @@ Em geral, o cabeçalho da requisição deve conter o token JWT no formato Bearer
 #### Administração da Plataforma
 
 Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
 
 <h3 id="associacoes-get-uuid">📗 Associacoes (GET) - Por UUID</h3>
 
 #### Administração da Plataforma
 
 Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
 
 <h3 id="associacoes-post">📗 Associacoes (POST)</h3>
 
 #### Administração da Plataforma
 
 Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
 
 <h3 id="associacoes-put">📗 Associacoes (PUT)</h3>
 
 #### Administração da Plataforma
 
 Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
 
 <h3 id="associacoes-delete">📗 Associacoes (DELETE)</h3>
 
 #### Administração da Plataforma
 
 Vê todos os registros não excluídos.
-#### Administração da Associação
-#### Administração da Horta
-#### Canteirista
-#### Dependente
 
-<h3 id="canteiros-e-usuarios-get-list">📗 Canteiros-e-usuarios (GET) - Lista</h3>
+<h3 id="canteiros-e-usuarios-get-list">📗 Canteiros & Usuários (GET)</h3>
 
 #### Administração da Plataforma
 
 Vê todos os registros não excluídos.
+
 #### Administração da Associação
+
+Vê todos os registros não excluídos para Horta UUID atrelado a sua Associação UUID.
+
 #### Administração da Horta
+
 #### Canteirista
 #### Dependente
 
-<h3 id="canteiros-e-usuarios-get-uuid">📗 Canteiros-e-usuarios (GET) - Por UUID</h3>
+<h3 id="canteiros-e-usuarios-get-uuid">📗 Canteiros & Usuários (GET por UUID)</h3>
 
 #### Administração da Plataforma
 
@@ -1291,7 +1276,7 @@ Vê todos os registros não excluídos.
 #### Canteirista
 #### Dependente
 
-<h3 id="usuarios-post">📗 Usuarios (POST)</h3>
+<h3 id="usuarios-post">📗 Usuarios (POST)</h3> ✅
 
 #### Administração da Plataforma
 
@@ -1320,3 +1305,16 @@ Vê todos os registros não excluídos.
 #### Administração da Horta
 #### Canteirista
 #### Dependente
+
+
+
+<h1 id="fluxos">🪴 Fluxos</h1>
+
+<h1 id="fluxos">🪴 Fluxo de Cadastro</h1>
+
+-> Cria uma Associação
+-> Cria um Usuário que terá por padrão cargo Adminstrador da Plataforma
+
+--> Demais dados devem ser preenchidos depois
+
+<h1 id="pendencias">⚠️ Pendências</h1>

@@ -23,6 +23,11 @@ class PlanoRepository
         return $this->planoModel->find($uuid);
     }
 
+    public function findBySlug(string $slug): ?PlanoModel
+    {
+        return $this->planoModel->where("slug", $slug)->first();
+    }
+
     public function create(array $data): PlanoModel
     {
         return $this->planoModel->create($data);
