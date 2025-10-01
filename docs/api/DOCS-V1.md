@@ -1175,7 +1175,11 @@ Acesso:** à todos os registros não excluídos.
 
 --> Demais dados devem ser preenchidos depois
 
-<h1 id="dados-teste">🎲 Dados teste</h1>
+
+<h1 id="usuarios-seed">🎲 Seeds do Banco </h1> 
+
+
+<h2 id="entidades-gerais-seed">🗃️ Entidades Gerais</h2>
 
 ## 🌱 Associações
 
@@ -1207,7 +1211,7 @@ Acesso:** à todos os registros não excluídos.
 
 ---
 
-## 👥 Usuários
+<h2 id="usuarios-de-teste-seed"> 👥 Usuários de Teste</h2> 
 
 | Usuário                | Cargo                  | Email                                                         | Senha      |
 | ---------------------- | ---------------------- | ------------------------------------------------------------- | ---------- |
@@ -1219,9 +1223,10 @@ Acesso:** à todos os registros não excluídos.
 | Julia Canteiro RJ      | canteirista            | [canteirista_2@example.com](mailto:canteirista_2@example.com) | senha12345 |
 | Lucas Dependente SP    | dependente             | [dependente_1@example.com](mailto:dependente_1@example.com)   | senha12345 |
 | Fernanda Dependente RJ | dependente             | [dependente_2@example.com](mailto:dependente_2@example.com)   | senha12345 |
+| Fernanda Dependente RJ | dummy                  | [dependente_2@example.com](mailto:dependente_2@example.com)   | senha12345 |
 
 
-<h1 id="pendencias">⚠️ Pendências: Aplicação de regras de negócio nos endpoints</h1> 
+<h1 id="aplicacao-regra-de-negocios">📏 Aplicação de regras de negócio nos endpoints</h1> 
 
 ## 🔴 Rotas EXCLUSIVAS - Administração da Plataforma
 
@@ -1326,40 +1331,40 @@ Acesso:** à todos os registros não excluídos.
 - [x] Endereços (DELETE)
 
 ### Categorias Financeiras
-- [ ] Categorias Financeiras (GET)
-- [ ] Categorias Financeiras (GET por UUID)
-- [ ] Categorias Financeiras (GET) - Por Associação
-- [ ] Categorias Financeiras (GET) - Por Horta
-- [ ] Categorias Financeiras (POST)
-- [ ] Categorias Financeiras (PUT)
-- [ ] Categorias Financeiras (DELETE)
+- [x] Categorias Financeiras (GET)
+- [x] Categorias Financeiras (GET por UUID)
+- [x] Categorias Financeiras (GET) - Por Associação
+- [x] Categorias Financeiras (GET) - Por Horta
+- [x] Categorias Financeiras (POST)
+- [x] Categorias Financeiras (PUT)
+- [x] Categorias Financeiras (DELETE)
 
 ### Chaves
-- [ ] Chaves (GET)
-- [ ] Chaves (GET por UUID)
-- [ ] Chaves (POST)
-- [ ] Chaves (PUT)
-- [ ] Chaves (DELETE)
+- [x] Chaves (GET)
+- [x] Chaves (GET por UUID)
+- [x] Chaves (POST)
+- [x] Chaves (PUT)
+- [x] Chaves (DELETE)
 
 ### Canteiros & Usuários (Modificação)
-- [ ] Canteiros & Usuários (POST)
-- [ ] Canteiros & Usuários (PUT)
-- [ ] Canteiros & Usuários (DELETE)
+- [x] Canteiros & Usuários (POST)
+- [x] Canteiros & Usuários (PUT)
+- [x] Canteiros & Usuários (DELETE)
 
 ### Canteiros (Modificação)
-- [ ] Canteiros (POST)
-- [ ] Canteiros (PUT)
-- [ ] Canteiros (DELETE)
+- [x] Canteiros (POST)
+- [x] Canteiros (PUT)
+- [x] Canteiros (DELETE)
 
 ### Fila de Usuários (Modificação)
-- [ ] Fila de Usuários (POST)
-- [ ] Fila de Usuários (PUT)
-- [ ] Fila de Usuários (DELETE)
+- [x] Fila de Usuários (POST)
+- [x] Fila de Usuários (PUT)
+- [x] Fila de Usuários (DELETE)
 
 ### Financeiro da Horta (Modificação)
-- [ ] Financeiro da Horta (POST)
-- [ ] Financeiro da Horta (PUT)
-- [ ] Financeiro da Horta (DELETE)
+- [x] Financeiro da Horta (POST)
+- [x] Financeiro da Horta (PUT)
+- [x] Financeiro da Horta (DELETE)
 
 ## 🔵 Rotas COMPARTILHADAS - Todos (Plataforma + Associação + Horta + Canteirista + Dependente)
 
@@ -1373,31 +1378,31 @@ Acesso:** à todos os registros não excluídos.
 - [x] Financeiro da Associação (GET por Associação UUID) 
 
 ### Canteiros & Usuários (Leitura)
-- [ ] Canteiros & Usuários (GET)
-- [ ] Canteiros & Usuários (GET por UUID)
+- [x] Canteiros & Usuários (GET)
+- [x] Canteiros & Usuários (GET por UUID)
 
 ### Canteiros (Leitura)
-- [ ] Canteiros (GET)
-- [ ] Canteiros (GET por UUID)
+- [x] Canteiros (GET)
+- [x] Canteiros (GET por UUID)
 
 ## Endereços
 - [x] Endereços (GET)
 - [x] Endereços (GET por UUID)
 
 ### Fila de Usuários (Leitura)
-- [ ] Fila de Usuários (GET)
-- [ ] Fila de Usuários (GET por UUID)
-- [ ] Fila de Usuários (GET por Horta UUID)
-- [ ] Fila de Usuários (GET) - Por Usuário
+- [x] Fila de Usuários (GET)
+- [x] Fila de Usuários (GET por UUID)
+- [x] Fila de Usuários (GET por Horta UUID)
+- [x] Fila de Usuários (GET) - Por Usuário
 
 ### Financeiro da Associação (Leitura)
 - [x] Financeiro da Associação (GET)
 - [x] Financeiro da Associação (GET por UUID)
 
 ### Financeiro da Horta (Leitura)
-- [ ] Financeiro da Horta (GET)
-- [ ] Financeiro da Horta (GET por UUID)
-- [ ] Financeiro da Horta (GET) - Por Horta
+- [x] Financeiro da Horta (GET)
+- [x] Financeiro da Horta (GET por UUID)
+- [x] Financeiro da Horta (GET) - Por Horta
 
 ### Hortas
 - [x] Hortas (GET)

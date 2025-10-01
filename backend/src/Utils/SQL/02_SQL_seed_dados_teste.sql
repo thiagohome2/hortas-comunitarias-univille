@@ -136,7 +136,7 @@ WHERE c.slug = 'dependente'
 LIMIT 1;
 
 INSERT INTO usuarios (uuid, nome_completo, cpf, email, senha, cargo_uuid, endereco_uuid, associacao_uuid, horta_uuid, status_de_acesso, excluido)
-SELECT UUID(), 'Dummest Dummy', '888.818.888-88', 'dummy@example.com', '$2y$10$TUHWKOcJj85/pMDxEg7eTu3zGDlE2sfOdVn4dfSN5JzMIqssNISYG',
+SELECT UUID(), 'Dummest Dummy', '288.819.888-88', 'dummy@example.com', '$2y$10$TUHWKOcJj85/pMDxEg7eTu3zGDlE2sfOdVn4dfSN5JzMIqssNISYG',
        c.uuid, e.uuid, a.uuid, h.uuid, 'ativo', 0
 FROM cargos c
 JOIN enderecos e ON e.cidade = 'Rio de Janeiro'
