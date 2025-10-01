@@ -1321,11 +1321,9 @@ Acesso:** à todos os registros não excluídos.
 - [x] Hortas (DELETE)
 
 ### Endereços
-- [ ] Endereços (GET)
-- [ ] Endereços (GET por UUID)
-- [ ] Endereços (POST)
-- [ ] Endereços (PUT)
-- [ ] Endereços (DELETE)
+- [x] Endereços (POST)
+- [x] Endereços (PUT)
+- [x] Endereços (DELETE)
 
 ### Categorias Financeiras
 - [ ] Categorias Financeiras (GET)
@@ -1382,6 +1380,10 @@ Acesso:** à todos os registros não excluídos.
 - [ ] Canteiros (GET)
 - [ ] Canteiros (GET por UUID)
 
+## Endereços
+- [x] Endereços (GET)
+- [x] Endereços (GET por UUID)
+
 ### Fila de Usuários (Leitura)
 - [ ] Fila de Usuários (GET)
 - [ ] Fila de Usuários (GET por UUID)
@@ -1389,8 +1391,8 @@ Acesso:** à todos os registros não excluídos.
 - [ ] Fila de Usuários (GET) - Por Usuário
 
 ### Financeiro da Associação (Leitura)
-- [ ] Financeiro da Associação (GET)
-- [ ] Financeiro da Associação (GET por UUID)
+- [x] Financeiro da Associação (GET)
+- [x] Financeiro da Associação (GET por UUID)
 
 ### Financeiro da Horta (Leitura)
 - [ ] Financeiro da Horta (GET)
