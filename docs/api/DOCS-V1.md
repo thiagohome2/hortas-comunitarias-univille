@@ -803,85 +803,169 @@ Acesso:** à todos os registros não excluídos.
 #### Administração da Horta
   **Acesso:** à todos os registros não excluídos para sua Horta UUID
 
-<h3 id="mensalidades-da-associacao-get-list">📗 Mensalidades da plataforma (lançamentos) (GET) </h3>
+<h3 id="mensalidades-da-associacao-get-list">📗 Mensalidades da Associação (GET)</h3>
 
 #### Administração da Plataforma
-  **Acesso:** à todos os registros não excluídos.
+**Acesso:** todos os registros não excluídos.
+
 #### Administração da Associação
-  **Acesso:** à todos os registros não excluídos para a sua Associação UUID.
+**Acesso:** todos os registros não excluídos da sua Associação UUID.
 
+#### Administração da Horta
+**Acesso:** todos os registros não excluídos de usuários com a sua Horta UUID.
 
-<h3 id="mensalidades-da-associacao-get-uuid">📗 Mensalidades da plataforma (lançamentos) (GET por UUID)</h3>
+#### Canteirista / Dependente
+**Acesso:** apenas os registros não excluídos do próprio usuário.
 
-#### Administração da Plataforma
-  **Acesso:** à todos os registros não excluídos.
+---
 
-<h3 id="mensalidades-da-associacao-get-associacao">📗 Mensalidades da plataforma (lançamentos) (GET por Associação)</h3>
-
-#### Administração da Plataforma
-  **Acesso:** à todos os registros não excluídos.
-
-<h3 id="mensalidades-da-associacao-get-usuario">📗 Mensalidades da plataforma (lançamentos) (GET por Usuário)</h3>
+<h3 id="mensalidades-da-associacao-get-uuid">📗 Mensalidades da Associação (GET por UUID)</h3>
 
 #### Administração da Plataforma
-  **Acesso:** à todos os registros não excluídos.
+**Acesso:** qualquer registro não excluído.
 
-<h3 id="mensalidades-da-associacao-post">📗 Mensalidades da plataforma (lançamentos) (POST)</h3>
-
-#### Administração da Plataforma
-  **Acesso:** à todos os registros não excluídos.
-
-<h3 id="mensalidades-da-associacao-put">📗 Mensalidades da plataforma (lançamentos) (PUT)</h3>
-
-#### Administração da Plataforma
-  **Acesso:** à todos os registros não excluídos.
-
-<h3 id="mensalidades-da-associacao-delete">📗 Mensalidades da plataforma (lançamentos) (DELETE)</h3>
-
-#### Administração da Plataforma
-  **Acesso:** à todos os registros não excluídos.
-
-<h3 id="mensalidades-da-plataforma-get-list">📗 Mensalidades da associação (lançamentos) (GET) </h3>
-
-#### Administração da Plataforma
-  **Acesso:** à todos os registros não excluídos.
 #### Administração da Associação
-  **Acesso:** à todos os registros não excluídos para Usuários UUID atrelados a sua Associação UUID.
+**Acesso:** apenas registros da sua Associação UUID.
 
-<h3 id="mensalidades-da-plataforma-get-uuid">📗 Mensalidades da associação (lançamentos) (GET por UUID)</h3>
+#### Administração da Horta
+**Acesso:** apenas registros de usuários com a sua Horta UUID.
 
-#### Administração da Plataforma
-  **Acesso:** à todos os registros não excluídos.
-#### Administração da Associação
-  **Acesso:** à todos os registros não excluídos para Usuários UUID atrelados a sua Associação UUID.
+#### Canteirista / Dependente
+**Acesso:** apenas registros do próprio usuário.
 
-<h3 id="mensalidades-da-plataforma-get-usuario">📗 Mensalidades da associação (lançamentos) (GET) - Por Usuario</h3>
+---
 
-#### Administração da Plataforma
-  **Acesso:** à todos os registros não excluídos.
-#### Administração da Associação
-  **Acesso:** à todos os registros não excluídos para Usuários UUID atrelados a sua Associação UUID.
-
-<h3 id="mensalidades-da-plataforma-post">📗 Mensalidades da associação (lançamentos) (POST)</h3>
+<h3 id="mensalidades-da-associacao-get-associacao">📗 Mensalidades da Associação (GET por Associação UUID)</h3>
 
 #### Administração da Plataforma
-  **Acesso:** à todos os registros não excluídos.
-#### Administração da Associação
-  **Acesso:** à todos os registros não excluídos para Usuários UUID atrelados a sua Associação UUID.
+**Acesso:** todos os registros da associação solicitada.
 
-<h3 id="mensalidades-da-plataforma-put">📗 Mensalidades da associação (lançamentos) (PUT)</h3>
+#### Administração da Associação
+**Acesso:** todos os registros apenas se for da sua própria Associação UUID.
+
+#### Administração da Horta
+**Acesso:** registros filtrados apenas de usuários com a sua Horta UUID (dentro da sua Associação).
+
+#### Canteirista / Dependente
+**Acesso:** registros filtrados apenas do próprio usuário dentro da associação solicitada.
+
+---
+
+<h3 id="mensalidades-da-associacao-get-usuario">📗 Mensalidades da Associação (GET por Usuário UUID)</h3>
 
 #### Administração da Plataforma
-  **Acesso:** à todos os registros não excluídos.
-#### Administração da Associação
-  **Acesso:** à todos os registros não excluídos para Usuários UUID atrelados a sua Associação UUID.
+**Acesso:** todos os registros do usuário solicitado.
 
-<h3 id="mensalidades-da-plataforma-delete">📗 Mensalidades da associação (lançamentos) (DELETE)</h3>
+#### Administração da Associação
+**Acesso:** todos os registros do usuário, apenas se ele pertencer à sua Associação UUID.
+
+#### Administração da Horta
+**Acesso:** todos os registros do usuário, apenas se ele pertencer à sua Horta UUID.
+
+#### Canteirista / Dependente
+**Acesso:** apenas os próprios registros (se o UUID solicitado for o próprio).
+
+---
+
+<h3 id="mensalidades-da-associacao-post">📗 Mensalidades da Associação (POST)</h3>
 
 #### Administração da Plataforma
-  **Acesso:** à todos os registros não excluídos.
+**Permissão:** pode criar mensalidades para qualquer associação e usuário.
+
 #### Administração da Associação
-  **Acesso:** à todos os registros não excluídos para Usuários UUID atrelados a sua Associação UUID.
+**Permissão:** pode criar mensalidades apenas para a sua própria Associação UUID.
+
+#### Outros Cargos
+**Permissão:** negada.
+
+---
+
+<h3 id="mensalidades-da-associacao-put">📗 Mensalidades da Associação (PUT)</h3>
+
+#### Administração da Plataforma
+**Permissão:** pode editar qualquer mensalidade.
+
+#### Administração da Associação
+**Permissão:** pode editar mensalidades apenas da sua própria Associação UUID.
+
+#### Outros Cargos
+**Permissão:** negada.
+
+---
+
+<h3 id="mensalidades-da-associacao-delete">📗 Mensalidades da Associação (DELETE)</h3>
+
+#### Administração da Plataforma
+**Permissão:** pode deletar qualquer mensalidade.
+
+#### Administração da Associação
+**Permissão:** pode deletar mensalidades apenas da sua própria Associação UUID.
+
+#### Outros Cargos
+**Permissão:** negada.
+
+---
+
+<h3 id="mensalidades-da-plataforma-get-list">📗 Mensalidades da Plataforma (GET)</h3>
+
+#### Administração da Plataforma
+**Acesso:** todos os registros não excluídos.
+
+#### Administração da Associação
+**Acesso:** todos os registros não excluídos de usuários atrelados à sua Associação UUID.
+
+---
+
+<h3 id="mensalidades-da-plataforma-get-uuid">📗 Mensalidades da Plataforma (GET por UUID)</h3>
+
+#### Administração da Plataforma
+**Acesso:** qualquer registro não excluído.
+
+#### Administração da Associação
+**Acesso:** apenas registros de usuários atrelados à sua Associação UUID.
+
+---
+
+<h3 id="mensalidades-da-plataforma-get-usuario">📗 Mensalidades da Plataforma (GET por Usuário UUID)</h3>
+
+#### Administração da Plataforma
+**Acesso:** todos os registros do usuário solicitado.
+
+#### Outros Cargos
+**Permissão:** negada.
+
+---
+
+<h3 id="mensalidades-da-plataforma-post">📗 Mensalidades da Plataforma (POST)</h3>
+
+#### Administração da Plataforma
+**Permissão:** pode criar mensalidades para qualquer usuário.
+
+#### NEW_ACCOUNT (Cadastro Especial)
+**Permissão:** pode criar mensalidade durante o processo de cadastro.
+
+#### Outros Cargos
+**Permissão:** negada.
+
+---
+
+<h3 id="mensalidades-da-plataforma-put">📗 Mensalidades da Plataforma (PUT)</h3>
+
+#### Administração da Plataforma
+**Permissão:** pode editar qualquer mensalidade.
+
+#### Outros Cargos
+**Permissão:** negada.
+
+---
+
+<h3 id="mensalidades-da-plataforma-delete">📗 Mensalidades da Plataforma (DELETE)</h3>
+
+#### Administração da Plataforma
+**Permissão:** pode deletar qualquer mensalidade.
+
+#### Outros Cargos
+**Permissão:** negada.
 
 <h3 id="permissoes-de-cargo-get-list">📗 Permissões de cargo (GET) </h3>
 
@@ -1174,60 +1258,55 @@ Acesso:** à todos os registros não excluídos.
 - [x] Permissões do Usuário (GET)
 
 ### Cargos (Modificação)
-- [ ] Cargos (POST)
-- [ ] Cargos (PUT)
-- [ ] Cargos (DELETE)
+- [x] Cargos (POST)
+- [x] Cargos (PUT)
+- [x] Cargos (DELETE)
 
 ### Planos
-- [ ] Planos (GET)
-- [ ] Planos (GET por UUID)
-- [ ] Planos (GET) - Por Usuário
-- [ ] Planos (POST)
-- [ ] Planos (PUT)
-- [ ] Planos (DELETE)
+- [x] Planos (GET)
+- [x] Planos (GET por UUID)
+- [x] Planos (GET) - Por Usuário
+- [x] Planos (POST)
+- [x] Planos (PUT)
+- [x] Planos (DELETE)
 
 ### Recursos do Plano
-- [ ] Recursos do Plano (GET)
-- [ ] Recursos do Plano (GET por UUID)
-- [ ] Recursos do Plano (GET) - Por Plano
-- [ ] Recursos do Plano (POST)
-- [ ] Recursos do Plano (PUT)
-- [ ] Recursos do Plano (DELETE)
+- [x] Recursos do Plano (GET)
+- [x] Recursos do Plano (GET por UUID)
+- [x] Recursos do Plano (GET) - Por Plano
+- [x] Recursos do Plano (POST)
+- [x] Recursos do Plano (PUT)
+- [x] Recursos do Plano (DELETE)
 
 ### Mensalidades da Plataforma (Modificação)
-- [ ] Mensalidades da Plataforma (GET por Associação)
-- [ ] Mensalidades da Plataforma (GET por Usuário)
-- [ ] Mensalidades da Plataforma (POST)
-- [ ] Mensalidades da Plataforma (PUT)
-- [ ] Mensalidades da Plataforma (DELETE)
-
-### Mensalidades da Associação (Modificação)
-- [ ] Mensalidades da Associação (POST)
-- [ ] Mensalidades da Associação (PUT)
-- [ ] Mensalidades da Associação (DELETE)
-
-### Financeiro da Associação (Modificação)
-- [ ] Financeiro da Associação (GET) - Por Associação
-- [ ] Financeiro da Associação (POST)
-- [ ] Financeiro da Associação (PUT)
-- [ ] Financeiro da Associação (DELETE)
+- [x] Mensalidades da Plataforma (GET por Associação UUID)
+- [x] Mensalidades da Plataforma (GET por Usuário UUID)
+- [x] Mensalidades da Plataforma (POST)
+- [x] Mensalidades da Plataforma (PUT)
+- [x] Mensalidades da Plataforma (DELETE)
 
 ## 🟡 Rotas COMPARTILHADAS - Plataforma + Associação
 
-### Cargos (Leitura)
-- [ ] Cargos (GET)
-- [ ] Cargos (GET por UUID)
+### Financeiro da Associação (Modificação) 
+- [x] Financeiro da Associação (POST)
+- [x] Financeiro da Associação (PUT)
+- [x] Financeiro da Associação (DELETE)
 
 ### Mensalidades da Plataforma (Leitura)
-- [ ] Mensalidades da Plataforma (GET)
-- [ ] Mensalidades da Plataforma (GET por UUID)
+- [x] Mensalidades da Plataforma (GET)
+- [x] Mensalidades da Plataforma (GET por UUID)
 
-### Mensalidades da Associação (Leitura)
-- [ ] Mensalidades da Associação (GET)
-- [ ] Mensalidades da Associação (GET por UUID)
-- [ ] Mensalidades da Associação (GET) - Por Usuário
+### Mensalidades da Associação (Modificação)
+- [x] Mensalidades da Associação (POST)
+- [x] Mensalidades da Associação (PUT)
+- [x] Mensalidades da Associação (DELETE)
+
 
 ## 🟢 Rotas COMPARTILHADAS - Plataforma + Associação + Horta
+
+### Cargos (Leitura)
+- [x] Cargos (GET)
+- [x] Cargos (GET por UUID)
 
 ### Usuários
 - [x] Usuários (GET)
@@ -1236,12 +1315,10 @@ Acesso:** à todos os registros não excluídos.
 - [x] Usuários (PUT)
 - [x] Usuários (DELETE)
 
-### Hortas
-- [ ] Hortas (GET)
-- [ ] Hortas (GET por UUID)
-- [ ] Hortas (POST)
-- [ ] Hortas (PUT)
-- [ ] Hortas (DELETE)
+### Hortas 
+- [x] Hortas (POST)
+- [x] Hortas (PUT)
+- [x] Hortas (DELETE)
 
 ### Endereços
 - [ ] Endereços (GET)
@@ -1288,6 +1365,15 @@ Acesso:** à todos os registros não excluídos.
 
 ## 🔵 Rotas COMPARTILHADAS - Todos (Plataforma + Associação + Horta + Canteirista + Dependente)
 
+### Mensalidades da Associação (Leitura)
+- [x] Mensalidades da Associação (GET)
+- [x] Mensalidades da Associação (GET por UUID)
+- [x] Mensalidades da Associação (GET) - Por Usuário
+
+### Financeiro da Associação (Modificação)
+- [x] Financeiro da Associação (GET) 
+- [x] Financeiro da Associação (GET por Associação UUID) 
+
 ### Canteiros & Usuários (Leitura)
 - [ ] Canteiros & Usuários (GET)
 - [ ] Canteiros & Usuários (GET por UUID)
@@ -1311,18 +1397,15 @@ Acesso:** à todos os registros não excluídos.
 - [ ] Financeiro da Horta (GET por UUID)
 - [ ] Financeiro da Horta (GET) - Por Horta
 
+### Hortas
+- [x] Hortas (GET)
+- [x] Hortas (GET por UUID)
+
 ## ⚪ Rotas PÚBLICAS
 - [x] Login (POST)
 - [x] Cadastro (POST)
 
 ---
 
-**Total: 105 rotas**
-**Progresso: 27.62% das rotas**
-
-**Legenda:**
-- 🔴 Exclusivas Admin Plataforma: 42 rotas
-- 🟡 Plataforma + Associação: 8 rotas
-- 🟢 Plataforma + Associação + Horta: 38 rotas
-- 🔵 Todos os níveis: 15 rotas
-- ⚪ Públicas: 2 rotas
+**Total: 111 rotas**
+**Progresso: 65%** 

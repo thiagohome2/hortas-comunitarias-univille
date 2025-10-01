@@ -17,14 +17,26 @@ class MensalidadeDaAssociacaoController
 
     public function list(Request $request, Response $response)
     {
-        $mensalidadesDaAssociacao = $this->mensalidadeDaAssociacaoService->findAllWhere();
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $mensalidadesDaAssociacao = $this->mensalidadeDaAssociacaoService->findAllWhere($payloadUsuarioLogado);
         $response->getBody()->write(json_encode($mensalidadesDaAssociacao));
         return $response->withStatus(200);
     }
 
     public function get(Request $request, Response $response, array $args)
     {
-        $mensalidadeDaAssociacao = $this->mensalidadeDaAssociacaoService->findByUuid($args['uuid']);
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $mensalidadeDaAssociacao = $this->mensalidadeDaAssociacaoService->findByUuid($args['uuid'], $payloadUsuarioLogado);
         if (!$mensalidadeDaAssociacao) return $response->withStatus(404);
 
         $response->getBody()->write(json_encode($mensalidadeDaAssociacao));
@@ -33,7 +45,13 @@ class MensalidadeDaAssociacaoController
 
     public function getByAssociacao(Request $request, Response $response, array $args)
     {
-        $mensalidadesDaAssociacao = $this->mensalidadeDaAssociacaoService->findByAssociacaoUuid($args['uuid']);
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $mensalidadesDaAssociacao = $this->mensalidadeDaAssociacaoService->findByAssociacaoUuid($args['uuid'], $payloadUsuarioLogado);
         if ($mensalidadesDaAssociacao->isEmpty()) return $response->withStatus(404);
 
         $response->getBody()->write(json_encode($mensalidadesDaAssociacao));
@@ -41,7 +59,13 @@ class MensalidadeDaAssociacaoController
     }
     public function getByUsuario(Request $request, Response $response, array $args)
     {
-        $mensalidadesDoUsuario = $this->mensalidadeDaAssociacaoService->findByUsuarioUuid($args['uuid']);
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $mensalidadesDoUsuario = $this->mensalidadeDaAssociacaoService->findByUsuarioUuid($args['uuid'], $payloadUsuarioLogado);
         if ($mensalidadesDoUsuario->isEmpty()) return $response->withStatus(404);
 
         $response->getBody()->write(json_encode($mensalidadesDoUsuario));
@@ -50,9 +74,14 @@ class MensalidadeDaAssociacaoController
 
     public function create(Request $request, Response $response)
     {
-        $data = (array)$request->getParsedBody();
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $mensalidadeDaAssociacao = $this->mensalidadeDaAssociacaoService->create($data, $uuidUsuarioLogado);
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $data = (array)$request->getParsedBody(); 
+        $mensalidadeDaAssociacao = $this->mensalidadeDaAssociacaoService->create($data, $payloadUsuarioLogado);
 
         $response->getBody()->write(json_encode($mensalidadeDaAssociacao));
         return $response->withStatus(201);
@@ -60,17 +89,28 @@ class MensalidadeDaAssociacaoController
 
     public function update(Request $request, Response $response, array $args)
     {
-        $data = (array)$request->getParsedBody();
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $mensalidadeDaAssociacao = $this->mensalidadeDaAssociacaoService->update($args['uuid'], $data, $uuidUsuarioLogado);
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $data = (array)$request->getParsedBody(); 
+        $mensalidadeDaAssociacao = $this->mensalidadeDaAssociacaoService->update($args['uuid'], $data, $payloadUsuarioLogado);
 
         $response->getBody()->write(json_encode($mensalidadeDaAssociacao));
         return $response->withStatus(200);
     }
 
-    public function delete(Request $request, Response $response, array $args){   
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $this->mensalidadeDaAssociacaoService->delete($args['uuid'], $uuidUsuarioLogado);
+    public function delete(Request $request, Response $response, array $args)
+    {
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];    
+        $this->mensalidadeDaAssociacaoService->delete($args['uuid'], $payloadUsuarioLogado);
         
         $response->getBody()->write(json_encode([
             "message" => "Registro UUID: " . $args['uuid'] . " excluído"

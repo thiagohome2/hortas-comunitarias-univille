@@ -24,10 +24,10 @@ class AssociacaoService
 
     public function findAllWhere(array $payloadUsuarioLogado): Collection
     {
-        if ($this->isCargoAdminPlataforma($payloadUsuarioLogado)) {
-            return $this->associacaoRepository->findAllWhere(['excluido' => 0]);
+        if (!$this->isCargoAdminPlataforma($payloadUsuarioLogado)) {
+            throw new Exception("Permissão de cargo 0 necessária | findAllWhere");
         } else {
-            throw new Exception("Permissão de cargo 0 necessária | findByUuid");
+            return $this->associacaoRepository->findAllWhere(['excluido' => 0]);
         }
     }
 
@@ -155,6 +155,6 @@ class AssociacaoService
 
     private function isCargoAdminPlataforma(array $payloadUsuarioLogado): bool
     {
-        return $this->cargoService->findByUuid($payloadUsuarioLogado['cargo_uuid'])->slug === "admin_plataforma";
+        return $this->cargoService->findByUuidInternal($payloadUsuarioLogado['cargo_uuid'])->slug === "admin_plataforma";
     }
 }

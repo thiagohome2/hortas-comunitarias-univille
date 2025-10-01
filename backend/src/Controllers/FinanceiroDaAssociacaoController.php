@@ -17,14 +17,26 @@ class FinanceiroDaAssociacaoController
 
     public function list(Request $request, Response $response)
     {
-        $financeirosDaAssociacao = $this->financeiroDaAssociacaoService->findAllWhere();
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $financeirosDaAssociacao = $this->financeiroDaAssociacaoService->findAllWhere($payloadUsuarioLogado);
         $response->getBody()->write(json_encode($financeirosDaAssociacao));
         return $response->withStatus(200);
     }
 
     public function get(Request $request, Response $response, array $args)
     {
-        $financeiroDaAssociacao = $this->financeiroDaAssociacaoService->findByUuid($args['uuid']);
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $financeiroDaAssociacao = $this->financeiroDaAssociacaoService->findByUuid($args['uuid'], $payloadUsuarioLogado);
         if (!$financeiroDaAssociacao) return $response->withStatus(404);
 
         $response->getBody()->write(json_encode($financeiroDaAssociacao));
@@ -33,7 +45,13 @@ class FinanceiroDaAssociacaoController
 
     public function getByAssociacao(Request $request, Response $response, array $args)
     {
-        $financeirosDaAssociacao = $this->financeiroDaAssociacaoService->findByAssociacaoUuid($args['uuid']);
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $financeirosDaAssociacao = $this->financeiroDaAssociacaoService->findByAssociacaoUuid($args['uuid'], $payloadUsuarioLogado);
         if ($financeirosDaAssociacao->isEmpty()) return $response->withStatus(404);
 
         $response->getBody()->write(json_encode($financeirosDaAssociacao));
@@ -42,9 +60,15 @@ class FinanceiroDaAssociacaoController
 
     public function create(Request $request, Response $response)
     {
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
         $data = (array)$request->getParsedBody();
         $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $financeiroDaAssociacao = $this->financeiroDaAssociacaoService->create($data, $uuidUsuarioLogado);
+        $financeiroDaAssociacao = $this->financeiroDaAssociacaoService->create($data, $payloadUsuarioLogado);
 
         $response->getBody()->write(json_encode($financeiroDaAssociacao));
         return $response->withStatus(201);
@@ -52,17 +76,31 @@ class FinanceiroDaAssociacaoController
 
     public function update(Request $request, Response $response, array $args)
     {
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
         $data = (array)$request->getParsedBody();
         $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $financeiroDaAssociacao = $this->financeiroDaAssociacaoService->update($args['uuid'], $data, $uuidUsuarioLogado);
+        $financeiroDaAssociacao = $this->financeiroDaAssociacaoService->update($args['uuid'], $data, $payloadUsuarioLogado);
 
         $response->getBody()->write(json_encode($financeiroDaAssociacao));
         return $response->withStatus(200);
     }
 
     public function delete(Request $request, Response $response, array $args){   
+        
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        
         $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $this->financeiroDaAssociacaoService->delete($args['uuid'], $uuidUsuarioLogado);
+        $this->financeiroDaAssociacaoService->delete($args['uuid'], $payloadUsuarioLogado, $payloadUsuarioLogado);
         
         $response->getBody()->write(json_encode([
             "message" => "Registro UUID: " . $args['uuid'] . " excluído"

@@ -17,7 +17,7 @@ class AssociacaoController
 
     public function list(Request $request, Response $response)
     {
-                $payloadUsuarioLogado = [
+        $payloadUsuarioLogado = [
             'usuario_uuid' => $request->getAttribute('usuario_uuid'),
             'cargo_uuid' => $request->getAttribute('cargo_uuid'),
             'associacao_uuid' => $request->getAttribute('associacao_uuid'),

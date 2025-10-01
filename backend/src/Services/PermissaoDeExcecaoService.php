@@ -137,6 +137,6 @@ class PermissaoDeExcecaoService
 
     private function isCargoAdminPlataforma(array $payloadUsuarioLogado): bool
     {
-        return $this->cargoService->findByUuid($payloadUsuarioLogado['cargo_uuid'])->slug === "admin_plataforma";
+        return $this->cargoService->findByUuidInternal($payloadUsuarioLogado['cargo_uuid'])->slug === "admin_plataforma";
     }
 }

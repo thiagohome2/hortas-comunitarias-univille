@@ -39,7 +39,7 @@ class UsuarioService {
     
     public function findAllWhere(array $payloadUsuarioLogado): Collection
     {
-        $cargo = $this->cargoService->findByUuid($payloadUsuarioLogado['cargo_uuid']);
+        $cargo = $this->cargoService->findByUuidInternal($payloadUsuarioLogado['cargo_uuid']);
         
         switch ($cargo->slug) {
             case "admin_plataforma":
@@ -66,7 +66,7 @@ class UsuarioService {
             throw new Exception('Usuário não encontrado');
         }
         
-        $cargo = $this->cargoService->findByUuid($payloadUsuarioLogado['cargo_uuid']);
+        $cargo = $this->cargoService->findByUuidInternal($payloadUsuarioLogado['cargo_uuid']);
         
         switch ($cargo->slug) {
             case "admin_plataforma":
@@ -136,7 +136,7 @@ class UsuarioService {
             $data['usuario_alterador_uuid'] = $uuidUsuarioLogado;
 
             if (!empty($data['cargo_uuid'])) {
-                $this->cargoService->findByUuid($data['cargo_uuid']);
+                $this->cargoService->findByUuidInternal($data['cargo_uuid']);
             }
 
             if (!empty($data['associacao_uuid'])){
@@ -157,7 +157,7 @@ class UsuarioService {
 
             return $this->usuarioRepository->create($data);}
         else {
-            $cargo = $this->cargoService->findByUuid($payloadUsuarioLogado['cargo_uuid']);
+            $cargo = $this->cargoService->findByUuidInternal($payloadUsuarioLogado['cargo_uuid']);
         
         switch ($cargo->slug) {
             case "admin_plataforma":
@@ -202,7 +202,7 @@ class UsuarioService {
                 $data['usuario_alterador_uuid'] = $uuidUsuarioLogado;
 
                 if (!empty($data['cargo_uuid'])) {
-                    $this->cargoService->findByUuid($data['cargo_uuid']);
+                    $this->cargoService->findByUuidInternal($data['cargo_uuid']);
                 }
 
                 if (!empty($data['associacao_uuid'])){
@@ -265,7 +265,7 @@ class UsuarioService {
                 $data['usuario_alterador_uuid'] = $uuidUsuarioLogado;
 
                 if (!empty($data['cargo_uuid'])) {
-                    $this->cargoService->findByUuid($data['cargo_uuid']);
+                    $this->cargoService->findByUuidInternal($data['cargo_uuid']);
                 }
 
                 $data['associacao_uuid'] = $payloadUsuarioLogado['associacao_uuid'];
@@ -333,7 +333,7 @@ class UsuarioService {
                 $data['usuario_alterador_uuid'] = $uuidUsuarioLogado;
 
                 if (!empty($data['cargo_uuid'])) {
-                    $this->cargoService->findByUuid($data['cargo_uuid']);
+                    $this->cargoService->findByUuidInternal($data['cargo_uuid']);
                 }
 
                 $data['associacao_uuid'] = $payloadUsuarioLogado['associacao_uuid'];
@@ -401,7 +401,7 @@ class UsuarioService {
             $data['usuario_alterador_uuid'] = $uuidUsuarioLogado;
 
             if (!empty($data['cargo_uuid'])) {
-                $this->cargoService->findByUuid($data['cargo_uuid']);
+                $this->cargoService->findByUuidInternal($data['cargo_uuid']);
             }
 
             if (!empty($data['associacao_uuid'])){
@@ -432,7 +432,7 @@ class UsuarioService {
         throw new Exception('Usuário não encontrado');
     }
 
-    $cargo = $this->cargoService->findByUuid($payloadUsuarioLogado['cargo_uuid']);
+    $cargo = $this->cargoService->findByUuidInternal($payloadUsuarioLogado['cargo_uuid']);
 
         switch ($cargo->slug) {
             case "admin_plataforma":
@@ -508,7 +508,7 @@ class UsuarioService {
         }
 
         if (!empty($data['cargo_uuid'])) {
-            $this->cargoService->findByUuid($data['cargo_uuid']);
+            $this->cargoService->findByUuidInternal($data['cargo_uuid']);
         }
         if (!empty($data['associacao_uuid'])) {
             $this->associacaoService->findByUuid($data['associacao_uuid'], $payloadUsuarioLogado);
@@ -536,7 +536,7 @@ class UsuarioService {
         throw new Exception('Usuário não encontrado');
     }
 
-    $cargo = $this->cargoService->findByUuid($payloadUsuarioLogado['cargo_uuid']);
+    $cargo = $this->cargoService->findByUuidInternal($payloadUsuarioLogado['cargo_uuid']);
 
     switch ($cargo->slug) {
         case "admin_plataforma":

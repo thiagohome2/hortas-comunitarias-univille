@@ -74,7 +74,7 @@ class SessaoService
 
             $usuario = $this->usuarioService->create($usuarioData, $uuidSistema, $payloadMinimo);
 
-            $plano = $this->planoService->findBySlug('plano_bronze');
+            $plano = $this->planoService->findBySlug('plano_bronze', $payloadMinimo);
 
             $hoje = new \DateTime();
             $dataVencimento = $hoje->modify('+30 days')->format('Y-m-d');

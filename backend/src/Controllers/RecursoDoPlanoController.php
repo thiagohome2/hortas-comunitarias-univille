@@ -17,14 +17,26 @@ class RecursoDoPlanoController
 
     public function list(Request $request, Response $response)
     {
-        $recursosDoPlano = $this->recursoDoPlanoService->findAllWhere();
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $recursosDoPlano = $this->recursoDoPlanoService->findAllWhere($payloadUsuarioLogado);
         $response->getBody()->write(json_encode($recursosDoPlano));
         return $response->withStatus(200);
     }
 
     public function get(Request $request, Response $response, array $args)
     {
-        $recursoDoPlano = $this->recursoDoPlanoService->findByUuid($args['uuid']);
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $recursoDoPlano = $this->recursoDoPlanoService->findByUuid($args['uuid'], $payloadUsuarioLogado);
         if (!$recursoDoPlano) return $response->withStatus(404);
 
         $response->getBody()->write(json_encode($recursoDoPlano));
@@ -33,7 +45,13 @@ class RecursoDoPlanoController
 
     public function getByPlano(Request $request, Response $response, array $args)
     {
-        $recursosDestePlano = $this->recursoDoPlanoService->findByPlanoUuid($args['uuid']);
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $recursosDestePlano = $this->recursoDoPlanoService->findByPlanoUuid($args['uuid'], $payloadUsuarioLogado);
         if (!$recursosDestePlano) return $response->withStatus(404);
 
         $response->getBody()->write(json_encode($recursosDestePlano));
@@ -42,9 +60,14 @@ class RecursoDoPlanoController
 
     public function create(Request $request, Response $response)
     {
-        $data = (array)$request->getParsedBody();
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $recursoDoPlano = $this->recursoDoPlanoService->create($data, $uuidUsuarioLogado);
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $data = (array)$request->getParsedBody(); 
+        $recursoDoPlano = $this->recursoDoPlanoService->create($data, $payloadUsuarioLogado);
 
         $response->getBody()->write(json_encode($recursoDoPlano));
         return $response->withStatus(201);
@@ -52,17 +75,27 @@ class RecursoDoPlanoController
 
     public function update(Request $request, Response $response, array $args)
     {
-        $data = (array)$request->getParsedBody();
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $recursoDoPlano = $this->recursoDoPlanoService->update($args['uuid'], $data, $uuidUsuarioLogado);
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];
+        $data = (array)$request->getParsedBody(); 
+        $recursoDoPlano = $this->recursoDoPlanoService->update($args['uuid'], $data, $payloadUsuarioLogado);
 
         $response->getBody()->write(json_encode($recursoDoPlano));
         return $response->withStatus(200);
     }
 
-    public function delete(Request $request, Response $response, array $args){   
-        $uuidUsuarioLogado = $request->getAttribute('usuario_uuid');
-        $this->recursoDoPlanoService->delete($args['uuid'], $uuidUsuarioLogado);
+    public function delete(Request $request, Response $response, array $args){ 
+        $payloadUsuarioLogado = [
+            'usuario_uuid' => $request->getAttribute('usuario_uuid'),
+            'cargo_uuid' => $request->getAttribute('cargo_uuid'),
+            'associacao_uuid' => $request->getAttribute('associacao_uuid'),
+            'horta_uuid' => $request->getAttribute('horta_uuid'),
+        ];   
+        $this->recursoDoPlanoService->delete($args['uuid'], $payloadUsuarioLogado);
         
         $response->getBody()->write(json_encode([
             "message" => "Registro UUID: " . $args['uuid'] . " excluído"

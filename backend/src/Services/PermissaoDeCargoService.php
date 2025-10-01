@@ -78,7 +78,7 @@ class PermissaoDeCargoService
         $data['usuario_alterador_uuid'] = $payloadUsuarioLogado['usuario_uuid'];
 
         if (!empty($data['cargo_uuid'])){
-            $this->cargoService->findByUuid($data['cargo_uuid']);
+            $this->cargoService->findByUuidInternal($data['cargo_uuid']);
         }
 
         if (!empty($data['permissao_uuid'])) {
@@ -105,7 +105,7 @@ class PermissaoDeCargoService
         ->assert($data);
 
         if (!empty($data['cargo_uuid'])){
-            $this->cargoService->findByUuid($data['cargo_uuid']);
+            $this->cargoService->findByUuidInternal($data['cargo_uuid']);
         }
 
         if (!empty($data['permissao_uuid'])) {
@@ -139,6 +139,6 @@ class PermissaoDeCargoService
 
     private function isCargoAdminPlataforma(array $payloadUsuarioLogado): bool
     {
-        return $this->cargoService->findByUuid($payloadUsuarioLogado['cargo_uuid'])->slug === "admin_plataforma";
+        return $this->cargoService->findByUuidInternal($payloadUsuarioLogado['cargo_uuid'])->slug === "admin_plataforma";
     }
 }
